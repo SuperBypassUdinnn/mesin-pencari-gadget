@@ -8,7 +8,7 @@ const SOURCE_BADGE_STYLE = {
 
 const DEFAULT_SPEC_CHIPS = ["chipset", "ram", "layar", "baterai", "kamera"];
 
-export default function ResultCard({ item, source = "both" }) {
+export default function ResultCard({ item, source = "both", onResultClick }) {
   const specs = item.specs || {};
   const specEntries = Object.entries(specs);
 
@@ -35,7 +35,10 @@ export default function ResultCard({ item, source = "both" }) {
         </span>
       </div>
 
-      <h3 className="text-lg font-bold text-slate-900 leading-snug mb-1">
+      <h3
+        onClick={() => onResultClick && onResultClick(item)}
+        className="text-lg font-bold text-slate-900 leading-snug mb-1 cursor-pointer hover:text-primary-600 transition-colors"
+      >
         {item.title}
       </h3>
       <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-3">
@@ -63,7 +66,14 @@ export default function ResultCard({ item, source = "both" }) {
         </div>
       )}
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+        <button
+          type="button"
+          onClick={() => onResultClick && onResultClick(item)}
+          className="text-xs font-semibold text-slate-700 hover:text-primary-600 transition-colors bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded"
+        >
+          Lihat Spesifikasi
+        </button>
         <a
           href={item.url}
           target="_blank"

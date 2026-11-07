@@ -186,3 +186,80 @@ class IREvaluator:
             "avg_latency_ms": avg_latency_ms,
             "per_query_results": per_query_results,
         }
+
+if __name__ == "__main__":
+    import csv
+    import json
+    import os
+    from backend.app.engine.preprocessor import IndonesianPreprocessor
+    from backend.app.engine.bm25 import BM25Engine
+    from backend.app.engine.sbert import SBERTEngine
+
+    out_dir = "evaluation_results"
+    os.makedirs(out_dir, exist_ok=True)
+    os.makedirs(os.path.join(out_dir, "charts"), exist_ok=True)
+
+    queries_path = "data/ground_truth/test_queries.json"
+    judgments_path = "data/ground_truth/relevance_judgments.json"
+
+    with open(queries_path, "r", encoding="utf-8") as f:
+        test_queries = json.load(f)
+    with open(judgments_path, "r", encoding="utf-8") as f:
+        ground_truth = json.load(f)
+
+    preprocessor = IndonesianPreprocessor()
+    bm25 = BM25Engine()
+    bm25.load("data/processed/inverted_index.json")
+
+    sbert = SBERTEngine(cache_dir="models/cache")
+    sbert.load("data/processed")
+
+    evaluator = IREvaluator()
+
+    def bm25_search(q: str):
+        tokens = preprocessor.preprocess(q)
+        return [doc_id for doc_id, _ in bm25.search(tokens, top_k=10)]
+
+    def sbert_search(q: str):
+        return [doc_id for doc_id, _ in sbert.search(q, top_k=10)]
+
+    print(f"[Benchmark] Evaluating Okapi BM25 and Sentence-BERT on {len(test_queries)} queries...")
+    res_bm25 = evaluator.evaluate_system(bm25_search, test_queries, ground_truth)
+    res_sbert = evaluator.evaluate_system(sbert_search, test_queries, ground_truth)
+
+    summary = {
+        "bm25": res_bm25,
+        "sbert": res_sbert,
+        "queries_count": len(test_queries)
+    }
+
+    with open(os.path.join(out_dir, "metrics_summary.json"), "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+
+    csv_path = os.path.join(out_dir, "per_query_benchmark.csv")
+    with open(csv_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["query_id", "query", "algo", "p@5", "p@10", "r@5", "r@10", "f1@5", "f1@10", "ap", "latency_ms"])
+        q_map = {q["id"]: q["query"] for q in test_queries}
+        for q_res in res_bm25["per_query_results"]:
+            qid = q_res["query_id"]
+            writer.writerow([qid, q_map.get(qid, ""), "bm25", q_res["p@5"], q_res["p@10"], q_res["r@5"], q_res["r@10"], q_res["f1@5"], q_res["f1@10"], q_res["ap"], q_res["latency_ms"]])
+        for q_res in res_sbert["per_query_results"]:
+            qid = q_res["query_id"]
+            writer.writerow([qid, q_map.get(qid, ""), "sbert", q_res["p@5"], q_res["p@10"], q_res["r@5"], q_res["r@10"], q_res["f1@5"], q_res["f1@10"], q_res["ap"], q_res["latency_ms"]])
+
+    print("=" * 60)
+    print("IR EVALUATION BENCHMARK SUMMARY (12 QUERIES)")
+    print("=" * 60)
+    print(f"{'Metric':<18} | {'Okapi BM25':<15} | {'Sentence-BERT':<15}")
+    print("-" * 60)
+    print(f"{'Mean P@5':<18} | {res_bm25['mean_p5']:<15.4f} | {res_sbert['mean_p5']:<15.4f}")
+    print(f"{'Mean P@10':<18} | {res_bm25['mean_p10']:<15.4f} | {res_sbert['mean_p10']:<15.4f}")
+    print(f"{'Mean R@5':<18} | {res_bm25['mean_r5']:<15.4f} | {res_sbert['mean_r5']:<15.4f}")
+    print(f"{'Mean R@10':<18} | {res_bm25['mean_r10']:<15.4f} | {res_sbert['mean_r10']:<15.4f}")
+    print(f"{'Mean F1@5':<18} | {res_bm25['mean_f1_5']:<15.4f} | {res_sbert['mean_f1_5']:<15.4f}")
+    print(f"{'MAP':<18} | {res_bm25['map']:<15.4f} | {res_sbert['map']:<15.4f}")
+    print(f"{'Avg Latency (ms)':<18} | {res_bm25['avg_latency_ms']:<15.4f} | {res_sbert['avg_latency_ms']:<15.4f}")
+    print("=" * 60)
+    print(f"[Benchmark] Outputs written to {out_dir}/metrics_summary.json and {csv_path}")
+

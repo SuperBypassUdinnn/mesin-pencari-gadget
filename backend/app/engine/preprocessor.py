@@ -1,11 +1,19 @@
 import re
 from typing import List
 
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import (
-    StopWordRemoverFactory,
-)
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+try:
+    from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+    from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+    _HAS_SASTRAWI = True
+except ImportError:
+    _HAS_SASTRAWI = False
 
+FALLBACK_STOPWORDS = {
+    "yang", "untuk", "pada", "ke", "para", "namun", "menurut", "antara", "dia", "dua",
+    "ia", "seperti", "jika", "sehingga", "kembali", "dan", "ini", "karena", "oleh",
+    "saat", "olehnya", "dengan", "adalah", "itu", "atau", "dari", "dalam", "bisa",
+    "juga", "sudah", "akan", "sangat", "lebih", "di"
+}
 
 class IndonesianPreprocessor:
     """Indonesian text preprocessing engine backed by PySastrawi.
@@ -16,16 +24,15 @@ class IndonesianPreprocessor:
     """
 
     def __init__(self) -> None:
-        self._stop_word_remover = StopWordRemoverFactory().create_stop_word_remover()
-        self._stemmer = StemmerFactory().create_stemmer()
+        if _HAS_SASTRAWI:
+            self._stop_word_remover = StopWordRemoverFactory().create_stop_word_remover()
+            self._stemmer = StemmerFactory().create_stemmer()
+        else:
+            self._stop_word_remover = None
+            self._stemmer = None
 
     def clean_text(self, text: str) -> str:
-        """Lowercase text and strip punctuation/special characters.
-
-        Alphanumeric technical specifications (e.g. ``13t``, ``8gen2``,
-        ``120hz``, ``4k``) are preserved since they consist solely of
-        letters and digits.
-        """
+        """Lowercase text and strip punctuation/special characters."""
         text = text.lower()
         text = re.sub(r"[^a-z0-9\s]", " ", text)
         text = re.sub(r"\s+", " ", text).strip()
@@ -38,26 +45,37 @@ class IndonesianPreprocessor:
         return text.split()
 
     def remove_stopwords(self, tokens: List[str]) -> List[str]:
-        """Filter out common Indonesian stopwords using PySastrawi.
-
-        Tech modifiers that are not stopwords (e.g. ``13t``, ``8gen2``)
-        are preserved.
-        """
+        """Filter out common Indonesian stopwords."""
         if not tokens:
             return []
-        cleaned = self._stop_word_remover.remove(" ".join(tokens))
-        return [token for token in cleaned.split() if token]
+        if self._stop_word_remover is not None:
+            cleaned = self._stop_word_remover.remove(" ".join(tokens))
+            return [token for token in cleaned.split() if token]
+        return [token for token in tokens if token.lower() not in FALLBACK_STOPWORDS]
 
     def stem_tokens(self, tokens: List[str]) -> List[str]:
-        """Stem each token using PySastrawi's morphological stemmer."""
-        return [self._stemmer.stem(token) for token in tokens]
+        """Stem each token to its root word."""
+        if not tokens:
+            return []
+        if self._stemmer is not None:
+            return [self._stemmer.stem(token) for token in tokens]
+        # Basic prefix/suffix removal fallback if Sastrawi is absent
+        stemmed = []
+        for t in tokens:
+            word = t
+            for p in ["meng", "mem", "men", "me", "ber", "ter", "di", "ke"]:
+                if word.startswith(p) and len(word) > len(p) + 3:
+                    word = word[len(p):]
+                    break
+            for s in ["kan", "an", "i", "nya"]:
+                if word.endswith(s) and len(word) > len(s) + 3:
+                    word = word[:-len(s)]
+                    break
+            stemmed.append(word)
+        return stemmed
 
     def preprocess(self, text: str) -> List[str]:
-        """Run the full preprocessing pipeline.
-
-        ``clean_text`` -> ``tokenize`` -> ``remove_stopwords`` ->
-        ``stem_tokens``.
-        """
+        """Full preprocessing pipeline: clean -> tokenize -> remove stopwords -> stem."""
         cleaned = self.clean_text(text)
         tokens = self.tokenize(cleaned)
         filtered = self.remove_stopwords(tokens)
