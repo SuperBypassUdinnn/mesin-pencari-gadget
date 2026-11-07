@@ -62,21 +62,18 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 
 ---
 
-## 2. Ringkasan Status Proyek Saat Ini
+## 2. Ringkasan Status Proyek & GitHub Issues Mapping
 
-| Komponen Proyek | Penanggung Jawab | Status | Catatan Dependensi |
+| Komponen Proyek & GitHub Issue | Penanggung Jawab | Status | Catatan Dependensi |
 | :--- | :--- | :--- | :--- |
 | **Arsitektur & Scaffolding** | Tim / Fadhlur | **SELESAI (100%)** | Struktur repo, Dockerfile, requirements, dan Makefile siap |
-| **Core IR: Preprocessing Sastrawi** | Member 2 (Fadhlur) | **SELESAI (100%)** | Lulus 15 unit tests, filter stopword & stemmer aktif |
-| **Core IR: Inverted Index & BM25** | Member 2 (Fadhlur) | **SELESAI (100%)** | Formula Okapi BM25 murni dari nol ($k_1=1.5, b=0.75$) |
-| **Core IR: Sentence-BERT Retrieval** | Member 2 (Fadhlur) | **SELESAI (100%)** | Vektor normalisasi L2 & Cosine Similarity NumPy ($< 1$ ms) |
-| **Core IR: Evaluator Engine** | Member 2 (Fadhlur) | **SELESAI (100%)** | Precision@K, Recall@K, F1@K, MAP terverifikasi trec_eval |
-| **Backend REST API (FastAPI)** | Member 2 (Fadhlur) | **SELESAI (100%)** | Endpoint `/api/search`, `/api/documents`, `/api/evaluation` siap |
-| **Ground Truth (12 Kueri Uji)** | Bersama (M1, M2, M3) | **SELESAI (100%)** | Kueri eksak & semantik tersimpan di `data/ground_truth/` |
-| **Benchmark Awal (make eval)** | Member 2 (Fadhlur) | **SELESAI (100%)** | Data metrik tersimpan di `evaluation_results/` |
-| **Frontend: Komponen UI & Search** | Member 1 | **SELESAI (100%)** | React 18 + Tailwind, SearchBar, ResultCard, SplitView |
-| **Frontend: Dashboard Evaluasi** | Member 1 | **SELESAI (100%)** | Halaman Evaluasi, tabel metrik komparasi, grafik Recharts |
-| **Scraper Multi-Sumber (Crawling)** | Member 3 | **FONDASI SIAP** | Spider Gadgetren, JagatReview, Droidlime siap dijalankan |
+| **[#3] Core IR: Preprocessing Sastrawi & BM25** | Member 2 (Fadhlur) | **SELESAI (100%)** | Inverted index & formula Okapi BM25 dari nol ([Issue #3](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/3)) |
+| **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **SELESAI (100%)** | Dense retrieval Cosine Similarity & API live ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
+| **[#1] Frontend: Komponen UI & Search** | Member 1 | **SELESAI (100%)** | React 18, SearchBar, ResultCard, SplitView ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
+| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **SELESAI (100%)** | Dashboard Recharts & Slide demo ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
+| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 | **FONDASI SIAP** | Spider Gadgetren, JagatReview, Droidlime ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
+| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 Lead | **DRAF SIAP** | Format TA USK, Lampiran Kontribusi ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
+| **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **MENUNGGU** | Verifikasi Docker, video YouTube, PDF final ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 | **Koleksi Korpus $\ge 700$ Dokumen** | Member 3 | **DALAM PROSES** | Target: 350 Gadgetren + 350 Jagat Review + 100 Droidlime |
 | **Naskah Laporan USK (Bab I - V)** | Member 3 Lead | **DRAF SIAP** | Format TA FMIPA USK, Lampiran Kontribusi Anggota siap |
 | **Video Presentasi YouTube** | Bersama (M1, M2, M3) | **MENUNGGU** | Menunggu penyelesaian scraping korpus penuh |
