@@ -72,7 +72,7 @@ The system follows a decoupled client-server architecture containerized via Dock
 - **BM25 Lexical Store (`data/processed/inverted_index.json`)**: Inverted index posting list (`term -> {doc_id: term_frequency}`), document lengths dictionary (`doc_id -> length`), and average document length (`avgdl`).
 - **Semantic Vector Store (`data/processed/embeddings.npy` & `doc_ids.json`)**: Precomputed L2-normalized dense vector matrix of dimension $N \times 384$. Dot product with query vector provides exact Cosine Similarity in $\le 1$ ms without external vector DB dependencies.
 
-## 3. Data Pipeline & Core IR Engine (User / Member 2 Lead)
+## 3. Data Pipeline & Core IR Engine (Member 2 (Fadhlur) Lead)
 
 ### 3.1 Indonesian Text Preprocessing Pipeline
 1. **Case Folding & Normalization**: Convert all characters to lowercase; remove non-alphanumeric symbols while preserving technical specs hyphenations (e.g., `snapdragon 8 gen 2`).
@@ -127,25 +127,25 @@ The system follows a decoupled client-server architecture containerized via Dock
 | Member | Primary Role | Concrete Deliverables |
 | :--- | :--- | :--- |
 | **Member 1** | Frontend UI & Visuals Lead | - React + Vite + Tailwind application setup.<br>- Hero Search Bar with quick pill suggestions.<br>- Side-by-Side comparison layout & Result Cards.<br>- Modal specification drawer.<br>- Interactive Evaluation Dashboard (Charts & Metric Tables via Recharts).<br>- Presentation Slides deck design. |
-| **User (Member 2)** | Core IR Engine & Backend Lead | - FastAPI backend architecture & REST endpoints.<br>- Indonesian Text Preprocessor (Cleaning, Tokenizer, Stopword, Sastrawi Stemmer).<br>- Inverted Index structure & Okapi BM25 implementation from scratch.<br>- Sentence-BERT multilingual embedding pipeline & Cosine Similarity search.<br>- Evaluation Engine calculating Precision@K, Recall@K, F1@K, MAP, & Latency.<br>- Docker Compose setup & container orchestration. |
+| **Member 2 (Fadhlur)** | Core IR Engine & Backend Lead | - FastAPI backend architecture & REST endpoints.<br>- Indonesian Text Preprocessor (Cleaning, Tokenizer, Stopword, Sastrawi Stemmer).<br>- Inverted Index structure & Okapi BM25 implementation from scratch.<br>- Sentence-BERT multilingual embedding pipeline & Cosine Similarity search.<br>- Evaluation Engine calculating Precision@K, Recall@K, F1@K, MAP, & Latency.<br>- Docker Compose setup & container orchestration. |
 | **Member 3** | Data Engineering & Report Lead | - Multi-source scraper for `gadgetren.com`, `jagatreview.com`, and `droidlime.com` crawling $700 - 1.000+$ full review articles.<br>- Structured JSON data schema with source provenance (`source`: Gadgetren/JagatReview/Droidlime) & SQLite ingestion script.<br>- Coordination with team on 10–15 test queries & ground-truth relevance labeling.<br>- Lead author for Final Report following USK FMIPA TA guidelines (Bab I–V).<br>- Scripting & recording coordinator for the YouTube presentation video. |
 
 ### 4.2 3-Week Concrete Sprint Schedule
 
 #### Sprint 1 (Days 1–7): Data Ingestion & Core Foundation
 - **Member 3**: Implement modular scrapers in `crawler/` (`spiders/gadgetren.py`, `spiders/jagatreview.py`, `spiders/droidlime.py`), collect 700–1.000+ articles, output `data/raw/documents.json`. Populate `docs/report/BAB_I_Pendahuluan.md` and `BAB_II_Tinjauan_Kepustakaan.md`.
-- **User (Member 2)**: Build `preprocessor.py` with Sastrawi stemming and tokenization tests. Implement Inverted Index builder and verify offline batch indexing on the enlarged multi-source dataset.
+- **Member 2 (Fadhlur)**: Build `preprocessor.py` with Sastrawi stemming and tokenization tests. Implement Inverted Index builder and verify offline batch indexing on the enlarged multi-source dataset.
 - **Member 1**: Initialize React Vite Tailwind project, build wireframes for Search Page, source badge pills (`[Gadgetren]`, `[Jagat Review]`), and Side-by-Side result view.
 - **Milestone 1**: 700–1.000+ clean documents in SQLite and preprocessed token cache verified.
 
 #### Sprint 2 (Days 8–14): IR Algorithms, Evaluation, & Integration
-- **User (Member 2)**: Complete BM25 ranking algorithm and S-BERT dense vector retriever. Build `evaluator.py`. Expose FastAPI `/api/search` and `/api/evaluation` endpoints.
+- **Member 2 (Fadhlur)**: Complete BM25 ranking algorithm and S-BERT dense vector retriever. Build `evaluator.py`. Expose FastAPI `/api/search` and `/api/evaluation` endpoints.
 - **Member 3 & Team**: Define 10–15 standard queries and annotate binary relevance judgments in `relevance_judgments.json`. Member 3 drafts `docs/report/BAB_III_Metode_Penelitian.md`.
 - **Member 1**: Wire React frontend to FastAPI API. Implement live search, side-by-side display, snippet keyword highlighting, and interactive evaluation metrics dashboard.
 - **Milestone 2**: Full end-to-end working system with quantifiable BM25 vs S-BERT benchmark results.
 
 #### Sprint 3 (Days 15–21): Containerization, Presentation, & Report Finalization
-- **User (Member 2)**: Verify multi-container `docker compose up --build` performance and test 1-command startup on fresh environment.
+- **Member 2 (Fadhlur)**: Verify multi-container `docker compose up --build` performance and test 1-command startup on fresh environment.
 - **Member 1 & Team**: Polish UI aesthetics, create presentation slides (PPTX/Canva) for the 5-minute live demo. Record and edit YouTube presentation video (all 3 members speaking).
 - **Member 3 & Team**: Finalize `BAB_IV_Hasil_dan_Pembahasan.md`, `BAB_V_Kesimpulan.md`, Abstract (ID & EN), and compile the complete PDF report `Kelompok_X.pdf` according to the USK FMIPA template.
 - **Milestone 3**: Final deliverables submitted (GitHub repository, YouTube video link, PDF report).
@@ -177,7 +177,7 @@ mesin-pencari-gadget/
 │   ├── parse_specs.py           # Technical specs extractor
 │   └── requirements.txt
 │
-├── backend/                     # [User / Member 2] Core IR Engine & API
+├── backend/                     # [Member 2 (Fadhlur)] Core IR Engine & API
 │   ├── Dockerfile
 │   ├── requirements.txt
 │   ├── app/
@@ -257,7 +257,7 @@ The report is authored collaboratively under `docs/report/` and exported to `Kel
 
 ### 6.2 5-Minute Live Demo & YouTube Video Execution Plan
 - **Minute 0:00–1:00 (Intro & Background)**: Member 3 explains problem context, corpus crawling results ($\ge 300$ gadget reviews), and system architecture.
-- **Minute 1:00–3:00 (Live Search & Algorithmic Comparison)**: User (Member 2) demonstrates the system via Docker, runs exact technical queries (highlighting BM25 accuracy) followed by semantic intent queries (highlighting Sentence-BERT contextual understanding).
+- **Minute 1:00–3:00 (Live Search & Algorithmic Comparison)**: Member 2 (Fadhlur) demonstrates the system via Docker, runs exact technical queries (highlighting BM25 accuracy) followed by semantic intent queries (highlighting Sentence-BERT contextual understanding).
 - **Minute 3:00–4:15 (Interactive Evaluation Dashboard)**: Member 1 presents the Evaluation Dashboard in the UI, reviewing Precision@K, Recall@K, and MAP charts.
 - **Minute 4:15–5:00 (Conclusion & Q&A Readiness)**: Summarize findings and conclude within the allocated 5 minutes.
 

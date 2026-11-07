@@ -15,7 +15,7 @@ To ensure balanced accountability, clear individual ownership, and seamless GitH
 ┌───────────────────────────────────────────────────────────────────────────┐
 │                               TEAM ROLES                                  │
 ├──────────────────────┬────────────────────────────┬───────────────────────┤
-│   MEMBER 1           │   MEMBER 2 (You)           │   MEMBER 3            │
+│   MEMBER 1           │   MEMBER 2 (Fadhlur)       │   MEMBER 3            │
 │   Frontend & UI Lead │   Core IR & Backend Lead   │   Data & Report Lead  │
 ├──────────────────────┼────────────────────────────┼───────────────────────┤
 │ • React + Vite UI    │ • Preprocessing (Sastrawi) │ • Multi-source Spiders│
@@ -43,7 +43,7 @@ To ensure balanced accountability, clear individual ownership, and seamless GitH
   5. Build the **Interactive Evaluation Dashboard** page displaying comparative bar/radar charts and metrics tables (Precision@5, Precision@10, Recall, F1, MAP).
   6. Design the 5-minute presentation slideshow deck (Canva or PowerPoint).
 
-### Member 2 (You): Core IR Engineer & Backend Lead
+### Member 2 (Fadhlur): Core IR Engineer & Backend Lead
 - **Primary Objective**: Build the mathematical search engine algorithms, data preprocessing pipeline, vector embeddings, quantitative evaluation benchmark, and orchestrate Docker Compose.
 - **Dedicated Workspace**: `backend/` and root `docker-compose.yml`
 - **Tech Stack**: Python 3.11+, FastAPI, Uvicorn, PySastrawi, Sentence-Transformers (`paraphrase-multilingual-MiniLM-L12-v2`), NumPy, SQLite.
