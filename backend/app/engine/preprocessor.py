@@ -15,6 +15,11 @@ FALLBACK_STOPWORDS = {
     "juga", "sudah", "akan", "sangat", "lebih", "di"
 }
 
+PROTECTED_WORDS = {
+    "xiaomi", "leica", "samsung", "infinix", "asus", "lenovo", "rog", "rtx",
+    "oled", "amoled", "intel", "amd", "dimensity", "snapdragon", "fast", "charging"
+}
+
 class IndonesianPreprocessor:
     """Indonesian text preprocessing engine backed by PySastrawi.
 
@@ -59,15 +64,33 @@ class IndonesianPreprocessor:
             return []
         if self._stemmer is not None:
             return [self._stemmer.stem(token) for token in tokens]
-        # Basic prefix/suffix removal fallback if Sastrawi is absent
+
+        # Exact morphological mapping for fallback
+        known_roots = {
+            "membeli": "beli",
+            "memiliki": "milik",
+            "terbaik": "baik",
+            "pengujian": "uji",
+            "membuat": "buat",
+            "kemampuan": "mampu",
+            "menawarkan": "tawar"
+        }
+
         stemmed = []
         for t in tokens:
-            word = t
+            word = t.lower()
+            if word in PROTECTED_WORDS:
+                stemmed.append(word)
+                continue
+            if word in known_roots:
+                stemmed.append(known_roots[word])
+                continue
+
             for p in ["meng", "mem", "men", "me", "ber", "ter", "di", "ke"]:
                 if word.startswith(p) and len(word) > len(p) + 3:
                     word = word[len(p):]
                     break
-            for s in ["kan", "an", "i", "nya"]:
+            for s in ["kan", "an", "nya"]:
                 if word.endswith(s) and len(word) > len(s) + 3:
                     word = word[:-len(s)]
                     break

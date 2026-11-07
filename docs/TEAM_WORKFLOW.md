@@ -91,12 +91,20 @@ main (Production-ready & demo branch)
 1. **Never commit directly to `main`**: All features must be developed on the respective feature branch.
 2. **Directory Isolation**:
    - Member 1 only modifies `frontend/`.
-   - Member 2 only modifies `backend/` and root configuration.
+   - Member 2 (Fadhlur) only modifies `backend/` and root configuration.
    - Member 3 only modifies `crawler/`, `data/raw/`, and `docs/report/`.
-3. **Pull Request Protocol**:
-   - Before merging into `main`, open a Pull Request on GitHub.
+3. **Mandatory Progress Update**:
+   - Before opening a Pull Request, the author **MUST** update `docs/PROGRESS.md` to check off completed items (`- [x]`) and record current status so all team members stay synchronized without needing to ask.
+4. **Mandatory Pre-PR Pipeline Verification**:
+   - Before opening a Pull Request, the author **MUST** run the automated verification script:
+     ```bash
+     python3 scripts/verify_pipeline.py
+     ```
+     or `make verify`. All 7 quality gates must report `[PASS]` before requesting review.
+5. **Pull Request Protocol**:
+   - Open a Pull Request on GitHub from your feature branch to `main`.
    - At least one other team member must review and approve the PR.
-   - Verify that tests pass before merging.
+   - GitHub Actions CI/CD tests must pass automatically.
 
 ---
 
