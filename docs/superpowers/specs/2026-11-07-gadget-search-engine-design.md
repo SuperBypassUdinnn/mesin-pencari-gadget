@@ -14,12 +14,12 @@
 The objective of this project is to build an end-to-end Indonesian Vertical Search Engine specialized in gadget reviews and hardware specifications. The system processes a crawled corpus of at least 300 Indonesian documents, implements two distinct Information Retrieval (IR) algorithms (**Okapi BM25** and **Sentence-BERT Semantic Retrieval**), provides an interactive web interface with side-by-side search comparison and evaluation dashboards, and encapsulates all services in Docker containers for single-command portability.
 
 ### Key Success Criteria:
-1. **Corpus**: $\ge 300$ high-quality Indonesian gadget review articles crawled from `gadgetren.com` with structured specifications and article bodies.
+1. **Corpus**: $700 - 1.000+$ comprehensive Indonesian gadget review & specification articles crawled from multi-source tech portals (**Gadgetren**, **Jagat Review**, and **Droidlime**).
 2. **Core IR Algorithms**:
    - Probabilistic Lexical: Custom Inverted Index with **Okapi BM25** scoring ($k_1=1.5, b=0.75$).
    - Dense Semantic: **Sentence-BERT** embeddings (`paraphrase-multilingual-MiniLM-L12-v2` / IndoBERT) with Cosine Similarity vector search.
-3. **Comprehensive IR Evaluation**: Precision@K, Recall@K, F1@K, and Mean Average Precision (MAP) evaluated against 10–15 annotated ground-truth test queries.
-4. **Interactive Web UI**: Modern React + Vite + Tailwind CSS interface featuring Side-by-Side split view, snippet highlighting, and an interactive evaluation analytics dashboard.
+3. **Comprehensive IR Evaluation**: Precision@K, Recall@K, F1@K, and Mean Average Precision (MAP) evaluated against 10–15 annotated ground-truth test queries across the enlarged corpus.
+4. **Interactive Web UI**: Modern React + Vite + Tailwind CSS interface featuring multi-source badges, Side-by-Side split view, snippet highlighting, and an interactive evaluation analytics dashboard.
 5. **Portability & Deployment**: 1-command startup via `docker-compose up --build` serving both frontend and FastAPI backend without dependency conflicts.
 6. **Academic Reporting & Presentation**: Full final report compliant with the USK FMIPA thesis report guidelines (Bab I–V, Lampiran Kontribusi Anggota), YouTube presentation video, and 5-minute live demo deck.
 
@@ -128,15 +128,15 @@ The system follows a decoupled client-server architecture containerized via Dock
 | :--- | :--- | :--- |
 | **Member 1** | Frontend UI & Visuals Lead | - React + Vite + Tailwind application setup.<br>- Hero Search Bar with quick pill suggestions.<br>- Side-by-Side comparison layout & Result Cards.<br>- Modal specification drawer.<br>- Interactive Evaluation Dashboard (Charts & Metric Tables via Recharts).<br>- Presentation Slides deck design. |
 | **User (Member 2)** | Core IR Engine & Backend Lead | - FastAPI backend architecture & REST endpoints.<br>- Indonesian Text Preprocessor (Cleaning, Tokenizer, Stopword, Sastrawi Stemmer).<br>- Inverted Index structure & Okapi BM25 implementation from scratch.<br>- Sentence-BERT multilingual embedding pipeline & Cosine Similarity search.<br>- Evaluation Engine calculating Precision@K, Recall@K, F1@K, MAP, & Latency.<br>- Docker Compose setup & container orchestration. |
-| **Member 3** | Data Engineering & Report Lead | - Scraper for `gadgetren.com` crawling $\ge 300$ full review articles.<br>- Structured JSON data schema & SQLite ingestion script.<br>- Coordination with team on 10–15 test queries & ground-truth relevance labeling.<br>- Lead author for Final Report following USK FMIPA TA guidelines (Bab I–V).<br>- Scripting & recording coordinator for the YouTube presentation video. |
+| **Member 3** | Data Engineering & Report Lead | - Multi-source scraper for `gadgetren.com`, `jagatreview.com`, and `droidlime.com` crawling $700 - 1.000+$ full review articles.<br>- Structured JSON data schema with source provenance (`source`: Gadgetren/JagatReview/Droidlime) & SQLite ingestion script.<br>- Coordination with team on 10–15 test queries & ground-truth relevance labeling.<br>- Lead author for Final Report following USK FMIPA TA guidelines (Bab I–V).<br>- Scripting & recording coordinator for the YouTube presentation video. |
 
 ### 4.2 3-Week Concrete Sprint Schedule
 
 #### Sprint 1 (Days 1–7): Data Ingestion & Core Foundation
-- **Member 3**: Implement `crawler/scraper.py`, collect 300+ articles, output `data/raw/documents.json`. Populate `docs/report/BAB_I_Pendahuluan.md` and `BAB_II_Tinjauan_Kepustakaan.md`.
-- **User (Member 2)**: Build `preprocessor.py` with Sastrawi stemming and tokenization tests. Implement Inverted Index builder and verify offline indexing on the first 50 sample documents.
-- **Member 1**: Initialize React Vite Tailwind project, build wireframes for Search Page and Side-by-Side result view.
-- **Milestone 1**: 300 clean documents in SQLite and preprocessed token cache verified.
+- **Member 3**: Implement modular scrapers in `crawler/` (`spiders/gadgetren.py`, `spiders/jagatreview.py`, `spiders/droidlime.py`), collect 700–1.000+ articles, output `data/raw/documents.json`. Populate `docs/report/BAB_I_Pendahuluan.md` and `BAB_II_Tinjauan_Kepustakaan.md`.
+- **User (Member 2)**: Build `preprocessor.py` with Sastrawi stemming and tokenization tests. Implement Inverted Index builder and verify offline batch indexing on the enlarged multi-source dataset.
+- **Member 1**: Initialize React Vite Tailwind project, build wireframes for Search Page, source badge pills (`[Gadgetren]`, `[Jagat Review]`), and Side-by-Side result view.
+- **Milestone 1**: 700–1.000+ clean documents in SQLite and preprocessed token cache verified.
 
 #### Sprint 2 (Days 8–14): IR Algorithms, Evaluation, & Integration
 - **User (Member 2)**: Complete BM25 ranking algorithm and S-BERT dense vector retriever. Build `evaluator.py`. Expose FastAPI `/api/search` and `/api/evaluation` endpoints.
@@ -163,13 +163,17 @@ mesin-pencari-gadget/
 ├── README.md                    # Setup guide, system architecture, & YouTube demo link
 │
 ├── data/                        # Persistent Data Layer
-│   ├── raw/documents.json       # Crawled 300+ raw gadget articles
+│   ├── raw/documents.json       # Crawled 700-1000+ raw gadget articles across 3 portals
 │   ├── processed/               # Preprocessed tokens, inverted index, embeddings.npy
 │   ├── ground_truth/            # test_queries.json & relevance_judgments.json
 │   └── gadget.db                # SQLite database for document metadata
 │
-├── crawler/                     # [Member 3] Data Extraction
-│   ├── scraper.py               # Crawler for gadgetren.com reviews & specs
+├── crawler/                     # [Member 3] Multi-Source Data Extraction
+│   ├── main_crawler.py          # Master runner orchestrating all portals
+│   ├── spiders/                 # Modular site extractors
+│   │   ├── gadgetren.py         # Parser for Gadgetren review pages
+│   │   ├── jagatreview.py       # Parser for Jagat Review articles
+│   │   └── droidlime.py         # Parser for Droidlime reviews
 │   ├── parse_specs.py           # Technical specs extractor
 │   └── requirements.txt
 │
