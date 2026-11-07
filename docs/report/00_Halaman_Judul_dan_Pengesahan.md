@@ -2,82 +2,138 @@
 
 ## Sampul
 
-Judul Skripsi: MESIN PENCARI VERTIKAL ULASAN GADGET DENGAN ALGORITMA OKAPI BM25 DAN SENTENCE-BERT
+LAPORAN PROYEK AKHIR MATA KULIAH PENELUSURAN INFORMASI
 
-Program Studi: Teknik Informatika
-
-Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA)
-
-Universitas Syiah Kuala
-
-Banda Aceh, 2026
-
-## Halaman Judul (Lampiran 7)
-
-MESIN PENCARI VERTIKAL ULASAN GADGET DENGAN ALGORITMA OKAPI BM25 DAN SENTENCE-BERT
+PEMBUATAN MESIN PENCARI VERTIKAL ULASAN & SPESIFIKASI GADGET DENGAN ALGORITMA OKAPI BM25 DAN SENTENCE-BERT PADA KORPUS TEKS BAHASA INDONESIA
 
 Disusun oleh:
+Kelompok [Nomor Kelompok]
 
-Nama Lengkap Mahasiswa
+1. [Nama Anggota 1] (NPM. [NPM])
+2. Fadhlurrahman Alaudin (NPM. [NPM])
+3. [Nama Anggota 3] (NPM. [NPM])
 
-NIM: 0000000000
+Dosen Pengampu Mata Kuliah:
+[Nama Dosen Pengampu Mata Kuliah], [Gelar]
+NIP. [NIP Dosen]
 
-Program Studi Teknik Informatika
-
-Fakultas Matematika dan Ilmu Pengetahuan Alam
-
-Universitas Syiah Kuala
-
-Banda Aceh
-
+PROGRAM STUDI INFORMATIKA / ILMU KOMPUTER
+FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM
+UNIVERSITAS SYIAH KUALA
+BANDA ACEH
 2026
 
-## Lembar Pengesahan (Lampiran 8)
+---
 
-Lembar pengesahan ini ditandatangani oleh pembimbing dan penguji skripsi.
+## Halaman Judul
 
-Judul: Mesin Pencari Vertikal Ulasan Gadget dengan Algoritma Okapi BM25 dan Sentence-BERT
+LAPORAN PROYEK AKHIR MATA KULIAH PENELUSURAN INFORMASI
 
-Nama Mahasiswa: [Nama Lengkap Mahasiswa]
+PEMBUATAN MESIN PENCARI VERTIKAL ULASAN & SPESIFIKASI GADGET DENGAN ALGORITMA OKAPI BM25 DAN SENTENCE-BERT PADA KORPUS TEKS BAHASA INDONESIA
 
-NIM: [NIM Mahasiswa]
+Diajukan sebagai salah satu syarat penilaian kelulusan pada Mata Kuliah Penelusuran Informasi (Information Retrieval) Semester Genap Tahun Akademik 2025/2026
 
-Pembimbing I: [Nama Pembimbing I]
+Disusun oleh:
+Kelompok [Nomor Kelompok]
 
-Pembimbing II: [Nama Pembimbing II]
+1. [Nama Anggota 1] (NPM. [NPM])
+2. Fadhlurrahman Alaudin (NPM. [NPM])
+3. [Nama Anggota 3] (NPM. [NPM])
 
-Penguji I: [Nama Penguji I]
+PROGRAM STUDI INFORMATIKA
+FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM
+UNIVERSITAS SYIAH KUALA
+BANDA ACEH
+2026
 
-Penguji II: [Nama Penguji II]
+---
 
-Penguji III: [Nama Penguji III]
+## Lembar Pengesahan
 
-Tanggal Sidang: [Tanggal]
+LEMBAR PENGESAHAN LAPORAN PROYEK AKHIR MATA KULIAH
 
-## Pernyataan Bebas Plagiasi (Lampiran 9)
+Judul Proyek: Pembuatan Mesin Pencari Vertikal Ulasan & Spesifikasi Gadget dengan Algoritma Okapi BM25 dan Sentence-BERT pada Korpus Teks Bahasa Indonesia
+Mata Kuliah: Penelusuran Informasi (Information Retrieval)
+Kelompok: [Nomor Kelompok]
 
-Saya yang bertanda tangan di bawah ini, menyatakan bahwa skripsi yang berjudul "Mesin Pencari Vertikal Ulasan Gadget dengan Algoritma Okapi BM25 dan Sentence-BERT" ini adalah hasil karya saya sendiri dan tidak merupakan plagiasi dari karya orang lain. Semua sumber yang digunakan dalam penulisan skripsi ini telah dicantumkan dalam daftar pustaka.
+Anggota Tim:
+1. Nama: [Nama Anggota 1] | NPM: [NPM] | Peran: Frontend & UI Lead
+2. Nama: Fadhlurrahman Alaudin | NPM: [NPM] | Peran: Core IR & Backend Lead
+3. Nama: [Nama Anggota 3] | NPM: [NPM] | Peran: Data Engineering & Report Lead
 
-## Kata Pengantar (Lampiran 12)
+Laporan Proyek Akhir ini telah diperiksa, diuji melalui live demo sistem, dan disetujui untuk memenuhi penilaian akhir mata kuliah Penelusuran Informasi.
 
-Puji syukur kami panjatkan kehadirat Allah SWT karena dengan limpahnya rahmat dan hidayah-Nya, skripsi ini dapat terselesaikan. Skripsi ini disusun sebagai syarat untuk memperoleh gelar Sarjana Teknik Informatika di Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Syiah Kuala. Ucapan terima kasih kami sampaikan kepada pembimbing, penguji, rekan rekan kampus, dan seluruh pihak yang telah membantu dalam penyelesaian skripsi ini.
+Banda Aceh, [Tanggal Pengesahan] 2026
 
-## Daftar Isi (Lampiran 13)
+Menyetujui,
+Dosen Pengampu Mata Kuliah Penelusuran Informasi
+
+( [Nama Dosen Pengampu Mata Kuliah], [Gelar] )
+NIP. [NIP Dosen]
+
+---
+
+## Pernyataan Bebas Plagiasi
+
+Kami yang bertanda tangan di bawah ini menyatakan dengan sesungguhnya bahwa Laporan Proyek Akhir Mata Kuliah Penelusuran Informasi dengan judul di atas adalah hasil karya orisinal kelompok kami sendiri. Seluruh data korpus teks hasil crawling, implementasi kode algoritma Okapi BM25 dan Sentence-BERT, antarmuka web, serta analisis evaluasi metrik (MAP, Precision, Recall, F1) yang dipaparkan dalam laporan ini dikerjakan secara mandiri dan bebas dari tindakan plagiasi. Semua referensi dan kepustakaan yang dirujuk telah dicantumkan secara tertib pada Daftar Pustaka.
+
+Banda Aceh, [Tanggal] 2026
+
+Tim Penyusun (Kelompok [Nomor Kelompok]):
+
+1. [Nama Anggota 1] (NPM. [NPM]) ........................
+2. Fadhlurrahman Alaudin (NPM. [NPM]) ........................
+3. [Nama Anggota 3] (NPM. [NPM]) ........................
+
+---
+
+## Kata Pengantar
+
+Puji syukur kami panjatkan ke hadirat Allah SWT atas rahmat dan hidayah-Nya, sehingga Laporan Proyek Akhir Mata Kuliah Penelusuran Informasi (Information Retrieval) yang berjudul "Pembuatan Mesin Pencari Vertikal Ulasan & Spesifikasi Gadget dengan Algoritma Okapi BM25 dan Sentence-BERT pada Korpus Teks Bahasa Indonesia" ini dapat diselesaikan dengan baik dan tepat waktu.
+
+Proyek ini dilaksanakan secara berkelompok guna mengimplementasikan konsep teoritis penelusuran informasi ke dalam bentuk aplikasi nyata, mencakup proses pengumpulan korpus ulasan gadget multi-sumber, prapemrosesan teks Bahasa Indonesia, pengindeksan Inverted Index, perankingan probabilistik Okapi BM25, pencarian semantik Sentence-BERT, serta evaluasi kuantitatif komparatif (Precision@K, Recall@K, F1@K, dan Mean Average Precision).
+
+Penyelesaian tugas ini tidak terlepas dari bimbingan dan dukungan berbagai pihak. Oleh karena itu, kami menyampaikan terima kasih yang sebesar-besarnya kepada:
+1. Bapak/Ibu Dosen Pengampu Mata Kuliah Penelusuran Informasi, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Syiah Kuala, atas arahan materi, masukan teknis, dan bimbingan selama perkuliahan dan pengerjaan proyek akhir ini.
+2. Rekan-rekan satu kelompok atas dedikasi, kolaborasi aktif, dan kerja sama yang solid dalam menyelesaikan pembagian tugas crawling, pembangunan core search engine, perancangan antarmuka web, dan penyusunan laporan.
+3. Rekan-rekan mahasiswa Program Studi Informatika USK atas diskusi ilmiah dan pertukaran gagasan seputar implementasi sistem temu balik informasi.
+
+Kami menyadari bahwa laporan dan sistem ini masih memiliki keterbatasan. Kritik dan masukan yang membangun sangat kami harapkan guna penyempurnaan sistem di masa mendatang. Semoga laporan ini dapat memberikan manfaat bagi pembelajaran penelusuran informasi.
+
+Banda Aceh, [Bulan] 2026
+
+Tim Penyusun
+
+---
+
+## Daftar Isi
 
 Halaman Judul dan Pengesahan ........................................ ii
-
-Abstrak dan Abstract ............................................... iii
-
+Abstrak dan Abstract ............................................... iv
 BAB I Pendahuluan ................................................. 1
-
-BAB II Tinjauan Kepustakaan ....................................... 5
-
-BAB III Metode Penelitian ......................................... 9
-
-BAB IV Hasil dan Pembahasan ...................................... 13
-
-BAB V Kesimpulan dan Saran ....................................... 17
-
-Daftar Pustaka .................................................... 20
-
-Lampiran Kontribusi Anggota ....................................... 22
+  1.1 Latar Belakang .............................................. 1
+  1.2 Rumusan Masalah ............................................. 2
+  1.3 Maksud dan Tujuan ........................................... 3
+  1.4 Manfaat Penelitian .......................................... 3
+BAB II Tinjauan Kepustakaan ....................................... 4
+  2.1 Konsep Dasar Information Retrieval .......................... 4
+  2.2 Text Preprocessing Bahasa Indonesia ......................... 5
+  2.3 Algoritma Okapi BM25 ........................................ 6
+  2.4 Algoritma Sentence-BERT & Semantic Retrieval ................ 7
+  2.5 Metrik Evaluasi Kinerja (MAP, Precision, Recall, F1) ........ 8
+BAB III Metode Penelitian ......................................... 10
+  3.1 Waktu dan Lingkungan Implementasi ........................... 10
+  3.2 Arsitektur Sistem dan Alur Kerja ............................ 11
+  3.3 Pengumpulan Korpus Data (Multi-Source Crawling) ............. 12
+  3.4 Skema Database dan Pengindeksan ............................. 13
+  3.5 Prosedur Pengujian dan Evaluasi Kuantitatif ................. 14
+BAB IV Hasil dan Pembahasan ....................................... 16
+  4.1 Karakteristik Korpus Data Ulasan Gadget ..................... 16
+  4.2 Hasil Pengujian Pencarian Komparatif Side-by-Side ........... 17
+  4.3 Hasil Evaluasi Kuantitatif (BM25 vs Sentence-BERT) .......... 19
+  4.4 Analisis Perbandingan dan Temuan Kinerja .................... 21
+BAB V Kesimpulan dan Saran ........................................ 23
+  5.1 Kesimpulan .................................................. 23
+  5.2 Saran Pengembangan Lanjutan ................................. 24
+Daftar Pustaka .................................................... 25
+Lampiran Kontribusi Anggota ....................................... 27
