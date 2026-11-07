@@ -62,7 +62,19 @@ Every time a task or feature is completed:
 
 ---
 
-## 5. Clean Text Policy
+## 5. Mandatory GitHub Issue Linking in Pull Requests
+
+When preparing or opening a Pull Request:
+- The PR description **MUST** link to the associated GitHub Issue using standard closing keywords:
+  - `Closes #1` or `Closes #2` for Frontend UI tasks (Member 1).
+  - `Closes #3` or `Closes #4` for Core IR & Backend tasks (Member 2 Fadhlur).
+  - `Closes #5` or `Closes #6` for Crawler & Academic Report tasks (Member 3).
+  - `Closes #7` for Delivery, Docker, and Video tasks (All Members).
+- Any PR submitted without an explicit issue link is considered non-compliant and will be rejected.
+
+---
+
+## 6. Clean Text Policy
 
 Never use decorative icons or emojis in code, docstrings, commit messages, PR descriptions, or documentation files. Use standard Markdown headers, clean bullet points, or Lucide SVG icons in frontend components.
 

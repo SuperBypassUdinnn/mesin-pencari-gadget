@@ -105,6 +105,9 @@ main (Production-ready & demo branch)
    - Open a Pull Request on GitHub from your feature branch to `main`.
    - At least one other team member must review and approve the PR.
    - GitHub Actions CI/CD tests must pass automatically.
+6. **Mandatory GitHub Issue Reference**:
+   - Every Pull Request description **MUST** explicitly link to the corresponding milestone issue using standard GitHub keywords (e.g. `Closes #1`, `Closes #3`, `Closes #5`).
+   - A PR submitted without an associated issue link will **NOT** be approved or merged. This ensures 100% digital traceability of individual contributions for academic grading.
 
 ---
 

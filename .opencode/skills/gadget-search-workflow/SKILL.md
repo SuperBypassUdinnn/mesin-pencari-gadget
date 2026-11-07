@@ -78,5 +78,6 @@ All 7 quality gates must pass:
 ### Step 4: Update Progress Checklist
 Open `docs/PROGRESS.md`, check off completed items (`- [x]`), and update milestone status.
 
-### Step 5: Pull Request & Review
+### Step 5: Pull Request & Mandatory Issue Linking
 Commit changes with concise Conventional Commits (`feat: ...`, `fix: ...`, `docs: ...`) and create a Pull Request targeting `main`.
+**MANDATORY**: Every PR description MUST explicitly reference the associated milestone issue using standard closing keywords (e.g. `Closes #1` or `Closes #2` for Frontend, `Closes #3` or `Closes #4` for Core IR, `Closes #5` or `Closes #6` for Crawler/Report, `Closes #7` for Demo/Delivery). Never submit or approve a PR without linking to an issue.
