@@ -7,8 +7,11 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-slate-50 text-slate-900 antialiased selection:bg-primary-200 selection:text-slate-900;
+    @apply bg-slate-50 text-slate-900 antialiased;
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  ::selection {
+    @apply bg-primary-200 text-slate-900;
   }
   h1, h2, h3, h4 {
     @apply tracking-tight;

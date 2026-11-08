@@ -109,6 +109,20 @@ main (Production-ready & demo branch)
    - Every Pull Request description **MUST** explicitly link to the corresponding milestone issue using standard GitHub keywords (e.g. `Closes #1`, `Closes #3`, `Closes #5`).
    - A PR submitted without an associated issue link will **NOT** be approved or merged. This ensures 100% digital traceability of individual contributions for academic grading.
 
+### Issue Management Protocol for New Tasks & Bugfixes:
+Whenever new requirements, bugfixes, or additional features arise outside the initial 7 milestone issues:
+1. **Create Issue First**: Never develop or submit a PR without a tracking issue. Create the issue via `ghx`:
+   ```bash
+   ghx issue create \
+     --title "[<Category>] <Clear Title>" \
+     --label "<category-label>,<type-label>" \
+     --body "### Penanggung Jawab: ...\n**Branch**: ...\n#### Deskripsi Tugas:\n- [ ] ...\n#### Kriteria Sukses:\n- Lulus 'make verify'"
+   ```
+   Valid Categories: `[Frontend]`, `[Core IR]`, `[Data]`, `[Report]`, `[Demo]`, `[Bugfix]`.
+   Valid Labels: `frontend`, `core-ir`, `crawler-data`, `report`, `demo`, `enhancement`, `bug`, `documentation`.
+2. **Register in Progress Tracker**: Add the newly created issue number and task checklist into `docs/PROGRESS.md`.
+3. **Closing Explanatory Comments**: When resolving an issue, always close with a descriptive comment explaining what was implemented and verified.
+
 ---
 
 ## 4. Evidence & Artifact Archiving Standard

@@ -20,6 +20,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -271,9 +272,9 @@ def gate_6_clean_text_policy_audit(root: str) -> bool:
 
 
 def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
-    print("\n--- Gate 7: Automated Pytest Regression Test Suite ---")
+    print("\n--- Gate 7: Automated Test Suites (Backend Pytest & Frontend Vitest) ---")
     if skip:
-        print("[SKIP] Skipping pytest regression suite as requested (--skip-tests).")
+        print("[SKIP] Skipping test suites as requested (--skip-tests).")
         return True
 
     venv_python = os.path.join(root, ".venv", "bin", "python")
@@ -283,14 +284,41 @@ def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
     env = os.environ.copy()
     env["PYTHONPATH"] = root
 
-    print(f"[RUN] Running: {' '.join(cmd)}")
+    print(f"[RUN] Running Backend Suite: {' '.join(cmd)}")
     result = subprocess.run(cmd, cwd=root, env=env)
 
     if result.returncode != 0:
         print(f"[FAIL] Pytest test suite failed with exit code {result.returncode}")
         return False
 
-    print("[PASS] Automated test suite passed successfully (100% green).")
+    frontend_dir = os.path.join(root, "frontend")
+    if os.path.isdir(frontend_dir) and shutil.which("npm"):
+        print("[RUN] Running Frontend Vite build & Vitest suite...")
+        fe_build = subprocess.run(
+            ["npm", "run", "build"],
+            cwd=frontend_dir,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        if fe_build.returncode != 0:
+            print(f"[FAIL] Frontend build failed:\n{fe_build.stderr}")
+            return False
+
+        fe_test = subprocess.run(
+            ["npm", "test", "--", "--run"],
+            cwd=frontend_dir,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        if fe_test.returncode != 0:
+            print(f"[FAIL] Frontend tests failed:\n{fe_test.stderr}")
+            return False
+
+        print("[PASS] Frontend build and Vitest suite passed successfully.")
+
+    print("[PASS] Automated test suites passed successfully (100% green).")
     return True
 
 

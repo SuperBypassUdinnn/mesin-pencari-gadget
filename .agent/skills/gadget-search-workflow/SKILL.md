@@ -81,3 +81,19 @@ Open `docs/PROGRESS.md`, check off completed items (`- [x]`), and update milesto
 ### Step 5: Pull Request & Mandatory Issue Linking
 Commit changes with concise Conventional Commits (`feat: ...`, `fix: ...`, `docs: ...`) and create a Pull Request targeting `main`.
 **MANDATORY**: Every PR description MUST explicitly reference the associated milestone issue using standard closing keywords (e.g. `Closes #1` or `Closes #2` for Frontend, `Closes #3` or `Closes #4` for Core IR, `Closes #5` or `Closes #6` for Crawler/Report, `Closes #7` for Demo/Delivery). Never submit or approve a PR without linking to an issue.
+
+---
+
+## 4. Issue Creation Protocol for Additional Tasks & Bugfixes
+
+If unexpected bugs, additional tasks, or scope extensions arise:
+1. **Never commit without an Issue**: Create an issue first using `ghx issue create`:
+   ```bash
+   ghx issue create \
+     --title "[<Category>] <Clear Title>" \
+     --label "<category-label>,<type-label>" \
+     --body "### Penanggung Jawab: ...\n**Branch**: ...\n#### Deskripsi Tugas:\n- [ ] ...\n#### Kriteria Sukses:\n- Lulus 'make verify'"
+   ```
+   Valid categories: `[Frontend]`, `[Core IR]`, `[Data]`, `[Report]`, `[Demo]`, `[Bugfix]`.
+2. **Register in `docs/PROGRESS.md`**: Append the newly created issue number and task items to the living tracker.
+3. **Closing Explanatory Comments**: When resolving or closing an issue, always provide an explanatory comment detailing what was accomplished and verified.

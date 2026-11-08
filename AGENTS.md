@@ -74,7 +74,16 @@ When preparing or opening a Pull Request:
 
 ---
 
-## 6. Clean Text Policy
+## 6. Issue Creation Protocol for Additional Tasks & Bugfixes
+
+If unexpected bugs, additional tasks, or scope extensions arise:
+1. **Create GitHub Issue First**: Run `ghx issue create` with standard title prefix (`[Frontend]`, `[Core IR]`, `[Data]`, `[Report]`, `[Bugfix]`) and proper labels (`frontend`, `core-ir`, `crawler-data`, `report`, `demo`, `enhancement`, `bug`).
+2. **Register in `docs/PROGRESS.md`**: Add the issue link and task items to the tracker.
+3. **Closing Explanatory Comments**: Always provide a detailed comment when closing or modifying an issue's status.
+
+---
+
+## 7. Clean Text Policy
 
 Never use decorative icons or emojis in code, docstrings, commit messages, PR descriptions, or documentation files. Use standard Markdown headers, clean bullet points, or Lucide SVG icons in frontend components.
 

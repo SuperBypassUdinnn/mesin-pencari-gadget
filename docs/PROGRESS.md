@@ -67,16 +67,13 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | Komponen Proyek & GitHub Issue | Penanggung Jawab | Status | Catatan Dependensi |
 | :--- | :--- | :--- | :--- |
 | **Arsitektur & Scaffolding** | Tim / Fadhlur | **SELESAI (100%)** | Struktur repo, Dockerfile, requirements, dan Makefile siap |
-| **[#3] Core IR: Preprocessing Sastrawi & BM25** | Member 2 (Fadhlur) | **SELESAI (100%)** | Inverted index & formula Okapi BM25 dari nol ([Issue #3](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/3)) |
-| **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **SELESAI (100%)** | Dense retrieval Cosine Similarity & API live ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
-| **[#1] Frontend: Komponen UI & Search** | Member 1 | **SELESAI (100%)** | React 18, SearchBar, ResultCard, SplitView ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
-| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **SELESAI (100%)** | Dashboard Recharts & Slide demo ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
-| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 | **FONDASI SIAP** | Spider Gadgetren, JagatReview, Droidlime ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
-| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 Lead | **DRAF SIAP** | Format TA USK, Lampiran Kontribusi ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
-| **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **MENUNGGU** | Verifikasi Docker, video YouTube, PDF final ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
-| **Koleksi Korpus $\ge 700$ Dokumen** | Member 3 | **DALAM PROSES** | Target: 350 Gadgetren + 350 Jagat Review + 100 Droidlime |
-| **Naskah Laporan USK (Bab I - V)** | Member 3 Lead | **DRAF SIAP** | Format TA FMIPA USK, Lampiran Kontribusi Anggota siap |
-| **Video Presentasi YouTube** | Bersama (M1, M2, M3) | **MENUNGGU** | Menunggu penyelesaian scraping korpus penuh |
+| **[#3] Core IR: Preprocessing Sastrawi & BM25** | Member 2 (Fadhlur) | **CLOSED (100%)** | Lulus 155 unit tests, formula Okapi BM25 murni ([Issue #3](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/3)) |
+| **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
+| **[#1] Frontend: Komponen UI & Search** | Member 1 | **OPEN (90%)** | React 18, SearchBar, ResultCard, SplitView, Vitest ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
+| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **OPEN (75%)** | Dashboard Recharts siap, slide demo in progress ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
+| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 | **OPEN (30%)** | Spider siap, crawling korpus penuh in progress ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
+| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
+| **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 
 ---
 
