@@ -101,10 +101,11 @@ main (Production-ready & demo branch)
      python3 scripts/verify_pipeline.py
      ```
      or `make verify`. All 7 quality gates must report `[PASS]` before requesting review.
-5. **Pull Request Protocol**:
+5. **Pull Request Protocol (Self-Merge with Mandatory CI Gate)**:
    - Open a Pull Request on GitHub from your feature branch to `main`.
-   - At least one other team member must review and approve the PR.
-   - GitHub Actions CI/CD tests must pass automatically.
+   - **Self-Merge Enabled**: Untuk menjaga kecepatan dan fleksibilitas pengerjaan, pembuat PR diizinkan melakukan *self-merge* tanpa wajib menunggu review manual dari anggota lain.
+   - **Mandatory CI Gate**: PR hanya dapat di-*merge* apabila seluruh *status checks* CI (`backend-tests` dan `frontend-tests`) berstatus **PASS** (100% green).
+   - Peer review opsional tetap dapat dilakukan untuk koordinasi kode antar-anggota.
 6. **Mandatory GitHub Issue Reference**:
    - Every Pull Request description **MUST** explicitly link to the corresponding milestone issue using standard GitHub keywords (e.g. `Closes #1`, `Closes #3`, `Closes #5`).
    - A PR submitted without an associated issue link will **NOT** be approved or merged. This ensures 100% digital traceability of individual contributions for academic grading.
