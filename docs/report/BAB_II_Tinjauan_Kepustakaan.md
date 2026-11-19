@@ -2,70 +2,63 @@
 
 ## 2.1 Information Retrieval
 
-Information Retrieval (IR) atau Penelusuran Informasi adalah ilmu yang mempelajari cara menyimpan, mengorganisasi, dan mencari informasi dari koleksi dokumen yang besar. Tujuan utama IR adalah mengembalikan dokumen yang relevan terhadap kebutuhan informasi pengguna yang diungkapkan dalam bentuk kueri. Dalam konteks mesin pencari vertikal gadget, IR digunakan untuk mengindeks dan mencari artikel ulasan serta spesifikasi teknis dari berbagai portal teknologi.
+Information Retrieval (IR) atau Penelusuran Informasi adalah ilmu yang mempelajari cara menyimpan, mengorganisasi, mengindeks, dan menemukan kembali informasi yang relevan dari koleksi dokumen tidak terstruktur atau semi-terstruktur (Manning, Raghavan, & Schütze, 2008). Tujuan utama sistem IR adalah mengembalikan daftar dokumen terurut berdasarkan tingkat relevansinya terhadap kebutuhan informasi pengguna yang dinyatakan dalam bentuk kueri. Dalam konteks mesin pencari vertikal gadget, IR berfokus pada domain spesifik ulasan dan spesifikasi perangkat elektronik sehingga hasil pencarian terhindar dari derau halaman web umum.
 
-Proses IR umumnya terdiri dari beberapa tahap, yaitu representasi dokumen, representasi kueri, pencocokan (matching), dan penilaian relevansi (ranking). Representasi dokumen dapat berupa vektor istilah (term vector) atau vektor dens yang dihasilkan oleh model pembelajaran mesin.
+Proses inti dalam sistem IR meliputi akuisisi dokumen (crawling), prapemrosesan teks, representasi dan pengindeksan (baik berupa inverted index maupun dense vector index), pencocokan serta perankingan (retrieval and ranking), hingga evaluasi kinerja secara kuantitatif.
 
 ## 2.2 Text Preprocessing Bahasa Indonesia
 
-Sebelum dokemen dan kueri dapat diindeks dan dicari, teks perlu melalui tahap preprocessing untuk membersihkan dan menstandarkan representasi teks. Tahapan preprocessing dalam penelitian ini meliputi:
+Sebelum dokumen dan kueri diindeks dalam sistem pencarian leksikal, teks mentah perlu dibersihkan dan dinormalisasi agar variasi penulisan kata tidak menurunkan kecocokan. Tahapan text preprocessing dalam penelitian ini meliputi:
 
-1. Case folding: Mengubah semua huruf menjadi huruf kecil agar pencarian tidak bersifat case-sensitive.
-2. Tokenization: Memecah teks menjadi token-token terkecil (kata atau frasa) berdasarkan spasi dan pola regex.
-3. Stopword removal: Menghapus kata-kata non-informatif (stopwords) menggunakan leksikon Sastrawi/Tala, sambil mempertahankan modifier teknis penting seperti "tanpa", "tidak", dan "anti".
-4. Stemming: Mengubah kata menjadi bentuk dasarnya (root word) menggunakan PySastrawi yang menerapkan aturan morfologis Nazief-Adriani.
+1. Case folding: Mengubah seluruh huruf menjadi huruf kecil agar pencocokan tidak sensitif terhadap huruf kapital.
+2. Tokenization: Memecah teks menjadi token kata atau istilah teknis menggunakan ekspresi reguler alfanumerik (`[a-z0-9]`) sehingga nama prosesor, kapasitas memori, dan seri perangkat tetap terjaga utuh.
+3. Stopword removal: Menghapus kata-kata umum yang memiliki daya pembeda rendah menggunakan kamus stopword Bahasa Indonesia dari Sastrawi.
+4. Stemming: Mengubah kata berimbuhan menjadi kata dasarnya (root word) menggunakan PySastrawi yang menerapkan algoritma Nazief-Adriani (Nazief & Adriani, 2006).
 
-Stemming bahasa Indonesia sangat penting karena bahasa Indonesia memiliki banyak imbuhan (awalan, akhiran, dan gabungan keduanya) yang dapat mengubah bentuk kata dasar. Dengan stemming, variasi kata seperti "mengulas", "diulas", dan "pengulasan" dapat diubah menjadi bentuk dasar "ulasan", sehingga meningkatkan kemiripan dalam pencarian leksikal.
+Stemming Bahasa Indonesia berperan penting karena kekayaan afiksasi (awalan, sisipan, akhiran, dan konfiks). Dengan stemming, kata seperti "menguji", "diuji", dan "pengujian" dipetakan ke kata dasar yang sama, sehingga mengurangi ukuran kosakata dan meningkatkan recall pada pencarian leksikal.
 
 ## 2.3 Algoritma Okapi BM25
 
-Okapi BM25 adalah algoritma penelusuran informasi berbasis model probabilistik yang menghitung skor relevansi dokumen terhadap kueri berdasarkan frekuensi istilah dan panjang dokumen. Rumus matematis Okapi BM25 adalah sebagai berikut:
+Okapi BM25 adalah algoritma perankingan berbasis kerangka probabilistik yang dikembangkan oleh Robertson dan Zaragoza (2009). Algoritma ini menyempurnakan pembobotan TF-IDF klasik dengan menambahkan saturasi frekuensi istilah (term frequency saturation) dan normalisasi panjang dokumen relatif terhadap panjang rata-rata korpus. Rumus skor relevansi dokumen $D$ terhadap kueri $Q$ adalah:
 
-Score(D, Q) = sum_{q in Q} IDF(q) * (f(q, D) * (k1 + 1)) / (f(q, D) + k1 * (1 - b + b * (|D| / avgdl)))
+$$\text{Score}(D, Q) = \sum_{q \in Q} \text{IDF}(q) \cdot \frac{f(q, D) \cdot (k_1 + 1)}{f(q, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}$$
 
-Di mana IDF(q) dihitung dengan rumus Robertson-Sparck Jones:
+dengan nilai Inverse Document Frequency (IDF) Robertson-Spärck Jones yang dihaluskan:
 
-IDF(q) = ln((N - n(q) + 0.5) / (n(q) + 0.5) + 1)
+$$\text{IDF}(q) = \ln\left(\frac{N - n(q) + 0,5}{n(q) + 0,5} + 1\right)$$
 
-Parameter dalam rumus di atas adalah:
-- N: Total jumlah dokumen dalam korpus.
-- n(q): Jumlah dokumen yang mengandung istilah kueri q.
-- f(q, D): Frekuensi kemunculan istilah q dalam dokumen D.
-- |D| dan avgdl: Panjang dokumen D dan rata-rata panjang dokumen dalam korpus.
-- k1: Parameter saturasi istilah (nilai 1.5).
-- b: Parameter normalisasi panjang dokumen (nilai 0.75).
+Keterangan parameter dalam persamaan di atas adalah:
+- $N$: Jumlah total dokumen dalam korpus (900 dokumen).
+- $n(q)$: Jumlah dokumen yang mengandung istilah kueri $q$.
+- $f(q, D)$: Frekuensi kemunculan istilah $q$ dalam dokumen $D$.
+- $|D|$ dan $\text{avgdl}$: Panjang dokumen $D$ (dalam jumlah token terindeks) dan rata-rata panjang dokumen korpus.
+- $k_1$: Parameter saturasi frekuensi istilah (ditetapkan sebesar $1{,}5$).
+- $b$: Parameter kontrol normalisasi panjang dokumen (ditetapkan sebesar $0{,}75$).
 
-BM25 efektif untuk kueri teknis eksak karena memberikan bobor lebih tinggi pada istilah yang jarang muncul dalam korpus namun sering muncul dalam suatu dokumen tertentu.
+BM25 sangat efektif untuk kueri teknis eksak karena istilah yang jarang muncul pada korpus (seperti seri prosesor atau fitur kamera khusus) memperoleh bobot IDF tinggi, sementara struktur Inverted Index memungkinkan eksekusi kueri hanya dalam hitungan milidetik.
 
 ## 2.4 Sentence-BERT dan Cosine Similarity
 
-Sentence-BERT (SBERT) adalah variasi dari arsitektur BERT yang dilatih untuk menghasilkan representasi vektor dens dari kalimat atau paragraf. Dalam penelitian ini, model yang digunakan adalah paraphrase-multilingual-MiniLM-L12-v2 yang menghasilkan vektor berdimensi 384 dan mendukung bahasa Indonesia.
+Sentence-BERT (SBERT) adalah modifikasi arsitektur BERT menggunakan jaringan Siamese dan Triplet untuk menghasilkan representasi vektor berdimensi tetap (dense sentence embedding) yang bermakna secara semantik (Reimers & Gurevych, 2019). Pada penelitian ini digunakan model pralatih multibahasa `paraphrase-multilingual-MiniLM-L12-v2` yang mendukung Bahasa Indonesia maupun istilah teknis Bahasa Inggris dengan dimensi vektor $d = 384$.
 
-Setiap dokumen diwakili sebagai vektor dens yang dihasilkan dari pengkodean gabungan judul, spesifikasi teknis, dan ringkasan ulasan. Query juga dienkode menjadi vektor dens yang sama. Kemudian, kemiripan antara vektor dokumen dan vektor query dihitung menggunakan cosine similarity:
+Setiap dokumen dan kueri dipetakan ke dalam vektor berdimensi 384 yang dinormalisasi menggunakan L2 norm ($\hat{v} = v / \|v\|_2$). Dengan normalisasi L2, perhitungan Cosine Similarity antara vektor kueri $\hat{u}$ dan matriks embedding dokumen $\hat{V}$ dapat disederhanakan menjadi perkalian titik (dot product) tunggal:
 
-Cosine Similarity(u, v) = (u . v) / (||u|| * ||v||)
+$$\text{Cosine Similarity}(\hat{u}, \hat{v}) = \frac{u \cdot v}{\|u\|_2 \|v\|_2} = \hat{u} \cdot \hat{v}$$
 
-Sebelum menghitung cosine similarity, vektor dinormalisasi dengan L2 norm sehingga hasil dot product memberikan nilai cosine similarity langsung. Pencarian dilakukan dengan perkalian matriks-vektor tunggal, diikuti dengan pengurutan untuk mengambil hasil Top-K.
-
-SBERT unggul untuk kueri semantik dan berbasis niat karena menangkap makna dan konteks, bukan hanya kecocokan kata secara harfiah.
+Pendekatan ini unggul dalam memahami konteks, sinonim, dan maksud kueri berbasis niat (intent-based) walaupun kata kunci pada kueri tidak muncul secara harfiah di dalam dokumen. Namun demikian, arsitektur berbasis transformer memiliki batasan panjang urutan token masukan (128 token pada MiniLM-L12-v2) serta memerlukan biaya komputasi lebih tinggi dibandingkan BM25 saat melakukan encoding kueri.
 
 ## 2.5 Metrik Evaluasi Information Retrieval
 
-Untuk mengevaluasi performa mesin pencari, digunakan metrik evaluasi standar IR sebagai berikut:
+Evaluasi kinerja kedua algoritma dilakukan mengikuti standar `trec_eval` (Voorhees & Harman, 2005) menggunakan lima metrik utama:
 
-1. Precision@K: Proporsi dokumen relevan dalam K hasil teratas.
-   Precision@K = |Dokumen Relevan n Hasil Teratas K| / K
+1. Precision@K: Proporsi dokumen relevan di antara $K$ dokumen peringkat teratas yang dikembalikan sistem:
+   $$\text{Precision@K} = \frac{|\text{Retrieved}_{[:K]} \cap \text{Relevant}|}{K}$$
+2. Recall@K: Proporsi dokumen relevan yang berhasil ditemukan pada $K$ hasil teratas terhadap seluruh dokumen relevan yang diketahui pada ground truth:
+   $$\text{Recall@K} = \frac{|\text{Retrieved}_{[:K]} \cap \text{Relevant}|}{|\text{Relevant}|}$$
+3. F1-Score@K: Rata-rata harmonik antara Precision@K dan Recall@K:
+   $$\text{F1@K} = \frac{2 \cdot \text{Precision@K} \cdot \text{Recall@K}}{\text{Precision@K} + \text{Recall@K}}$$
+4. Mean Average Precision (MAP): Rata-rata nilai Average Precision (AP) pada seluruh kueri uji $|Q|$, yang mengevaluasi ketepatan urutan ranking secara menyeluruh:
+   $$\text{AP} = \frac{1}{|\text{Relevant}|} \sum_{i=1}^{N} \text{Precision@}i \cdot \text{rel}(i), \quad \text{MAP} = \frac{1}{|Q|} \sum_{q=1}^{|Q|} \text{AP}(q)$$
+5. Latensi (Latency): Waktu respons pencarian per kueri yang diukur dalam milidetik menggunakan penghitung waktu presisi tinggi (`time.perf_counter()`).
 
-2. Recall@K: Proporsi dokumen relevan yang berhasil diambil dari total dokumen relevan dalam korpus.
-   Recall@K = |Dokumen Relevan n Hasil Teratas K| / |Total Dokumen Relevan dalam Korpus|
-
-3. F1-Score@K: Rata-rata harmonik antara Precision dan Recall.
-   F1@K = 2 * (Precision@K * Recall@K) / (Precision@K + Recall@K)
-
-4. Mean Average Precision (MAP): Rata-rata Average Precision (AP) di seluruh kueri uji.
-   AP = sum_{k=1}^{N} (P@k * rel(k)) / |Total Dokumen Relevan|
-   MAP = (1 / |Q|) * sum_{q=1}^{|Q|} AP(q)
-
-5. Latensi: Waktu respons rata-rata kueri dalam milidetik.
-
-Semua metrik dihitung dengan proteksi terhadap pembagian nol untuk kueri yang tidak menghasilkan hasil relevan.
+Seluruh perhitungan metrik dilengkapi pengamanan pembagian nol apabila himpunan relevan kosong atau tidak ada dokumen relevan yang terambil.
