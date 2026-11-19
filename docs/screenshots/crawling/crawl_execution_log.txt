@@ -13,8 +13,8 @@
 ============================================================
 [MainCrawler] CRAWL SUMMARY
 Total unique documents : 900
-Elapsed time           : 122.18 s
-Average content length : 4183.3 chars (617.3 words)
+Elapsed time           : 122.33 s
+Average content length : 4184.2 chars (617.4 words)
 Specs extraction rate  : 695/900 (77.2%)
 Distribution by source :
   - Jagat Review: 252
@@ -23,13 +23,13 @@ Distribution by source :
   - Gadgetren: 135
   - Hybrid: 108
 Distribution by category:
-  - smartphone: 352
-  - laptop: 188
-  - peripheral: 153
-  - audio: 111
-  - tablet: 54
-  - wearable: 34
-  - camera: 8
+  - smartphone: 473
+  - laptop: 227
+  - audio: 73
+  - tablet: 50
+  - peripheral: 33
+  - wearable: 33
+  - camera: 11
 Saved raw JSON         : data/raw/documents.json
 Saved SQLite DB        : data/gadget.db
 ============================================================
