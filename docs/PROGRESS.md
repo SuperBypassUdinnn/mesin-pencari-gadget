@@ -71,8 +71,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
 | **[#1] Frontend: Komponen UI & Search** | Member 1 | **OPEN (90%)** | React 18, SearchBar, ResultCard, SplitView, Vitest ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
 | **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **OPEN (75%)** | Dashboard Recharts siap, slide demo in progress ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
-| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 | **OPEN (30%)** | Spider siap, crawling korpus penuh in progress ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
-| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
+| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **READY FOR PR (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
+| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 
 ---
@@ -114,7 +114,7 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 
 ---
 
-### Anggota 3: Data Engineer & Laporan Lead
+### Anggota 3 (Khalish): Data Engineer & Laporan Lead
 *Workspace: `crawler/`, `data/raw/`, `docs/report/`*
 *Tugas Mandiri / Paralel:*
 - [x] Pembangunan spider crawler modular (`crawler/spiders/gadgetren.py`, `jagatreview.py`, `droidlime.py`)
@@ -123,10 +123,10 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Penyusunan draf Bab III Metode Penelitian, Bab IV Hasil & Pembahasan, Bab V Kesimpulan & Saran
 - [x] Penyusunan Halaman Judul, Pengesahan, Pernyataan Bebas Plagiasi, Abstrak ID & EN, dan Tabel Kontribusi Anggota
 *Tugas Integrasi & Tindak Lanjut:*
-- [ ] Jalankan crawler multi-sumber (`python3 -m crawler.main_crawler`) hingga mencapai kuota target $700 - 1.000+$ artikel
-- [ ] Pastikan file `data/raw/documents.json` terisi artikel lengkap dengan spesifikasi
-- [ ] Hubungi Member 2 (Fadhlur) untuk menjalankan `make index` pada korpus penuh
-- [ ] Masukkan tangkapan layar (screenshot) bukti crawling ke folder `docs/screenshots/crawling/`
+- [x] Jalankan crawler multi-sumber (`python3 -m crawler.main_crawler`) hingga mencapai kuota target 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid)
+- [x] Pastikan file `data/raw/documents.json` terisi artikel lengkap dengan spesifikasi (77.2% coverage)
+- [x] Jalankan indexing & evaluasi korpus penuh (`make index` & `make eval`) dengan 15 kueri uji ground truth
+- [x] Masukkan tangkapan layar (screenshot) bukti crawling dan grafik analitik ke `docs/screenshots/crawling/` dan `evaluation_results/charts/`
 - [ ] Masukkan grafik evaluasi dari `evaluation_results/charts/` ke Bab IV Laporan
 - [ ] Koordinasikan perekaman video presentasi YouTube (alokasi waktu ketiga anggota sesuai `docs/presentation/5_MINUTE_DEMO_SCRIPT.md`)
-- [ ] Ekspor Laporan Akhir ke format PDF `Kelompok_X.pdf` untuk dikumpulkan ke e-learning
+- [ ] Ekspor Laporan Akhir ke format PDF `Kelompok_4.pdf` untuk dikumpulkan ke e-learning

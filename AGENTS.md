@@ -10,7 +10,7 @@ Whenever an AI agent starts a session in this repository:
 1. **Identify the Active Member & Role**:
    - **Member 1 (Frontend & UI Lead)**: Responsible for `frontend/` (React, Vite, Tailwind, SplitView, Dashboard Recharts, slides).
    - **Member 2 (Fadhlur - Core IR & Backend Lead)**: Responsible for `backend/` (Preprocessing Sastrawi, Inverted Index Okapi BM25, Sentence-BERT, Evaluator, Docker Compose).
-   - **Member 3 (Data & Academic Report Lead)**: Responsible for `crawler/`, `data/raw/`, and `docs/report/` (USK FMIPA thesis format Bab I–V, video recording).
+   - **Member 3 (Khalish - Data & Academic Report Lead)**: Responsible for `crawler/`, `data/raw/`, and `docs/report/` (USK FMIPA thesis format Bab I–V, video recording).
 2. **Read Living Documents**:
    - Read `docs/TEAM_WORKFLOW.md` for role boundaries, branch strategy, and git rules.
    - Read `docs/PROGRESS.md` to identify pending tasks, parallel vs dependent workflows, and current milestones.
@@ -24,7 +24,7 @@ Whenever an AI agent starts a session in this repository:
 To prevent merge conflicts during multi-member collaboration:
 - **Member 1 Workspace**: Only touches `frontend/` (components, pages, styles, `api.js`).
 - **Member 2 (Fadhlur) Workspace**: Only touches `backend/` (engine, API endpoints, db, docker-compose).
-- **Member 3 Workspace**: Only touches `crawler/`, `data/raw/`, and `docs/report/`.
+- **Member 3 (Khalish) Workspace**: Only touches `crawler/`, `data/raw/`, and `docs/report/`.
 - **Shared Files**: Root configuration (`Makefile`, `docker-compose.yml`, `data/ground_truth/`, `docs/PROGRESS.md`). Edits to shared files must be coordinated.
 
 ---
@@ -68,7 +68,7 @@ When preparing or opening a Pull Request:
 - The PR description **MUST** link to the associated GitHub Issue using standard closing keywords:
   - `Closes #1` or `Closes #2` for Frontend UI tasks (Member 1).
   - `Closes #3` or `Closes #4` for Core IR & Backend tasks (Member 2 Fadhlur).
-  - `Closes #5` or `Closes #6` for Crawler & Academic Report tasks (Member 3).
+  - `Closes #5` or `Closes #6` for Crawler & Academic Report tasks (Member 3 Khalish).
   - `Closes #7` for Delivery, Docker, and Video tasks (All Members).
 - Any PR submitted without an explicit issue link is considered non-compliant and will be rejected.
 
