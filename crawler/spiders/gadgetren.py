@@ -16,12 +16,29 @@ class GadgetrenSpider(BaseSpider):
     def extract_specs(self, soup) -> Dict[str, str]:
         return self.extract_specs_from_soup(soup)
 
+    def _extract_date(self, soup, url: str) -> str:
+        time_tag = soup.find("time")
+        if time_tag:
+            dt = str(time_tag.get("datetime") or "").strip()
+            if len(dt) >= 10 and re.match(r"^\d{4}-\d{2}-\d{2}", dt):
+                return dt[:10]
+        meta_pub = soup.find("meta", attrs={"property": "article:published_time"})
+        if meta_pub and meta_pub.get("content"):
+            val = str(meta_pub["content"]).strip()
+            if len(val) >= 10 and re.match(r"^\d{4}-\d{2}-\d{2}", val):
+                return val[:10]
+        m = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
+        if m:
+            return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+        return ""
+
     def crawl(self, max_documents: int = 350) -> List[Dict[str, Any]]:
         documents: List[Dict[str, Any]] = []
+        seen_urls = set()
         page = 1
         doc_count = 0
 
-        while doc_count < max_documents:
+        while doc_count < max_documents and page <= 30:
             url = f"{self.base_url}page/{page}/" if page > 1 else self.base_url
             soup = self.fetch(url)
             if not soup:
@@ -42,7 +59,11 @@ class GadgetrenSpider(BaseSpider):
                 link_tag = article.find("a", href=True)
                 if not link_tag:
                     continue
-                article_url = link_tag["href"]
+                article_url = str(link_tag["href"]).strip()
+                norm_url = article_url.rstrip("/").lower()
+                if norm_url in seen_urls or "gadgetren.com" not in norm_url:
+                    continue
+                seen_urls.add(norm_url)
 
                 article_soup = self.fetch(article_url)
                 if not article_soup:
@@ -55,8 +76,7 @@ class GadgetrenSpider(BaseSpider):
                 )
                 title = self.clean_title(title_tag.get_text(" ", strip=True)) if title_tag else "Review Gadgetren"
 
-                date_tag = article_soup.find("time")
-                date_str = date_tag.get_text(strip=True)[:10] if date_tag else ""
+                date_str = self._extract_date(article_soup, article_url)
 
                 content_div = article_soup.find(
                     "div", class_=re.compile("entry-content|post-content")

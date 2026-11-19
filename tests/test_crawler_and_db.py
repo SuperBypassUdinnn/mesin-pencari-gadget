@@ -56,7 +56,7 @@ def test_base_spider_schema_validation():
 def test_clean_html_content_strips_noise():
     spider = BaseSpider(name="Test", base_url="https://example.com", delay_seconds=0.0)
     raw_html = """
-    <div class="sharedaddy">Share this post</div>
+    <div class="sharedaddy"><div class="inner-share">Share this post</div></div>
     <p>Baca juga: Artikel lain yang tidak relevan.</p>
     <p>Smartphone ini hadir dengan layar AMOLED 120Hz yang sangat cerah di luar ruangan dan responsif untuk gaming.</p>
     <script>alert('xss');</script>

@@ -215,6 +215,8 @@ class BaseSpider:
             re.IGNORECASE,
         )
         for el in list(soup.find_all(["div", "section", "aside"])):
+            if getattr(el, "decomposed", False) or el.attrs is None:
+                continue
             classes = " ".join(el.get("class", []) or [])
             el_id = el.get("id", "") or ""
             if noise_pattern.search(f"{classes} {el_id}"):
