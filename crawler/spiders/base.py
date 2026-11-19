@@ -16,7 +16,18 @@ BOILERPLATE_PREFIXES = (
 )
 
 OFFTOPIC_TITLE_PATTERNS = (
-    r"\bfossil\b.*\bwatch\b",
+    r"\bfossil\b.*\b(?:watch|jam tangan)\b",
+    r"\bjam tangan kolaborasi\b",
+    r"\bkursi\b",
+    r"\bergochair\b",
+    r"\bgaming chair\b",
+    r"\bmeja gaming\b",
+    r"\b\(ps5\)\b",
+    r"\b\(ps4\)\b",
+    r"\b\(xbox\)\b",
+    r"\b\(pc\)\b",
+    r"\b\(switch\)\b",
+    r"\b3d printer\b",
     r"\btrailer\b",
     r"\bsinopsis\b",
     r"\bbioskop\b",
@@ -34,6 +45,74 @@ OFFTOPIC_TITLE_PATTERNS = (
     r"\baction figure\b",
     r"\blego\b",
 )
+
+CATEGORY_PATTERNS = [
+    (
+        "wearable",
+        re.compile(
+            r"\b(?:smartwatch|smartband|smart band|galaxy watch|apple watch|huawei watch|"
+            r"xiaomi watch|garmin|amazfit|fitbit|watch fit|watch ultra|watch gt|"
+            r"xband|mi band|smart ring|cincin pintar|wearable)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "tablet",
+        re.compile(
+            r"\b(?:tablet|ipad|galaxy tab|redmi pad|poco pad|xiaomi pad|huawei matepad|"
+            r"matepad|oppo pad|infinix xpad|lenovo tab|tab s\d+|tab a\d+)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "audio",
+        re.compile(
+            r"\b(?:tws|earbuds?|headphone|headset|earphone|true wireless|bluetooth speaker|"
+            r"soundbar|mikrofon|microphone|dji mic|nothing ear|airpods|galaxy buds|"
+            r"freebuds|wf-1000|wh-1000|edifier|earfun|anc)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "camera",
+        re.compile(
+            r"\b(?:mirrorless|dslr|action cam|action camera|pocket camera|fujifilm|"
+            r"sony alpha|sony rx\d|canon eos|canon rf|nikon z\d|panasonic lumix|"
+            r"lumix|gopro|insta360|dji osmo|dji avata|dji mini|drone|lensa kamera|kamera saku)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "laptop",
+        re.compile(
+            r"\b(?:laptop|notebook|ultrabook|macbook|zenbook|vivobook|expertbook|"
+            r"chromebook|thinkpad|ideapad|legion|rog zephyrus|rog strix|rog flow|"
+            r"tuf gaming|acer swift|acer nitro|predator helios|hp victus|hp omen|"
+            r"hp pavilion|msi katana|msi cyborg|msi prestige|axioo pongo|advan workplus|mini pc)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "smartphone",
+        re.compile(
+            r"\b(?:smartphone|ponsel|handphone|hp|iphone|galaxy s\d+|galaxy a\d+|"
+            r"galaxy m\d+|galaxy z|galaxy fold|galaxy flip|redmi|poco|xiaomi \d+|"
+            r"oppo find|oppo reno|oppo a\d+|vivo x\d+|vivo v\d+|vivo y\d+|iqoo|"
+            r"realme|infinix|tecno|itel|nothing phone|rog phone|zenfone|huawei pura|"
+            r"huawei nova|honor magic|zte blade|nubia|motorola|pixel \d+)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "peripheral",
+        re.compile(
+            r"\b(?:keyboard|mouse|monitor|router|mesh wi-fi|ssd eksternal|flash drive|"
+            r"usb-c hub|powerbank|power bank|charger gan|gan charger|wall charger|"
+            r"nas|beestation|webcam|capture card|graphics card|vga|motherboard|cooling pad)\b",
+            re.IGNORECASE,
+        ),
+    ),
+]
 
 GADGET_RELEVANCE_TERMS = (
     "smartphone",
@@ -367,28 +446,18 @@ class BaseSpider:
     def infer_category(
         self, title: str, content: str, default: str = "smartphone"
     ) -> str:
-        """Infer canonical gadget category with title-weighted keyword matching."""
-        title_l = (title or "").lower()
-        body_l = (content or "").lower()
+        """Infer canonical gadget category with word-boundary, title-first matching."""
+        title_clean = title or ""
+        body_clean = content or ""
 
-        rules = [
-            ("laptop", ("laptop", "notebook", "ultrabook", "macbook", "zenbook", "vivobook", "rog", "legion", "thinkpad", "ideapad", "predator", "tuf gaming")),
-            ("tablet", ("tablet", "ipad", "galaxy tab", "xpad", "matepad", "pad ")),
-            ("wearable", ("smartwatch", "smartband", "watch ", "band ", "wearable", "jam tangan pintar", "cincin pintar")),
-            ("audio", ("tws", "earbuds", "headphone", "headset", "earphone", "speaker", "soundbar", "anc")),
-            ("camera", ("kamera mirrorless", "dslr", "action cam", "action camera", "fujifilm", "sony alpha", "canon eos", "gopro", "insta360", "drone")),
-            ("peripheral", ("keyboard", "mouse", "monitor", "router", "ssd eksternal", "powerbank", "charger", "gan ", "vga", "graphics card", "motherboard")),
-            ("smartphone", ("smartphone", "ponsel", "hp ", "iphone", "galaxy a", "galaxy s", "galaxy z", "xiaomi", "redmi", "poco", "oppo", "vivo", "realme", "infinix", "iqoo", "tecno", "asus zenfone")),
-        ]
-
-        for cat, keywords in rules:
-            if any(kw in title_l for kw in keywords):
+        for cat, pattern in CATEGORY_PATTERNS:
+            if pattern.search(title_clean):
                 return cat
 
         best_cat = default
         best_hits = 0
-        for cat, keywords in rules:
-            hits = sum(1 for kw in keywords if kw in body_l)
+        for cat, pattern in CATEGORY_PATTERNS:
+            hits = len(pattern.findall(body_clean))
             if hits > best_hits:
                 best_hits = hits
                 best_cat = cat

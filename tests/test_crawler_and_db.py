@@ -100,6 +100,23 @@ def test_infer_category_and_validity():
     assert spider.is_valid_gadget_review("Sinopsis Film Bioskop Terbaru 2026", offtopic_text) is False
 
 
+def test_word_boundary_categories_and_non_gadget_filters():
+    spider = BaseSpider(name="Test", base_url="https://example.com", delay_seconds=0.0)
+    phone_body = " ".join(
+        ["Smartphone dengan layar AMOLED 120Hz, kamera 50MP, chipset kencang, dan baterai 5000 mAh untuk main game lancar."] * 10
+    )
+    assert spider.infer_category("Review Samsung Galaxy S26 FE – Flagship Terjangkau dengan Upgrade Minor", phone_body) == "smartphone"
+    assert spider.infer_category("Review TECNO POVA 8 5G – Main Game Lancar", phone_body) == "smartphone"
+    assert spider.infer_category("Review Samsung Galaxy Watch Ultra 2", phone_body) == "wearable"
+    assert spider.infer_category("Review REDMI Pad 2 4G", phone_body) == "tablet"
+
+    chair_body = " ".join(["Kursi ergonomis nyaman untuk kerja dan bermain game seharian dengan sandaran empuk."] * 12)
+    assert spider.is_valid_gadget_review("Review TTRacing Maxx Pro – Kursi Gaming", chair_body) is False
+
+    game_body = " ".join(["Game petualangan aksi terbaru dengan grafis memukau dan ekspansi cerita seru."] * 12)
+    assert spider.is_valid_gadget_review("Review Starfield (PS5) – Ekspansi Jelajah", game_body) is False
+
+
 def _make_wp_post(idx: int, title: str, url: str, body: str, date: str = "2026-10-15T10:00:00"):
     return {
         "id": idx,
