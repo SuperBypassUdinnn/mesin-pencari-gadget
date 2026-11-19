@@ -25,3 +25,7 @@
 [12] FastAPI. (2024). FastAPI documentation. https://fastapi.tiangolo.com
 
 [13] React. (2024). React documentation. https://react.dev
+
+[14] Richardson, L. (2024). Beautiful Soup Documentation. https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+
+[15] WordPress. (2024). WordPress REST API Handbook. https://developer.wordpress.org/rest-api/
