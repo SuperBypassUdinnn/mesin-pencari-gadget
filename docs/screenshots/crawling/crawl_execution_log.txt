@@ -1,0 +1,35 @@
+[MainCrawler] Cleared previous rows in data/gadget.db (fresh crawl mode).
+[MainCrawler] Starting multi-source Indonesian gadget crawler (target=900)...
+[MainCrawler] Probing GadgetrenSpider...
+[MainCrawler] Gadgetren returned 135 documents.
+[MainCrawler] Launching Jagat Review (target quota: 252 docs)...
+[MainCrawler] Jagat Review extracted 252 docs, stored 252 unique docs.
+[MainCrawler] Launching Yangcanggih (target quota: 252 docs)...
+[MainCrawler] Yangcanggih extracted 252 docs, stored 252 unique docs.
+[MainCrawler] Launching Droidlime (target quota: 153 docs)...
+[MainCrawler] Droidlime extracted 153 docs, stored 153 unique docs.
+[MainCrawler] Launching Hybrid (target quota: 108 docs)...
+[MainCrawler] Hybrid extracted 108 docs, stored 108 unique docs.
+============================================================
+[MainCrawler] CRAWL SUMMARY
+Total unique documents : 900
+Elapsed time           : 122.18 s
+Average content length : 4183.3 chars (617.3 words)
+Specs extraction rate  : 695/900 (77.2%)
+Distribution by source :
+  - Jagat Review: 252
+  - Yangcanggih: 252
+  - Droidlime: 153
+  - Gadgetren: 135
+  - Hybrid: 108
+Distribution by category:
+  - smartphone: 352
+  - laptop: 188
+  - peripheral: 153
+  - audio: 111
+  - tablet: 54
+  - wearable: 34
+  - camera: 8
+Saved raw JSON         : data/raw/documents.json
+Saved SQLite DB        : data/gadget.db
+============================================================
