@@ -71,8 +71,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
 | **[#1] Frontend: Komponen UI & Search** | Member 1 | **OPEN (90%)** | React 18, SearchBar, ResultCard, SplitView, Vitest ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
 | **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **OPEN (75%)** | Dashboard Recharts siap, slide demo in progress ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
-| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **READY FOR PR (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
-| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
+| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **CLOSED (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
+| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **READY FOR PR (95%)** | Bab I-V lengkap dengan angka riil, grafik/bukti, dan PDF `Kelompok_4.pdf`; sisa pengisian nama/NPM Member 1 & Dosen ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 
 ---
@@ -127,6 +127,6 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Pastikan file `data/raw/documents.json` terisi artikel lengkap dengan spesifikasi (77.2% coverage)
 - [x] Jalankan indexing & evaluasi korpus penuh (`make index` & `make eval`) dengan 15 kueri uji ground truth
 - [x] Masukkan tangkapan layar (screenshot) bukti crawling dan grafik analitik ke `docs/screenshots/crawling/` dan `evaluation_results/charts/`
-- [ ] Masukkan grafik evaluasi dari `evaluation_results/charts/` ke Bab IV Laporan
+- [x] Masukkan grafik evaluasi dari `evaluation_results/charts/` ke Bab IV Laporan
 - [ ] Koordinasikan perekaman video presentasi YouTube (alokasi waktu ketiga anggota sesuai `docs/presentation/5_MINUTE_DEMO_SCRIPT.md`)
-- [ ] Ekspor Laporan Akhir ke format PDF `Kelompok_4.pdf` untuk dikumpulkan ke e-learning
+- [x] Ekspor Laporan Akhir ke format PDF `Kelompok_4.pdf` untuk dikumpulkan ke e-learning
