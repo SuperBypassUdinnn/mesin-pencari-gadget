@@ -15,7 +15,7 @@ To ensure balanced accountability, clear individual ownership, and seamless GitH
 ┌───────────────────────────────────────────────────────────────────────────┐
 │                               TEAM ROLES                                  │
 ├──────────────────────┬────────────────────────────┬───────────────────────┤
-│   MEMBER 1           │   MEMBER 2 (Fadhlur)       │   MEMBER 3            │
+│   MEMBER 1           │   MEMBER 2 (Fadhlur)       │   MEMBER 3 (Khalish)  │
 │   Frontend & UI Lead │   Core IR & Backend Lead   │   Data & Report Lead  │
 ├──────────────────────┼────────────────────────────┼───────────────────────┤
 │ • React + Vite UI    │ • Preprocessing (Sastrawi) │ • Multi-source Spiders│
@@ -55,7 +55,7 @@ To ensure balanced accountability, clear individual ownership, and seamless GitH
   5. Expose REST endpoints (`/api/search`, `/api/documents/{id}`, `/api/evaluation`).
   6. Package the complete system into `docker-compose.yml` for 1-command execution.
 
-### Member 3: Data Engineer & Report Lead
+### Member 3 (Khalish): Data Engineer & Report Lead
 - **Primary Objective**: Crawl and clean a diverse multi-source corpus of $700 - 1.000+$ gadget reviews, coordinate evaluation query labeling, lead the authoring of the USK FMIPA final report, and manage YouTube demo production.
 - **Dedicated Workspace**: `crawler/`, `data/raw/`, and `docs/report/`
 - **Tech Stack**: Python (`requests`, `beautifulsoup4`), SQLite, Markdown / LaTeX / Microsoft Word.
@@ -92,7 +92,7 @@ main (Production-ready & demo branch)
 2. **Directory Isolation**:
    - Member 1 only modifies `frontend/`.
    - Member 2 (Fadhlur) only modifies `backend/` and root configuration.
-   - Member 3 only modifies `crawler/`, `data/raw/`, and `docs/report/`.
+   - Member 3 (Khalish) only modifies `crawler/`, `data/raw/`, and `docs/report/`.
 3. **Mandatory Progress Update**:
    - Before opening a Pull Request, the author **MUST** update `docs/PROGRESS.md` to check off completed items (`- [x]`) and record current status so all team members stay synchronized without needing to ask.
 4. **Mandatory Pre-PR Pipeline Verification**:

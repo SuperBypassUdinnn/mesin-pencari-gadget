@@ -71,8 +71,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
 | **[#1] Frontend: Komponen UI & Search** | Member 1 | **OPEN (90%)** | React 18, SearchBar, ResultCard, SplitView, Vitest ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
 | **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **OPEN (75%)** | Dashboard Recharts siap, slide demo in progress ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
-| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 | **OPEN (30%)** | Spider siap, crawling korpus penuh in progress ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
-| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
+| **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **OPEN (30%)** | Spider siap, crawling korpus penuh in progress ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
+| **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **OPEN (60%)** | Bab I–III siap, Bab IV–V menunggu evaluasi korpus penuh ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 
 ---
@@ -114,7 +114,7 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 
 ---
 
-### Anggota 3: Data Engineer & Laporan Lead
+### Anggota 3 (Khalish): Data Engineer & Laporan Lead
 *Workspace: `crawler/`, `data/raw/`, `docs/report/`*
 *Tugas Mandiri / Paralel:*
 - [x] Pembangunan spider crawler modular (`crawler/spiders/gadgetren.py`, `jagatreview.py`, `droidlime.py`)

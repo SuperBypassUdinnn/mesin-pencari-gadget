@@ -9,7 +9,7 @@ Closes #
 ### Team Role
 - [ ] Member 1: Frontend & UI Lead (`frontend/`)
 - [ ] Member 2 (Fadhlur): Core IR & Backend Lead (`backend/`)
-- [ ] Member 3: Data Engineering & Report Lead (`crawler/`, `docs/report/`)
+- [ ] Member 3 (Khalish): Data Engineering & Report Lead (`crawler/`, `docs/report/`)
 
 ### Pre-PR Quality Checklist
 <!-- All items must be checked before requesting review -->
