@@ -1,0 +1,379 @@
+{
+  "total_documents": 900,
+  "source_distribution": {
+    "Jagat Review": 252,
+    "Yangcanggih": 252,
+    "Droidlime": 153,
+    "Gadgetren": 135,
+    "Hybrid": 108
+  },
+  "category_distribution": {
+    "smartphone": 473,
+    "laptop": 227,
+    "audio": 73,
+    "tablet": 50,
+    "peripheral": 33,
+    "wearable": 33,
+    "camera": 11
+  },
+  "docs_with_specs": 695,
+  "specs_coverage_pct": 77.22,
+  "specs_key_distribution": {
+    "ram": 338,
+    "harga": 316,
+    "chipset": 261,
+    "kamera": 173,
+    "baterai": 172,
+    "storage": 168,
+    "prosesor": 139,
+    "layar": 132,
+    "gpu": 92,
+    "os": 44
+  },
+  "avg_words": 617.43,
+  "median_words": 647,
+  "min_words": 131,
+  "max_words": 749,
+  "avg_chars": 4184.2,
+  "vocabulary_size": 11802,
+  "bm25_avgdl": 388.89,
+  "zipf_slope": -1.5891,
+  "zipf_r2": 0.951,
+  "top_terms": [
+    {
+      "rank": 1,
+      "term": "layar",
+      "frequency": 4186
+    },
+    {
+      "rank": 2,
+      "term": "kamera",
+      "frequency": 3236
+    },
+    {
+      "rank": 3,
+      "term": "laptop",
+      "frequency": 3033
+    },
+    {
+      "rank": 4,
+      "term": "2",
+      "frequency": 2481
+    },
+    {
+      "rank": 5,
+      "term": "smartphone",
+      "frequency": 2373
+    },
+    {
+      "rank": 6,
+      "term": "fitur",
+      "frequency": 2243
+    },
+    {
+      "rank": 7,
+      "term": "warna",
+      "frequency": 2105
+    },
+    {
+      "rank": 8,
+      "term": "desain",
+      "frequency": 1777
+    },
+    {
+      "rank": 9,
+      "term": "dukung",
+      "frequency": 1765
+    },
+    {
+      "rank": 10,
+      "term": "pro",
+      "frequency": 1742
+    },
+    {
+      "rank": 11,
+      "term": "1",
+      "frequency": 1733
+    },
+    {
+      "rank": 12,
+      "term": "guna",
+      "frequency": 1665
+    },
+    {
+      "rank": 13,
+      "term": "3",
+      "frequency": 1549
+    },
+    {
+      "rank": 14,
+      "term": "pakai",
+      "frequency": 1530
+    },
+    {
+      "rank": 15,
+      "term": "hasil",
+      "frequency": 1519
+    },
+    {
+      "rank": 16,
+      "term": "harga",
+      "frequency": 1508
+    },
+    {
+      "rank": 17,
+      "term": "foto",
+      "frequency": 1444
+    },
+    {
+      "rank": 18,
+      "term": "galaxy",
+      "frequency": 1405
+    },
+    {
+      "rank": 19,
+      "term": "sisi",
+      "frequency": 1353
+    },
+    {
+      "rank": 20,
+      "term": "perangkat",
+      "frequency": 1335
+    },
+    {
+      "rank": 21,
+      "term": "5",
+      "frequency": 1331
+    },
+    {
+      "rank": 22,
+      "term": "baterai",
+      "frequency": 1295
+    },
+    {
+      "rank": 23,
+      "term": "4",
+      "frequency": 1282
+    },
+    {
+      "rank": 24,
+      "term": "bodi",
+      "frequency": 1258
+    },
+    {
+      "rank": 25,
+      "term": "video",
+      "frequency": 1244
+    }
+  ],
+  "evaluation": {
+    "queries_count": 15,
+    "bm25": {
+      "mean_p5": 0.7467,
+      "mean_p10": 0.66,
+      "mean_r5": 0.3015,
+      "mean_r10": 0.5231,
+      "mean_f1_5": 0.4249,
+      "mean_f1_10": 0.5765,
+      "map": 0.4647,
+      "avg_latency_ms": 1.4856
+    },
+    "sbert": {
+      "mean_p5": 0.5467,
+      "mean_p10": 0.48,
+      "mean_r5": 0.218,
+      "mean_r10": 0.3878,
+      "mean_f1_5": 0.3086,
+      "mean_f1_10": 0.4235,
+      "map": 0.2993,
+      "avg_latency_ms": 548.9864
+    },
+    "steady_state_latency_ms": {
+      "bm25_q02_to_q15_avg": 1.2819,
+      "sbert_q02_to_q15_avg": 18.0007,
+      "sbert_q01_cold_start_ms": 7982.7856
+    },
+    "per_query": [
+      {
+        "id": "q01",
+        "query": "Xiaomi kamera Leica",
+        "type": "exact",
+        "relevant_count": 9,
+        "bm25_p5": 1.0,
+        "sbert_p5": 1.0,
+        "bm25_ap": 0.8261,
+        "sbert_ap": 0.8468,
+        "bm25_latency_ms": 4.337,
+        "sbert_latency_ms": 7982.786
+      },
+      {
+        "id": "q02",
+        "query": "ASUS Zenbook Intel OLED",
+        "type": "exact",
+        "relevant_count": 8,
+        "bm25_p5": 1.0,
+        "sbert_p5": 0.4,
+        "bm25_ap": 0.9861,
+        "sbert_ap": 0.4688,
+        "bm25_latency_ms": 0.467,
+        "sbert_latency_ms": 17.93
+      },
+      {
+        "id": "q03",
+        "query": "smartwatch layar AMOLED baterai awet",
+        "type": "exact",
+        "relevant_count": 11,
+        "bm25_p5": 1.0,
+        "sbert_p5": 0.6,
+        "bm25_ap": 0.6662,
+        "sbert_ap": 0.346,
+        "bm25_latency_ms": 0.688,
+        "sbert_latency_ms": 19.937
+      },
+      {
+        "id": "q04",
+        "query": "laptop gaming NVIDIA RTX",
+        "type": "exact",
+        "relevant_count": 14,
+        "bm25_p5": 1.0,
+        "sbert_p5": 0.6,
+        "bm25_ap": 0.5571,
+        "sbert_ap": 0.3474,
+        "bm25_latency_ms": 0.439,
+        "sbert_latency_ms": 16.652
+      },
+      {
+        "id": "q05",
+        "query": "smartphone chipset Snapdragon 8",
+        "type": "exact",
+        "relevant_count": 15,
+        "bm25_p5": 0.2,
+        "sbert_p5": 0.2,
+        "bm25_ap": 0.05,
+        "sbert_ap": 0.0356,
+        "bm25_latency_ms": 0.657,
+        "sbert_latency_ms": 17.402
+      },
+      {
+        "id": "q06",
+        "query": "layar AMOLED 120Hz fast charging",
+        "type": "exact",
+        "relevant_count": 13,
+        "bm25_p5": 0.6,
+        "sbert_p5": 0.2,
+        "bm25_ap": 0.2098,
+        "sbert_ap": 0.0427,
+        "bm25_latency_ms": 0.65,
+        "sbert_latency_ms": 19.395
+      },
+      {
+        "id": "q07",
+        "query": "Samsung Galaxy Z Fold",
+        "type": "exact",
+        "relevant_count": 13,
+        "bm25_p5": 1.0,
+        "sbert_p5": 1.0,
+        "bm25_ap": 0.6846,
+        "sbert_ap": 0.6923,
+        "bm25_latency_ms": 0.416,
+        "sbert_latency_ms": 16.08
+      },
+      {
+        "id": "q08",
+        "query": "smartphone MediaTek Dimensity 5G",
+        "type": "exact",
+        "relevant_count": 15,
+        "bm25_p5": 0.8,
+        "sbert_p5": 0.2,
+        "bm25_ap": 0.557,
+        "sbert_ap": 0.03,
+        "bm25_latency_ms": 0.541,
+        "sbert_latency_ms": 20.63
+      },
+      {
+        "id": "q09",
+        "query": "smartphone fotografi malam hari minim cahaya",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 0.8,
+        "sbert_p5": 0.4,
+        "bm25_ap": 0.3921,
+        "sbert_ap": 0.0633,
+        "bm25_latency_ms": 0.69,
+        "sbert_latency_ms": 17.485
+      },
+      {
+        "id": "q10",
+        "query": "laptop tipis dan ringan untuk kerja mahasiswa",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 1.0,
+        "sbert_p5": 0.4,
+        "bm25_ap": 0.6667,
+        "sbert_ap": 0.1286,
+        "bm25_latency_ms": 1.258,
+        "sbert_latency_ms": 17.344
+      },
+      {
+        "id": "q11",
+        "query": "HP baterai tahan lama seharian tanpa sering cas",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 0.2,
+        "sbert_p5": 0.8,
+        "bm25_ap": 0.0333,
+        "sbert_ap": 0.5047,
+        "bm25_latency_ms": 7.189,
+        "sbert_latency_ms": 19.17
+      },
+      {
+        "id": "q12",
+        "query": "laptop layar akurat untuk editing video kreator",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 0.4,
+        "sbert_p5": 0.4,
+        "bm25_ap": 0.1582,
+        "sbert_ap": 0.0978,
+        "bm25_latency_ms": 1.594,
+        "sbert_latency_ms": 16.818
+      },
+      {
+        "id": "q13",
+        "query": "smartphone gaming kencang harga terjangkau",
+        "type": "semantic",
+        "relevant_count": 11,
+        "bm25_p5": 0.4,
+        "sbert_p5": 0.4,
+        "bm25_ap": 0.1061,
+        "sbert_ap": 0.1818,
+        "bm25_latency_ms": 1.54,
+        "sbert_latency_ms": 15.071
+      },
+      {
+        "id": "q14",
+        "query": "tablet layar luas untuk produktivitas dan hiburan",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 1.0,
+        "sbert_p5": 1.0,
+        "bm25_ap": 0.6667,
+        "sbert_ap": 0.4519,
+        "bm25_latency_ms": 0.984,
+        "sbert_latency_ms": 17.071
+      },
+      {
+        "id": "q15",
+        "query": "earbuds TWS peredam bising suara jernih",
+        "type": "semantic",
+        "relevant_count": 15,
+        "bm25_p5": 0.8,
+        "sbert_p5": 0.6,
+        "bm25_ap": 0.4107,
+        "sbert_ap": 0.2511,
+        "bm25_latency_ms": 0.832,
+        "sbert_latency_ms": 21.025
+      }
+    ]
+  }
+}
