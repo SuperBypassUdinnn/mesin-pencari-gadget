@@ -74,10 +74,10 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **CLOSED (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
 | **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **READY FOR PR (95%)** | Bab I-V lengkap dengan angka riil, grafik/bukti, dan PDF `Kelompok_4.pdf`; sisa pengisian nama/NPM Member 1 & Dosen ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
-| **[#10] Bugfix: Fail-loud S-BERT loading** | Member 2 (Fadhlurrahman Alaudin) | **IN PROGRESS** | Temuan review pasca-merge PR #8 ([Issue #10](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/10)) |
-| **[#11] Bugfix: Integritas Daftar Pustaka** | Member 3 (Khalish), via review | **IN PROGRESS** | Temuan review pasca-merge PR #9 ([Issue #11](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/11)) |
-| **[#12] Bugfix: PDF exporter lintas-platform** | Member 3 (Khalish), via review | **IN PROGRESS** | Temuan review pasca-merge PR #9 ([Issue #12](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/12)) |
-| **[#13] Docs & UI: README 5 portal + pola UI** | Tim, via review | **IN PROGRESS** | Temuan review pasca-merge PR #8/#9 ([Issue #13](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/13)) |
+| **[#10] Bugfix: Fail-loud S-BERT loading** | Member 2 (Fadhlurrahman Alaudin) | **CLOSED (100%)** | Diperbaiki & di-merge via PR #14 ([Issue #10](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/10)) |
+| **[#11] Bugfix: Integritas Daftar Pustaka** | Member 3 (Khalish), via review | **CLOSED (100%)** | Referensi terverifikasi, sitasi APA 1:1, PDF regenerasi ([Issue #11](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/11)) |
+| **[#12] Bugfix: PDF exporter lintas-platform** | Member 3 (Khalish), via review | **CLOSED (100%)** | Terverifikasi di Linux; \`make report\` aktif ([Issue #12](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/12)) |
+| **[#13] Docs & UI: README 5 portal + pola UI** | Tim, via review | **CLOSED (100%)** | README, badge, pills, dead code dibersihkan ([Issue #13](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/13)) |
 
 ---
 
