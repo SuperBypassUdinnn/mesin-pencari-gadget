@@ -243,12 +243,16 @@ class TestContentSignatures:
 
     def test_searchbar_has_suggestion_pills(self):
         content = _read("src/components/SearchBar.jsx")
-        for pill in ("HP Kamera Low-light", "Laptop Coding 10 Jutaan", "Fast Charging 120W"):
+        for pill in (
+            "ASUS Zenbook Intel OLED",
+            "smartphone MediaTek Dimensity 5G",
+            "HP baterai tahan lama seharian tanpa sering cas",
+        ):
             assert pill in content, f"SearchBar missing suggestion pill: {pill}"
 
     def test_resultcard_has_source_badges_and_fields(self):
         content = _read("src/components/ResultCard.jsx")
-        for badge in ("Gadgetren", "Jagat Review", "Droidlime"):
+        for badge in ("Gadgetren", "Jagat Review", "Droidlime", "Yangcanggih", "Hybrid"):
             assert badge in content, f"ResultCard missing source badge: {badge}"
         for field in ("score", "latency_ms", "snippet", "specs"):
             assert field in content, f"ResultCard missing field: {field}"

@@ -32,11 +32,11 @@ Developed for the **Penelusuran Informasi (Information Retrieval) 2025/2026** co
 
 - **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Recharts. Features Split View (BM25 vs S-BERT), quick suggestion pills, source portal badges, and an interactive evaluation dashboard.
 - **Backend**: FastAPI, Uvicorn, PySastrawi, Sentence-Transformers, NumPy. Provides high-throughput, low-latency REST endpoints.
-- **Corpus & Data Layer**: Multi-source Indonesian gadget reviews (Gadgetren, Jagat Review, Droidlime) stored in SQLite (`data/gadget.db`).
+- **Corpus & Data Layer**: 900 multi-source Indonesian gadget reviews crawled from five tech portals (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid) with 77.22% structured specification extraction coverage, stored in SQLite (`data/gadget.db`).
 - **Core Algorithms**:
   - **Okapi BM25**: Custom Inverted Index, Robertson-Spärck Jones IDF smoothing ($k_1=1.5, b=0.75$).
   - **Sentence-BERT**: Multilingual dense semantic embeddings (`paraphrase-multilingual-MiniLM-L12-v2`) with Cosine Similarity vector search.
-- **Evaluation Engine**: Automated benchmark computing Precision@K, Recall@K, F1@K, Mean Average Precision (MAP), and execution latency across 12 annotated test queries.
+- **Evaluation Engine**: Automated benchmark computing Precision@K, Recall@K, F1@K, Mean Average Precision (MAP), and execution latency across 15 annotated test queries (8 exact technical, 7 semantic intent) with TREC-style pooled relevance judgments.
 
 ---
 
@@ -97,7 +97,7 @@ PYTHONPATH=. pytest tests/ -v
 
 ## Project Structure & Team Deliverables
 
-- `crawler/`: Multi-source spiders for Gadgetren, Jagat Review, and Droidlime.
+- `crawler/`: Multi-source spiders for Jagat Review, Yangcanggih, Droidlime, Gadgetren, and Hybrid, plus the USK FMIPA report PDF exporter.
 - `backend/app/engine/`: Text preprocessor (Sastrawi), BM25 engine, S-BERT engine, evaluator, and indexer.
 - `frontend/`: React components, pages (Search, Evaluation Dashboard), and Tailwind styling.
 - `data/`: SQLite database (`gadget.db`), processed inverted indices, and ground-truth test queries.

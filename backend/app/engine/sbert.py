@@ -42,27 +42,33 @@ class SBERTEngine:
         return (title + " " + content).strip()
 
     def _ensure_model(self):
+        """Load the SentenceTransformer model on first use.
+
+        Fails loudly when the model cannot be loaded. A silent degraded mode
+        would produce meaningless embeddings and silently corrupt benchmark
+        artifacts (observed: ``make eval`` writing random S-BERT metrics when
+        ``sentence-transformers`` was missing), so any load failure raises.
+        Unit tests must inject a deterministic encoder via ``model_instance``.
+        """
         if self.model is not None:
             return
         try:
             from sentence_transformers import SentenceTransformer
+        except ImportError as exc:
+            raise RuntimeError(
+                "sentence-transformers is not installed. "
+                "Install backend requirements (pip install -r backend/requirements.txt) "
+                "or inject a deterministic encoder via SBERTEngine(model_instance=...) in tests."
+            ) from exc
+        try:
             os.makedirs(self.cache_dir, exist_ok=True)
             self.model = SentenceTransformer(self.model_name, cache_folder=self.cache_dir)
-        except Exception as e:
-            # Fallback deterministic pseudo-embedding generator for offline / test environments
-            class FallbackEncoder:
-                def __init__(self, dim: int = 384):
-                    self.dim = dim
-                def encode(self, texts: List[str]):
-                    vecs = []
-                    for t in texts:
-                        # Hash characters deterministically into float vector
-                        seed = sum(ord(c) for c in t) % 10000
-                        rng = np.random.RandomState(seed)
-                        vec = rng.randn(self.dim).astype(np.float32)
-                        vecs.append(vec)
-                    return np.array(vecs, dtype=np.float32)
-            self.model = FallbackEncoder()
+        except Exception as exc:
+            raise RuntimeError(
+                f"Failed to load Sentence-BERT model '{self.model_name}' "
+                f"(cache: {self.cache_dir}). Check network access to Hugging Face "
+                "or provide a pre-populated model cache."
+            ) from exc
 
     def encode(self, texts: List[str]) -> np.ndarray:
         """Encode a list of strings into an L2-normalized float32 matrix.
@@ -103,6 +109,14 @@ class SBERTEngine:
             return []
 
         query_vec = self.encode([query])[0]
+        if query_vec.shape[0] != self.embeddings.shape[1]:
+            raise RuntimeError(
+                "Dimension mismatch between query embedding "
+                f"({query_vec.shape[0]}d) and document embedding matrix "
+                f"({self.embeddings.shape[1]}d). The stored embeddings were "
+                "probably built with a different encoder; rebuild the index "
+                "with 'make index'."
+            )
         scores = np.dot(self.embeddings, query_vec)
         ranked = sorted(
             zip(self.doc_ids, scores.tolist()), key=lambda item: item[1], reverse=True

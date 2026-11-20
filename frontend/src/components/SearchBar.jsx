@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Search, X, Plus } from "lucide-react";
 
 const QUICK_SUGGESTIONS = [
-  "HP Kamera Low-light",
-  "Laptop Coding 10 Jutaan",
-  "Fast Charging 120W",
+  "ASUS Zenbook Intel OLED",
+  "smartphone MediaTek Dimensity 5G",
+  "HP baterai tahan lama seharian tanpa sering cas",
 ];
 
 export default function SearchBar({ value, onChange, onSearch, loading }) {
