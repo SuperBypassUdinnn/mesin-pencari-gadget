@@ -33,7 +33,7 @@ export default function ResultCard({ item, onResultClick }) {
       </div>
 
       <h3
-        onClick={() => onResultClick && onResultClick(item)}
+        onClick={() => onResultClick && onResultClick(item.id)}
         className="text-lg font-bold text-slate-900 leading-snug mb-1 cursor-pointer hover:text-primary-600 transition-colors"
       >
         {item.title}
@@ -66,7 +66,7 @@ export default function ResultCard({ item, onResultClick }) {
       <div className="flex items-center justify-between pt-2 border-t border-slate-100">
         <button
           type="button"
-          onClick={() => onResultClick && onResultClick(item)}
+          onClick={() => onResultClick && onResultClick(item.id)}
           className="text-xs font-semibold text-slate-700 hover:text-primary-600 transition-colors bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded"
         >
           Lihat Spesifikasi
