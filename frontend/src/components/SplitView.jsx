@@ -1,4 +1,5 @@
 import { Cpu, Sparkles } from "lucide-react";
+import ResultCard from "./ResultCard.jsx";
 
 export default function SplitView({ bm25Results, sbertResults, bm25Latency, sbertLatency, onResultClick }) {
   return (
