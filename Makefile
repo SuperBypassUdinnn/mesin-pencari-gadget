@@ -1,4 +1,4 @@
-.PHONY: help up down build dev-backend dev-frontend test crawl index eval verify
+.PHONY: help up down build dev-backend dev-frontend test crawl index eval report verify
 
 help:
 	@echo "Indonesian Gadget Vertical Search Engine Commands:"
@@ -9,6 +9,7 @@ help:
 	@echo "  make crawl        - Run multi-source crawlers"
 	@echo "  make index        - Build offline Inverted Index & S-BERT embeddings"
 	@echo "  make eval         - Run quantitative IR evaluation (MAP, P, R, F1)"
+	@echo "  make report       - Regenerate docs/report/Kelompok_4.pdf from markdown"
 	@echo "  make verify       - Run pre-flight quality gatekeeper (7 gates)"
 
 up:
@@ -31,6 +32,9 @@ index:
 
 eval:
 	python3 -m backend.app.engine.evaluator
+
+report:
+	python3 -m crawler.build_report_pdf
 
 verify:
 	python3 scripts/verify_pipeline.py

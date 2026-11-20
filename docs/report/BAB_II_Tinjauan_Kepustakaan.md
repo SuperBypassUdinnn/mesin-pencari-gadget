@@ -12,14 +12,14 @@ Sebelum dokumen dan kueri diindeks dalam sistem pencarian leksikal, teks mentah 
 
 1. Case folding: Mengubah seluruh huruf menjadi huruf kecil agar pencocokan tidak sensitif terhadap huruf kapital.
 2. Tokenization: Memecah teks menjadi token kata atau istilah teknis menggunakan ekspresi reguler alfanumerik (`[a-z0-9]`) sehingga nama prosesor, kapasitas memori, dan seri perangkat tetap terjaga utuh.
-3. Stopword removal: Menghapus kata-kata umum yang memiliki daya pembeda rendah menggunakan kamus stopword Bahasa Indonesia dari Sastrawi.
-4. Stemming: Mengubah kata berimbuhan menjadi kata dasarnya (root word) menggunakan PySastrawi yang menerapkan algoritma Nazief-Adriani (Nazief & Adriani, 2006).
+3. Stopword removal: Menghapus kata-kata umum yang memiliki daya pembeda rendah menggunakan kamus stopword Bahasa Indonesia dari Sastrawi (PySastrawi, 2024).
+4. Stemming: Mengubah kata berimbuhan menjadi kata dasarnya (root word) menggunakan PySastrawi yang menerapkan algoritma confix-stripping Nazief-Adriani (Adriani et al., 2007).
 
 Stemming Bahasa Indonesia berperan penting karena kekayaan afiksasi (awalan, sisipan, akhiran, dan konfiks). Dengan stemming, kata seperti "menguji", "diuji", dan "pengujian" dipetakan ke kata dasar yang sama, sehingga mengurangi ukuran kosakata dan meningkatkan recall pada pencarian leksikal.
 
 ## 2.3 Algoritma Okapi BM25
 
-Okapi BM25 adalah algoritma perankingan berbasis kerangka probabilistik yang dikembangkan oleh Robertson dan Zaragoza (2009). Algoritma ini menyempurnakan pembobotan TF-IDF klasik dengan menambahkan saturasi frekuensi istilah (term frequency saturation) dan normalisasi panjang dokumen relatif terhadap panjang rata-rata korpus. Rumus skor relevansi dokumen $D$ terhadap kueri $Q$ adalah:
+Okapi BM25 adalah algoritma perankingan berbasis kerangka probabilistik yang dikembangkan oleh Robertson dan Zaragoza (2009). Algoritma ini menyempurnakan pembobotan TF-IDF klasik (Spärck Jones, 1972; Aizawa, 2003) dengan menambahkan saturasi frekuensi istilah (term frequency saturation) dan normalisasi panjang dokumen relatif terhadap panjang rata-rata korpus. Rumus skor relevansi dokumen $D$ terhadap kueri $Q$ adalah:
 
 $$\text{Score}(D, Q) = \sum_{q \in Q} \text{IDF}(q) \cdot \frac{f(q, D) \cdot (k_1 + 1)}{f(q, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}$$
 
@@ -39,7 +39,7 @@ BM25 sangat efektif untuk kueri teknis eksak karena istilah yang jarang muncul p
 
 ## 2.4 Sentence-BERT dan Cosine Similarity
 
-Sentence-BERT (SBERT) adalah modifikasi arsitektur BERT menggunakan jaringan Siamese dan Triplet untuk menghasilkan representasi vektor berdimensi tetap (dense sentence embedding) yang bermakna secara semantik (Reimers & Gurevych, 2019). Pada penelitian ini digunakan model pralatih multibahasa `paraphrase-multilingual-MiniLM-L12-v2` yang mendukung Bahasa Indonesia maupun istilah teknis Bahasa Inggris dengan dimensi vektor $d = 384$.
+Sentence-BERT (SBERT) adalah modifikasi arsitektur BERT (Devlin et al., 2019) menggunakan jaringan Siamese dan Triplet untuk menghasilkan representasi vektor berdimensi tetap (dense sentence embedding) yang bermakna secara semantik (Reimers & Gurevych, 2019). Pada penelitian ini digunakan model pralatih multibahasa `paraphrase-multilingual-MiniLM-L12-v2` yang mendukung Bahasa Indonesia maupun istilah teknis Bahasa Inggris dengan dimensi vektor $d = 384$.
 
 Setiap dokumen dan kueri dipetakan ke dalam vektor berdimensi 384 yang dinormalisasi menggunakan L2 norm ($\hat{v} = v / \|v\|_2$). Dengan normalisasi L2, perhitungan Cosine Similarity antara vektor kueri $\hat{u}$ dan matriks embedding dokumen $\hat{V}$ dapat disederhanakan menjadi perkalian titik (dot product) tunggal:
 

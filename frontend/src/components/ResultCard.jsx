@@ -4,11 +4,13 @@ const SOURCE_BADGE_STYLE = {
   Gadgetren: "badge-gadgetren",
   "Jagat Review": "badge-jagat",
   Droidlime: "badge-droidlime",
+  Yangcanggih: "badge-yangcanggih",
+  Hybrid: "badge-hybrid",
 };
 
 const DEFAULT_SPEC_CHIPS = ["chipset", "ram", "layar", "baterai", "kamera"];
 
-export default function ResultCard({ item, source = "both", onResultClick }) {
+export default function ResultCard({ item, onResultClick }) {
   const specs = item.specs || {};
   const specEntries = Object.entries(specs);
 
@@ -21,11 +23,6 @@ export default function ResultCard({ item, source = "both", onResultClick }) {
           >
             [{item.source}]
           </span>
-          {source === "both" && (
-            <span className="badge bg-slate-50 text-slate-600 border-slate-200 text-[10px]">
-              {item.source === "Gadgetren" ? "BM25" : "S-BERT"}
-            </span>
-          )}
         </div>
         <span className="text-xs font-mono text-slate-400">
           {item.latency_ms?.toFixed(1)} ms

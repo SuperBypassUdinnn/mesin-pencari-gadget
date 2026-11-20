@@ -249,7 +249,7 @@ if __name__ == "__main__":
             writer.writerow([qid, q_map.get(qid, ""), "sbert", q_res["p@5"], q_res["p@10"], q_res["r@5"], q_res["r@10"], q_res["f1@5"], q_res["f1@10"], q_res["ap"], q_res["latency_ms"]])
 
     print("=" * 60)
-    print("IR EVALUATION BENCHMARK SUMMARY (12 QUERIES)")
+    print(f"IR EVALUATION BENCHMARK SUMMARY ({len(test_queries)} QUERIES)")
     print("=" * 60)
     print(f"{'Metric':<18} | {'Okapi BM25':<15} | {'Sentence-BERT':<15}")
     print("-" * 60)

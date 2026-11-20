@@ -2,6 +2,7 @@ import base64
 import html
 import os
 import re
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -25,14 +26,26 @@ EDGE_CANDIDATES = [
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
     r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    # macOS application bundles
+    "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 ]
+
+BROWSER_COMMANDS = ["msedge", "microsoft-edge", "microsoft-edge-stable", "google-chrome", "google-chrome-stable", "chromium", "chromium-browser"]
 
 
 def _find_browser() -> str:
+    for command in BROWSER_COMMANDS:
+        resolved = shutil.which(command)
+        if resolved:
+            return resolved
     for path in EDGE_CANDIDATES:
         if os.path.isfile(path):
             return path
-    raise FileNotFoundError("No headless Chromium/Edge binary found on system.")
+    raise FileNotFoundError(
+        "No headless Chromium/Edge binary found on system. "
+        "Install Microsoft Edge or Google Chrome (or set PATH to include it)."
+    )
 
 
 def _extract_braced(text: str, start: int) -> tuple[str, int]:

@@ -74,6 +74,10 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **CLOSED (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
 | **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **READY FOR PR (95%)** | Bab I-V lengkap dengan angka riil, grafik/bukti, dan PDF `Kelompok_4.pdf`; sisa pengisian nama/NPM Member 1 & Dosen ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
+| **[#10] Bugfix: Fail-loud S-BERT loading** | Member 2 (Fadhlurrahman Alaudin) | **IN PROGRESS** | Temuan review pasca-merge PR #8 ([Issue #10](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/10)) |
+| **[#11] Bugfix: Integritas Daftar Pustaka** | Member 3 (Khalish), via review | **IN PROGRESS** | Temuan review pasca-merge PR #9 ([Issue #11](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/11)) |
+| **[#12] Bugfix: PDF exporter lintas-platform** | Member 3 (Khalish), via review | **IN PROGRESS** | Temuan review pasca-merge PR #9 ([Issue #12](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/12)) |
+| **[#13] Docs & UI: README 5 portal + pola UI** | Tim, via review | **IN PROGRESS** | Temuan review pasca-merge PR #8/#9 ([Issue #13](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/13)) |
 
 ---
 
@@ -109,7 +113,7 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 *Tugas Integrasi:*
 - [x] Jalankan baseline benchmark evaluasi dan ekspor `evaluation_results/metrics_summary.json`
 - [x] Setup CI/CD GitHub Actions (`.github/workflows/ci.yml`) dan Branch Protection
-- [ ] Setelah korpus $\ge 700$ artikel di-scrape oleh Member 3, jalankan kembali `make index` dan `make eval` untuk memproses seluruh data riil
+- [x] Setelah korpus $\ge 700$ artikel di-scrape oleh Member 3, jalankan kembali `make index` dan `make eval` untuk memproses seluruh data riil (dieksekusi oleh Member 3 pada korpus 900 dokumen; artefak diverifikasi ulang oleh Member 2 saat review pasca-merge PR #8: index 11.802 term, embedding (900, 384) genuine, metrik Tabel 4.3-4.4 cocok 100%)
 - [ ] Verifikasi kestabilan container `docker compose up --build` sebelum jadwal demo
 
 ---

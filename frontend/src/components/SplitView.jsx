@@ -27,7 +27,7 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
               </div>
             ) : (
               bm25Results.map((item) => (
-                <ResultCard key={item.id} item={item} source="bm25" onResultClick={onResultClick} />
+                <ResultCard key={item.id} item={item} onResultClick={onResultClick} />
               ))
             )}
           </div>
@@ -56,7 +56,7 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
               </div>
             ) : (
               sbertResults.map((item) => (
-                <ResultCard key={item.id} item={item} source="sbert" onResultClick={onResultClick} />
+                <ResultCard key={item.id} item={item} onResultClick={onResultClick} />
               ))
             )}
           </div>

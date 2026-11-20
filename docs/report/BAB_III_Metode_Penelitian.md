@@ -4,8 +4,8 @@
 
 Sistem mesin pencari vertikal dibangun dalam arsitektur terpisah (decoupled client-server) yang dikontainerisasi menggunakan Docker Compose agar dapat direproduksi dengan satu perintah (`docker compose up --build`). Lingkungan implementasi terdiri dari komponen berikut:
 
-1. Backend Service: Python 3.11 dengan framework FastAPI dan server ASGI Uvicorn. Modul inti mencakup prapemrosesan teks PySastrawi, mesin Okapi BM25, mesin Sentence-BERT (`sentence-transformers`, `torch`, `numpy`), serta modul evaluasi `IREvaluator`.
-2. Frontend Service: Aplikasi web Single-Page Application berbasis React 18, Vite, Tailwind CSS, Lucide Icons, dan Recharts yang disajikan pada port `3000`. Fitur utama mencakup tampilan komparasi hasil pencarian berdampingan (Side-by-Side Split View), modal detail spesifikasi teknis, dan Dasbor Evaluasi interaktif.
+1. Backend Service: Python 3.11 dengan framework FastAPI (FastAPI, 2024) dan server ASGI Uvicorn. Modul inti mencakup prapemrosesan teks PySastrawi, mesin Okapi BM25, mesin Sentence-BERT (`sentence-transformers`, `torch`, `numpy`), serta modul evaluasi `IREvaluator`.
+2. Frontend Service: Aplikasi web Single-Page Application berbasis React 18 (React, 2024), Vite, Tailwind CSS, Lucide Icons, dan Recharts yang disajikan pada port `3000`. Fitur utama mencakup tampilan komparasi hasil pencarian berdampingan (Side-by-Side Split View), modal detail spesifikasi teknis, dan Dasbor Evaluasi interaktif.
 3. Storage Layer: Database SQLite (`data/gadget.db`) untuk penyimpanan dokumen terstruktur, arsip JSON mentah (`data/raw/documents.json`), Inverted Index JSON (`data/processed/inverted_index.json`), serta matriks embedding NumPy (`data/processed/embeddings.npy`).
 4. Pengujian & Verifikasi Otomatis: Suite pengujian Python (`pytest`, 161 unit test) dan frontend (`vitest`) yang dijalankan secara otomatis pada GitHub Actions CI serta skrip gatekeeper `scripts/verify_pipeline.py`.
 
@@ -23,9 +23,9 @@ Crawling -> Preprocessing -> Indexing -> Retrieval -> Evaluation
 
 ## 3.3 Multi-source Crawler
 
-Untuk membangun korpus ulasan gadget yang beragam, mutakhir, dan representatif terhadap ekosistem media teknologi Indonesia, crawler dirancang secara modular dengan `BaseSpider` (`crawler/spiders/base.py`) dan subclass khusus `WPJsonSpider` (`crawler/spiders/wp_rest.py`). Korpus dikumpulkan dari lima portal teknologi Indonesia:
+Untuk membangun korpus ulasan gadget yang beragam, mutakhir, dan representatif terhadap ekosistem media teknologi Indonesia, crawler dirancang secara modular dengan `BaseSpider` (`crawler/spiders/base.py`) dan subclass khusus `WPJsonSpider` (`crawler/spiders/wp_rest.py`) dengan pembersihan DOM menggunakan Beautiful Soup (Richardson, 2024). Korpus dikumpulkan dari lima portal teknologi Indonesia:
 
-1. Jagat Review (`jagatreview.py`, kuota 28% / 252 dokumen): Menggunakan WordPress REST API v2 resmi pada kategori Notebook/Laptop (ID 46) dan Gadget/Smartphone (ID 38).
+1. Jagat Review (`jagatreview.py`, kuota 28% / 252 dokumen): Menggunakan WordPress REST API v2 resmi (WordPress, 2024) pada kategori Notebook/Laptop (ID 46) dan Gadget/Smartphone (ID 38).
 2. Yangcanggih (`yangcanggih.py`, kuota 28% / 252 dokumen): Menggunakan WordPress REST API v2 pada kategori Review khusus (ID 569) yang kaya akan tabel spesifikasi terstruktur.
 3. Droidlime (`droidlime.py`, kuota 17% / 153 dokumen): Menggunakan WordPress REST API v2 secara berurutan pada kategori Review, Hands-on, Harga HP, dan Fitur.
 4. Gadgetren (`gadgetren.py`, kuota 15% / 135 dokumen): Melakukan ekstraksi HTML halaman review beserta deteksi tanggal publikasi ISO dari tag `<time>`, meta OpenGraph, dan pola URL, serta penanganan aman terhadap respons HTTP 403 tanpa melewati batasan situs.
