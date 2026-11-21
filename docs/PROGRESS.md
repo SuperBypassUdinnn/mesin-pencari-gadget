@@ -69,11 +69,11 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **Arsitektur & Scaffolding** | Tim / Fadhlur | **SELESAI (100%)** | Struktur repo, Dockerfile, requirements, dan Makefile siap |
 | **[#3] Core IR: Preprocessing Sastrawi & BM25** | Member 2 (Fadhlur) | **CLOSED (100%)** | Lulus 155 unit tests, formula Okapi BM25 murni ([Issue #3](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/3)) |
 | **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
-| **[#1] Frontend: Komponen UI & Search** | Member 1 | **READY FOR PR (100%)** | React 18, SearchBar, ResultCard, SplitView responsif; 11 test Vitest hijau ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
-| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **READY FOR PR (100%)** | Dashboard Recharts siap; deck slide 5 menit (`frontend/slides/`) dengan catatan pembicara ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
+| **[#1] Frontend: Komponen UI & Search** | Member 1 | **CLOSED (100%)** | React 18, SearchBar, ResultCard, SplitView responsif; 11 test Vitest hijau; merged via PR #17 ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
+| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **CLOSED (100%)** | Dashboard Recharts siap; deck slide 5 menit (`frontend/slides/`) dengan catatan pembicara; merged via PR #17 ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
 | **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **CLOSED (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
 | **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **READY FOR PR (95%)** | Bab I-V lengkap dengan angka riil, grafik/bukti, dan PDF `Kelompok_4.pdf`; sisa pengisian nama/NPM Member 1 & Dosen ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
-| **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
+| **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **IN PROGRESS (75%)** | Docker 1-command terverifikasi (health 900 dokumen, BM25, S-BERT, evaluasi, frontend); deck presentasi siap; menunggu rekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
 | **[#10] Bugfix: Fail-loud S-BERT loading** | Member 2 (Fadhlurrahman Alaudin) | **CLOSED (100%)** | Diperbaiki & di-merge via PR #14 ([Issue #10](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/10)) |
 | **[#11] Bugfix: Integritas Daftar Pustaka** | Member 3 (Khalish), via review | **CLOSED (100%)** | Referensi terverifikasi, sitasi APA 1:1, PDF regenerasi ([Issue #11](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/11)) |
 | **[#12] Bugfix: PDF exporter lintas-platform** | Member 3 (Khalish), via review | **CLOSED (100%)** | Terverifikasi di Linux; \`make report\` aktif ([Issue #12](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/12)) |
@@ -114,7 +114,7 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Jalankan baseline benchmark evaluasi dan ekspor `evaluation_results/metrics_summary.json`
 - [x] Setup CI/CD GitHub Actions (`.github/workflows/ci.yml`) dan Branch Protection
 - [x] Setelah korpus $\ge 700$ artikel di-scrape oleh Member 3, jalankan kembali `make index` dan `make eval` untuk memproses seluruh data riil (dieksekusi oleh Member 3 pada korpus 900 dokumen; artefak diverifikasi ulang oleh Member 2 saat review pasca-merge PR #8: index 11.802 term, embedding (900, 384) genuine, metrik Tabel 4.3-4.4 cocok 100%)
-- [ ] Verifikasi kestabilan container `docker compose up --build` sebelum jadwal demo
+- [x] Verifikasi kestabilan container `docker compose up --build` sebelum jadwal demo (diverifikasi 21 Nov 2026: `/api/health` melaporkan 900 dokumen; BM25, S-BERT, evaluasi, document detail, dan frontend `localhost:3000` merespons; layout image backend diperbaiki via Issue #18)
 
 ---
 

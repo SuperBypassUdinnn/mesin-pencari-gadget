@@ -87,7 +87,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Running Test Suite
 
-Run the complete test suite (155 automated tests):
+Run the complete backend test suite (161 automated tests):
 
 ```bash
 PYTHONPATH=. pytest tests/ -v
@@ -99,7 +99,7 @@ PYTHONPATH=. pytest tests/ -v
 
 - `crawler/`: Multi-source spiders for Jagat Review, Yangcanggih, Droidlime, Gadgetren, and Hybrid, plus the USK FMIPA report PDF exporter.
 - `backend/app/engine/`: Text preprocessor (Sastrawi), BM25 engine, S-BERT engine, evaluator, and indexer.
-- `frontend/`: React components, pages (Search, Evaluation Dashboard), and Tailwind styling.
+- `frontend/`: React components, pages (Search, Evaluation Dashboard), Tailwind styling, and the five-minute presentation deck in `frontend/slides/`.
 - `data/`: SQLite database (`gadget.db`), processed inverted indices, and ground-truth test queries.
 - `evaluation_results/`: Exported metrics summary (`metrics_summary.json`) and per-query benchmarks (`per_query_benchmark.csv`).
 - `docs/report/`: USK FMIPA thesis format final report (Bab I–V, Lampiran Kontribusi Anggota).
