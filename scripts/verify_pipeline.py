@@ -277,8 +277,14 @@ def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
         print("[SKIP] Skipping test suites as requested (--skip-tests).")
         return True
 
-    venv_python = os.path.join(root, ".venv", "bin", "python")
-    python_bin = venv_python if os.path.exists(venv_python) else sys.executable
+    venv_candidates = [
+        os.path.join(root, ".venv", "bin", "python"),
+        os.path.join(root, ".venv", "Scripts", "python.exe"),
+    ]
+    python_bin = next(
+        (candidate for candidate in venv_candidates if os.path.exists(candidate)),
+        sys.executable,
+    )
 
     cmd = [python_bin, "-m", "pytest", "tests/", "-v"]
     env = os.environ.copy()
@@ -292,10 +298,11 @@ def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
         return False
 
     frontend_dir = os.path.join(root, "frontend")
-    if os.path.isdir(frontend_dir) and shutil.which("npm"):
+    npm_bin = shutil.which("npm.cmd") if os.name == "nt" else shutil.which("npm")
+    if os.path.isdir(frontend_dir) and npm_bin:
         print("[RUN] Running Frontend Vite build & Vitest suite...")
         fe_build = subprocess.run(
-            ["npm", "run", "build"],
+            [npm_bin, "run", "build"],
             cwd=frontend_dir,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE,
@@ -306,7 +313,7 @@ def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
             return False
 
         fe_test = subprocess.run(
-            ["npm", "test", "--", "--run"],
+            [npm_bin, "test", "--", "--run"],
             cwd=frontend_dir,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.PIPE,
