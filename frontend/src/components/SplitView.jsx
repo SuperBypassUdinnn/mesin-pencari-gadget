@@ -4,9 +4,9 @@ import ResultCard from "./ResultCard.jsx";
 export default function SplitView({ bm25Results, sbertResults, bm25Latency, sbertLatency, onResultClick }) {
   return (
     <section className="w-full">
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div className="flex-1 panel p-5">
-          <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <div className="panel flex-1 p-4 sm:p-5">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Cpu size={18} strokeWidth={1.5} className="text-amber-600" />
               <h3 className="font-semibold text-slate-900">Okapi BM25</h3>
@@ -18,12 +18,12 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
               </div>
             </div>
           </div>
-          <div className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wider">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">
             {bm25Results.length} hasil
           </div>
           <div className="space-y-2">
             {bm25Results.length === 0 ? (
-              <div className="text-center py-6 text-slate-500 text-sm">
+              <div className="py-6 text-center text-sm text-slate-500">
                 Tidak ada hasil untuk kata kunci ini.
               </div>
             ) : (
@@ -34,8 +34,8 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
           </div>
         </div>
 
-        <div className="flex-1 panel p-5">
-          <div className="flex items-center justify-between mb-4">
+        <div className="panel flex-1 p-4 sm:p-5">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Sparkles size={18} strokeWidth={1.5} className="text-indigo-600" />
               <h3 className="font-semibold text-slate-900">Sentence-BERT</h3>
@@ -47,12 +47,12 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
               </div>
             </div>
           </div>
-          <div className="text-xs font-medium text-slate-500 mb-2 uppercase tracking-wider">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wider text-slate-500">
             {sbertResults.length} hasil
           </div>
           <div className="space-y-2">
             {sbertResults.length === 0 ? (
-              <div className="text-center py-6 text-slate-500 text-sm">
+              <div className="py-6 text-center text-sm text-slate-500">
                 Tidak ada hasil untuk kata kunci ini.
               </div>
             ) : (
@@ -64,7 +64,7 @@ export default function SplitView({ bm25Results, sbertResults, bm25Latency, sber
         </div>
       </div>
 
-      <div className="mt-6 flex justify-end gap-2">
+      <div className="mt-6 flex flex-col justify-end gap-2 sm:flex-row">
         <button className="btn-ghost text-sm">Atur bobot gabungan</button>
         <button className="btn-primary text-sm">Ekspor hasil</button>
       </div>

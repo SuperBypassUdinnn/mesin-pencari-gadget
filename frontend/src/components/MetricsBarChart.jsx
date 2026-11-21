@@ -43,7 +43,7 @@ export default function MetricsBarChart({ data }) {
         </ResponsiveContainer>
       </div>
       <p className="mt-3 text-xs text-slate-500 text-center">
-        Skor dinamormalisasi ke rentang 0 hingga 1 untuk membandingkan performa
+        Skor dinormalisasi ke rentang 0 hingga 1 untuk membandingkan performa
         Okapi BM25 dengan Sentence-BERT.
       </p>
     </section>

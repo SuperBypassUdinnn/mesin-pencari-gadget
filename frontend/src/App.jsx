@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <Navbar view={view} onChangeView={setView} />
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="mx-auto max-w-7xl px-3 py-4 sm:px-4 sm:py-6">
         {view === "evaluasi" ? (
           <EvaluationDashboard />
         ) : (
