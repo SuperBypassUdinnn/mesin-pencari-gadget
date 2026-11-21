@@ -29,9 +29,9 @@ export default function EvaluationDashboard() {
 
   if (loading) {
     return (
-      <section className="panel p-6 flex flex-col items-center justify-center min-h-[300px]">
+      <section className="panel flex min-h-[300px] flex-col items-center justify-center p-6">
         <div className="flex flex-col items-center gap-3">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600" />
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary-600" />
           <p className="text-slate-600">Memuat data evaluasi...</p>
         </div>
       </section>
@@ -40,8 +40,8 @@ export default function EvaluationDashboard() {
 
   if (error) {
     return (
-      <section className="panel p-6 border border-red-200 bg-red-50 text-red-800">
-        <div className="flex items-center gap-2 mb-2">
+      <section className="panel border border-red-200 bg-red-50 p-6 text-red-800">
+        <div className="mb-2 flex items-center gap-2">
           <AlertCircle size={18} strokeWidth={1.75} />
           <span className="font-semibold">Gagal memuat evaluasi</span>
         </div>
@@ -63,22 +63,22 @@ export default function EvaluationDashboard() {
 
   return (
     <section className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 flex items-center gap-2">
             <BarChart3 size={20} strokeWidth={1.75} className="text-primary-600" />
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Evaluasi IR
             </h1>
           </div>
           <p className="text-slate-600">
-            Bandingkan metrik evaluasi Okapi BM25 dan Sentence-BERT across test
-            queries ({testQueriesCount} kueri uji).
+            Bandingkan metrik evaluasi Okapi BM25 dan Sentence-BERT pada{" "}
+            {testQueriesCount} kueri uji.
           </p>
         </div>
         <button
           onClick={fetchEvaluation}
-          className="btn-ghost flex items-center gap-2"
+          className="btn-ghost flex shrink-0 items-center gap-2 self-start sm:self-auto"
           title="reload evaluation data"
         >
           <RefreshCw size={16} strokeWidth={2} />
@@ -86,15 +86,9 @@ export default function EvaluationDashboard() {
         </button>
       </div>
 
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
-          {error}
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="panel p-5">
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
             MAP BM25
           </div>
           <div className="text-2xl font-bold text-slate-900">
@@ -102,7 +96,7 @@ export default function EvaluationDashboard() {
           </div>
         </div>
         <div className="panel p-5">
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
             MAP S-BERT
           </div>
           <div className="text-2xl font-bold text-slate-900">
@@ -110,7 +104,7 @@ export default function EvaluationDashboard() {
           </div>
         </div>
         <div className="panel p-5">
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+          <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
             Rata-rata Latency
           </div>
           <div className="text-2xl font-bold text-slate-900">
@@ -122,30 +116,30 @@ export default function EvaluationDashboard() {
       <MetricsTable data={data} />
       <MetricsBarChart data={data} />
 
-      <div className="panel p-6">
-        <div className="flex items-center justify-between mb-4">
+      <div className="panel p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-semibold text-slate-900">Inspeksi Per Kueri</h2>
-          <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+          <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
             Detail per kueri uji
           </span>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse border border-slate-200 rounded-xl overflow-hidden">
+          <table className="w-full min-w-[720px] border-collapse overflow-hidden rounded-xl border border-slate-200 text-left">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200">
-                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase border-r border-slate-200 last:border-0">
+              <tr className="border-b border-slate-200 bg-slate-50">
+                <th className="border-r border-slate-200 px-4 py-3 text-xs font-semibold uppercase text-slate-500 last:border-0">
                   Kueri
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase border-r border-slate-200 last:border-0">
+                <th className="border-r border-slate-200 px-4 py-3 text-xs font-semibold uppercase text-slate-500 last:border-0">
                   P@5 BM25
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase border-r border-slate-200 last:border-0">
+                <th className="border-r border-slate-200 px-4 py-3 text-xs font-semibold uppercase text-slate-500 last:border-0">
                   P@5 S-BERT
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase border-r border-slate-200 last:border-0">
+                <th className="border-r border-slate-200 px-4 py-3 text-xs font-semibold uppercase text-slate-500 last:border-0">
                   Latency BM25 (ms)
                 </th>
-                <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase last:border-0">
+                <th className="px-4 py-3 text-xs font-semibold uppercase text-slate-500 last:border-0">
                   Latency S-BERT (ms)
                 </th>
               </tr>
@@ -155,19 +149,19 @@ export default function EvaluationDashboard() {
                 const sbertRow = (sbert.per_query_results || [])[index] || {};
                 return (
                   <tr key={row.query_id || index} className="border-b border-slate-100 last:border-0">
-                    <td className="px-4 py-3 text-sm text-slate-600 font-medium border-r border-slate-200 last:border-0">
+                    <td className="border-r border-slate-200 px-4 py-3 text-sm font-medium text-slate-600 last:border-0">
                       {row.query_id}
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-slate-900 border-r border-slate-200 last:border-0">
+                    <td className="border-r border-slate-200 px-4 py-3 font-mono text-sm text-slate-900 last:border-0">
                       {row["p@5"]?.toFixed(3) ?? "-"}
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-slate-900 border-r border-slate-200 last:border-0">
+                    <td className="border-r border-slate-200 px-4 py-3 font-mono text-sm text-slate-900 last:border-0">
                       {sbertRow["p@5"]?.toFixed(3) ?? "-"}
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-slate-900 border-r border-slate-200 last:border-0">
+                    <td className="border-r border-slate-200 px-4 py-3 font-mono text-sm text-slate-900 last:border-0">
                       {row.latency_ms?.toFixed(2) ?? "-"}
                     </td>
-                    <td className="px-4 py-3 text-sm font-mono text-slate-900 last:border-0">
+                    <td className="px-4 py-3 font-mono text-sm text-slate-900 last:border-0">
                       {sbertRow.latency_ms?.toFixed(2) ?? "-"}
                     </td>
                   </tr>

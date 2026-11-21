@@ -15,14 +15,14 @@ export default function MetricsTable({ data }) {
 
   return (
     <section className="panel p-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-lg font-semibold text-slate-900">Perbandingan Metrik Evaluasi</h2>
         <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
           Okapi BM25 vs Sentence-BERT
         </span>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse border border-slate-200 rounded-xl overflow-hidden">
+        <table className="w-full min-w-[480px] border-collapse overflow-hidden rounded-xl border border-slate-200 text-left">
           <thead>
             <tr className="bg-slate-50 border-b border-slate-200">
               <th className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase border-r border-slate-200 last:border-0">
