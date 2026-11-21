@@ -3,7 +3,7 @@
 verify_pipeline.py — Automated Pre-Flight Quality Gatekeeper for Indonesian Gadget Search Engine.
 
 Inspired by the contract-first verification pipeline in SiagaKita.
-Enforces 7 quality gates before any team member opens a Pull Request:
+Enforces 8 quality gates before any team member opens a Pull Request:
   1. Directory & Scaffolding Hygiene
   2. Data Layer & Ground Truth Integrity
   3. Offline Index & Embeddings Verification
@@ -11,6 +11,7 @@ Enforces 7 quality gates before any team member opens a Pull Request:
   5. Living Progress Tracker & Workflow Parity
   6. Clean Text & Anti-Emoji Policy Audit
   7. Automated Pytest Regression Test Suite
+  8. Frontend Dependency Security Audit (npm audit)
 
 Usage:
   python3 scripts/verify_pipeline.py [--fast] [--skip-tests] [--report-only]
@@ -329,6 +330,40 @@ def gate_7_pytest_regression_suite(root: str, skip: bool = False) -> bool:
     return True
 
 
+def gate_8_frontend_security_audit(root: str, skip: bool = False) -> bool:
+    print("\n--- Gate 8: Frontend Dependency Security Audit (npm audit) ---")
+    if skip:
+        print("[SKIP] Skipping security audit as requested (--skip-tests).")
+        return True
+
+    frontend_dir = os.path.join(root, "frontend")
+    npm_bin = shutil.which("npm.cmd") if os.name == "nt" else shutil.which("npm")
+    if not os.path.isdir(frontend_dir) or not npm_bin:
+        print("[FAIL] frontend directory or npm binary not found.")
+        return False
+
+    print(f"[RUN] Running strict 'npm audit --audit-level=high' in {frontend_dir}...")
+    result = subprocess.run(
+        [npm_bin, "audit", "--audit-level=high"],
+        cwd=frontend_dir,
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode != 0:
+        print(f"[FAIL] npm audit found high/critical vulnerabilities (exit code {result.returncode}):")
+        if result.stdout:
+            for line in result.stdout.splitlines()[:15]:
+                print(f"  {line}")
+        elif result.stderr:
+            for line in result.stderr.splitlines()[:10]:
+                print(f"  {line}")
+        return False
+
+    print("[PASS] Frontend Security Audit passed: Zero high or critical vulnerabilities found.")
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(description="Pre-Flight Quality Gatekeeper for Indonesian Gadget Search Engine")
     parser.add_argument("--fast", action="store_true", help="Run fast verification without heavy operations")
@@ -355,6 +390,7 @@ def main():
 
     if not args.report_only:
         results.append(("Gate 7: Pytest Regression Suite", gate_7_pytest_regression_suite(repo_root, skip=args.skip_tests)))
+        results.append(("Gate 8: Frontend Dependency Security Audit", gate_8_frontend_security_audit(repo_root, skip=args.skip_tests)))
 
     print("\n" + "=" * 70)
     print("PRE-FLIGHT QUALITY VERIFICATION SUMMARY")

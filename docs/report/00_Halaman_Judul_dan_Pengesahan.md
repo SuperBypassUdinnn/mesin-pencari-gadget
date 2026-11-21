@@ -9,13 +9,13 @@ PEMBUATAN MESIN PENCARI VERTIKAL ULASAN & SPESIFIKASI GADGET DENGAN ALGORITMA OK
 Disusun oleh:
 Kelompok 4
 
-1. [Nama Anggota 1] (NPM. [NPM])
-2. Fadhlurrahman Alaudin (NPM. [NPM])
-3. Khalish (NPM. [NPM])
+1. Muhammad Irfan Qadafi (NPM. 2408107010054)
+2. Fadhlurrahman Alaudin (NPM. 2408107010053)
+3. Khalish Aufa (NPM. 2408107010068)
 
 Dosen Pengampu Mata Kuliah:
-[Nama Dosen Pengampu Mata Kuliah], [Gelar]
-NIP. [NIP Dosen]
+Fathia Sabrina, S.T., M.Inf.Tech
+NIP. 199107232024062001
 
 PROGRAM STUDI INFORMATIKA
 FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM
@@ -36,9 +36,9 @@ Diajukan sebagai salah satu syarat penilaian kelulusan pada Mata Kuliah Penelusu
 Disusun oleh:
 Kelompok 4
 
-1. [Nama Anggota 1] (NPM. [NPM])
-2. Fadhlurrahman Alaudin (NPM. [NPM])
-3. Khalish (NPM. [NPM])
+1. Muhammad Irfan Qadafi (NPM. 2408107010054)
+2. Fadhlurrahman Alaudin (NPM. 2408107010053)
+3. Khalish Aufa (NPM. 2408107010068)
 
 PROGRAM STUDI INFORMATIKA
 FAKULTAS MATEMATIKA DAN ILMU PENGETAHUAN ALAM
@@ -57,9 +57,10 @@ Mata Kuliah: Penelusuran Informasi (Information Retrieval)
 Kelompok: 4
 
 Anggota Tim:
-1. Nama: [Nama Anggota 1] | NPM: [NPM] | Peran: Frontend & UI Lead
-2. Nama: Fadhlurrahman Alaudin | NPM: [NPM] | Peran: Core IR & Backend Lead
-3. Nama: Khalish | NPM: [NPM] | Peran: Data Engineering & Report Lead
+
+1. Nama: Muhammad Irfan Qadafi | NPM: 2408107010054 | Peran: Frontend & UI Lead
+2. Nama: Fadhlurrahman Alaudin | NPM: 2408107010053 | Peran: Core IR & Backend Lead
+3. Nama: Khalish Aufa | NPM: 2408107010068 | Peran: Data Engineering & Report Lead
 
 Laporan Proyek Akhir ini telah diperiksa, diuji melalui live demo sistem, dan disetujui untuk memenuhi penilaian akhir mata kuliah Penelusuran Informasi.
 
@@ -68,8 +69,8 @@ Banda Aceh, November 2026
 Menyetujui,
 Dosen Pengampu Mata Kuliah Penelusuran Informasi
 
-( [Nama Dosen Pengampu Mata Kuliah], [Gelar] )
-NIP. [NIP Dosen]
+( Fathia Sabrina, S.T., M.Inf.Tech )
+NIP. 199107232024062001
 
 ---
 
@@ -81,9 +82,9 @@ Banda Aceh, November 2026
 
 Tim Penyusun (Kelompok 4):
 
-1. [Nama Anggota 1] (NPM. [NPM]) ........................
-2. Fadhlurrahman Alaudin (NPM. [NPM]) ........................
-3. Khalish (NPM. [NPM]) ........................
+1. Muhammad Irfan Qadafi (NPM. 2408107010054) ........................
+2. Fadhlurrahman Alaudin (NPM. 2408107010053) ........................
+3. Khalish Aufa (NPM. 2408107010068) ........................
 
 ---
 
@@ -94,6 +95,7 @@ Puji syukur kami panjatkan ke hadirat Allah SWT atas rahmat dan hidayah-Nya, seh
 Proyek ini dilaksanakan secara berkelompok guna mengimplementasikan konsep teoritis penelusuran informasi ke dalam bentuk aplikasi nyata, mencakup proses pengumpulan 900 artikel ulasan gadget dari lima portal teknologi Indonesia, prapemrosesan teks Bahasa Indonesia menggunakan PySastrawi, pengindeksan Inverted Index, perankingan probabilistik Okapi BM25, pencarian semantik Sentence-BERT, serta evaluasi kuantitatif komparatif (Precision@K, Recall@K, F1@K, Mean Average Precision, dan latensi).
 
 Penyelesaian tugas ini tidak terlepas dari bimbingan dan dukungan berbagai pihak. Oleh karena itu, kami menyampaikan terima kasih yang sebesar-besarnya kepada:
+
 1. Bapak/Ibu Dosen Pengampu Mata Kuliah Penelusuran Informasi, Fakultas Matematika dan Ilmu Pengetahuan Alam, Universitas Syiah Kuala, atas arahan materi, masukan teknis, dan bimbingan selama perkuliahan dan pengerjaan proyek akhir ini.
 2. Rekan-rekan satu kelompok atas dedikasi, kolaborasi aktif, dan kerja sama yang solid dalam menyelesaikan pembagian tugas crawling, pembangunan core search engine, perancangan antarmuka web, dan penyusunan laporan.
 3. Rekan-rekan mahasiswa Program Studi Informatika USK atas diskusi ilmiah dan pertukaran gagasan seputar implementasi sistem temu balik informasi.

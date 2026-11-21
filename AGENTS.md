@@ -41,14 +41,15 @@ or
 make verify
 ```
 
-All 7 quality gates must report `[PASS]`:
+All 8 quality gates must report `[PASS]`:
 1. Gate 1: Directory & Scaffolding Hygiene
 2. Gate 2: Data Layer & Ground Truth Integrity
 3. Gate 3: Offline Index Verification (`inverted_index.json` & `embeddings.npy`)
 4. Gate 4: Academic Report Completeness (USK FMIPA standards in `docs/report/`)
 5. Gate 5: Living Progress Tracker & Workflow Parity (`docs/PROGRESS.md`)
 6. Gate 6: Clean Text Policy Audit (Zero decorative pictographic emojis)
-7. Gate 7: Automated Pytest Regression Test Suite (155+ tests green)
+7. Gate 7: Automated Pytest Regression Test Suite (161+ tests green)
+8. Gate 8: Frontend Dependency Security Audit (`npm audit` zero high/critical vulnerabilities)
 
 ---
 
