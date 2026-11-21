@@ -53,6 +53,10 @@ jobs:
         working-directory: frontend
         run: npm ci
 
+      - name: Strict Frontend Security Audit
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
       - name: Run Frontend Vitest Suite
         working-directory: frontend
         run: npm test -- --run
