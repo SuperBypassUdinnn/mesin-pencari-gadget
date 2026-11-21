@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesin Pencari Gadget Vertikal - Slide Demo 5 Menit</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #020617;
+        --panel: rgba(30, 41, 59, 0.72);
+        --border: #334155;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #60a5fa;
+        --accent-strong: #2563eb;
+        --amber: #f59e0b;
+        --indigo: #818cf8;
+        --emerald: #34d399;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: radial-gradient(circle at 20% 0%, #0f172a 0%, var(--bg) 55%);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+
+      .progress {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: #1e293b;
+        z-index: 30;
+      }
+
+      #progressBar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+        transition: width 240ms ease;
+      }
+
+      #deck {
+        position: relative;
+        height: 100%;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(14px, 2vh, 24px);
+        padding: clamp(28px, 5vw, 80px);
+      }
+
+      .slide.active {
+        display: flex;
+        animation: fade 320ms ease;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .kicker {
+        margin: 0;
+        color: var(--accent);
+        font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      h1 {
+        max-width: 18ch;
+        font-size: clamp(2.2rem, 6vw, 4.6rem);
+        line-height: 1.04;
+      }
+
+      h2 {
+        max-width: 26ch;
+        font-size: clamp(1.5rem, 3.4vw, 2.7rem);
+        line-height: 1.12;
+      }
+
+      h3 {
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+      }
+
+      p,
+      li {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(0.95rem, 1.55vw, 1.3rem);
+        line-height: 1.55;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.2em;
+        display: grid;
+        gap: 0.5em;
+      }
+
+      strong {
+        color: var(--text);
+      }
+
+      .accent {
+        color: var(--accent);
+      }
+
+      .amber {
+        color: var(--amber);
+      }
+
+      .indigo {
+        color: var(--indigo);
+      }
+
+      .emerald {
+        color: var(--emerald);
+      }
+
+      .lead {
+        max-width: 62ch;
+      }
+
+      .grid-2,
+      .grid-3 {
+        display: grid;
+        gap: clamp(12px, 1.6vw, 20px);
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--panel);
+        padding: clamp(14px, 1.8vw, 24px);
+        min-width: 0;
+      }
+
+      .card h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      .metric {
+        display: grid;
+        gap: 0.15rem;
+      }
+
+      .metric .value {
+        color: var(--text);
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .metric .label {
+        color: var(--muted);
+        font-size: clamp(0.72rem, 1vw, 0.85rem);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .pipeline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .chip {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.8);
+        color: var(--text);
+        padding: 0.35rem 0.75rem;
+        font-size: clamp(0.72rem, 1.1vw, 0.9rem);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .arrow {
+        color: #475569;
+        font-weight: 700;
+      }
+
+      .formula {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: #0b1120;
+        color: #cbd5e1;
+        padding: 0.9rem 1rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: clamp(0.68rem, 1.05vw, 0.86rem);
+        line-height: 1.55;
+        overflow-x: auto;
+        white-space: pre-wrap;
+      }
+
+      .callout {
+        border-left: 4px solid var(--accent-strong);
+        border-radius: 0 14px 14px 0;
+        background: rgba(37, 99, 235, 0.12);
+        padding: 0.8rem 1rem;
+        color: var(--text);
+        font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+      }
+
+      .bar-chart {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: minmax(70px, 120px) 1fr minmax(58px, auto);
+        align-items: center;
+        gap: 0.7rem;
+        font-size: clamp(0.78rem, 1.1vw, 0.95rem);
+      }
+
+      .bar-label {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .bar-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #1e293b;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 999px;
+      }
+
+      .bar-fill.bm25 {
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+      }
+
+      .bar-fill.sbert {
+        background: linear-gradient(90deg, #4f46e5, #818cf8);
+      }
+
+      .bar-value {
+        color: var(--text);
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        color: var(--muted);
+        font-size: clamp(0.72rem, 1vw, 0.85rem);
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .dot {
+        width: 0.65rem;
+        height: 0.65rem;
+        border-radius: 999px;
+        display: inline-block;
+      }
+
+      .dot.bm25 {
+        background: #60a5fa;
+      }
+
+      .dot.sbert {
+        background: #818cf8;
+      }
+
+      .team {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(10px, 1.4vw, 18px);
+      }
+
+      .team .card p {
+        font-size: clamp(0.8rem, 1.15vw, 1rem);
+      }
+
+      .footer-note {
+        color: #64748b;
+        font-size: clamp(0.7rem, 1vw, 0.85rem);
+      }
+
+      .notes {
+        display: none;
+        margin-top: 0.4rem;
+        border: 1px dashed #475569;
+        border-radius: 12px;
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.7rem 0.9rem;
+        color: #cbd5e1;
+        font-size: clamp(0.75rem, 1.05vw, 0.9rem);
+        line-height: 1.5;
+        max-height: 26vh;
+        overflow-y: auto;
+      }
+
+      body.show-notes .slide.active .notes {
+        display: block;
+      }
+
+      .hud {
+        position: fixed;
+        inset: auto 0 0 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.6rem clamp(16px, 3vw, 40px);
+        color: #64748b;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        z-index: 20;
+        pointer-events: none;
+      }
+
+      .hud .brand {
+        text-transform: uppercase;
+      }
+
+      #counter {
+        color: #94a3b8;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 760px) {
+        .grid-2,
+        .grid-3,
+        .team {
+          grid-template-columns: 1fr;
+        }
+
+        .slide {
+          justify-content: flex-start;
+          overflow-y: auto;
+        }
+
+        .hud .hint {
+          display: none;
+        }
+      }
+
+      @media print {
+        html,
+        body {
+          height: auto;
+          overflow: visible;
+          background: #ffffff;
+          color: #0f172a;
+        }
+
+        #deck {
+          height: auto;
+        }
+
+        .progress,
+        .hud {
+          display: none !important;
+        }
+
+        .slide {
+          position: relative;
+          display: flex !important;
+          min-height: 100vh;
+          page-break-after: always;
+          background: #ffffff;
+        }
+
+        .card,
+        .formula,
+        .chip {
+          background: #f8fafc;
+          color: #0f172a;
+          border-color: #cbd5e1;
+        }
+
+        p,
+        li,
+        .metric .label,
+        .bar-label,
+        .footer-note {
+          color: #475569;
+        }
+
+        .notes {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <main id="deck">
+      <section class="slide active" aria-hidden="false">
+        <p class="kicker">Penelusuran Informasi 2025/2026 - FMIPA Universitas Syiah Kuala</p>
+        <h1>Mesin Pencari Gadget Vertikal</h1>
+        <p class="lead">
+          Perbandingan <strong class="amber">Okapi BM25</strong> dan
+          <strong class="indigo">Sentence-BERT</strong> pada ulasan gadget berbahasa Indonesia.
+        </p>
+        <div class="grid-3">
+          <div class="card metric">
+            <span class="value">900</span>
+            <span class="label">Artikel ulasan</span>
+          </div>
+          <div class="card metric">
+            <span class="value">5</span>
+            <span class="label">Portal teknologi</span>
+          </div>
+          <div class="card metric">
+            <span class="value">15</span>
+            <span class="label">Kueri evaluasi</span>
+          </div>
+        </div>
+        <p class="footer-note">
+          Kelompok 4 - Irfan (Frontend dan UI), Fadhlur (Core IR dan Backend), Khalish (Data dan Laporan)
+        </p>
+        <aside class="notes">
+          Pembuka 10 detik. Sebutkan nama kelompok, judul proyek, dan tujuan demo: membandingkan
+          dua pendekatan information retrieval pada korpus gadget Indonesia.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">0:00 - 1:00 | Khalish</p>
+        <h2>Ulasan gadget tersebar dan sulit dibandingkan</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Kondisi saat ini</h3>
+            <ul>
+              <li>Ulasan tersebar di Jagat Review, Yangcanggih, Droidlime, Gadgetren, dan Hybrid.</li>
+              <li>Format, istilah teknis, dan kedalaman ulasan berbeda-beda.</li>
+              <li>Mesin pencari umum mencampur iklan, toko daring, dan konten tidak relevan.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Yang dibutuhkan</h3>
+            <ul>
+              <li>Pencarian vertikal yang fokus pada review dan spesifikasi gadget.</li>
+              <li>Hasil yang dapat dibandingkan secara transparan.</li>
+              <li>Dua pendekatan IR ditampilkan berdampingan: lexical dan semantic.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout">
+          Tujuan proyek: satu antarmuka pencarian yang menampilkan hasil Okapi BM25 dan
+          Sentence-BERT secara berdampingan, lengkap dengan metrik evaluasi.
+        </div>
+        <aside class="notes">
+          Khalish 45 detik. Tekankan masalah fragmentasi konten dan mengapa vertical search
+          relevan. Jangan menjelaskan algoritma di segmen ini.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Korpus dan arsitektur | Khalish</p>
+        <h2>900 artikel, 5 portal, satu pipeline</h2>
+        <div class="grid-3">
+          <div class="card metric">
+            <span class="value">900</span>
+            <span class="label">Dokumen unik</span>
+          </div>
+          <div class="card metric">
+            <span class="value">77,22%</span>
+            <span class="label">Cakupan spesifikasi</span>
+          </div>
+          <div class="card metric">
+            <span class="value">15</span>
+            <span class="label">Ground truth</span>
+          </div>
+        </div>
+        <div class="pipeline">
+          <span class="chip">Crawling 5 portal</span>
+          <span class="arrow">-&gt;</span>
+          <span class="chip">SQLite</span>
+          <span class="arrow">-&gt;</span>
+          <span class="chip">Preprocessing Sastrawi</span>
+          <span class="arrow">-&gt;</span>
+          <span class="chip">Indeks BM25</span>
+          <span class="arrow">+</span>
+          <span class="chip">Embedding S-BERT</span>
+          <span class="arrow">-&gt;</span>
+          <span class="chip">Retrieval</span>
+          <span class="arrow">-&gt;</span>
+          <span class="chip">Evaluasi</span>
+        </div>
+        <p class="lead">
+          Seluruh artefak dihasilkan ulang dengan <strong>make index</strong> dan
+          <strong>make eval</strong>, lalu disajikan melalui FastAPI dan React.
+        </p>
+        <aside class="notes">
+          Khalish 30 detik. Sebutkan lima portal, jumlah dokumen, dan alur data. Tekankan bahwa
+          angka evaluasi berasal dari korpus riil, bukan data mock.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Core IR | Fadhlur</p>
+        <h2>Preprocessing dan Okapi BM25</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Pipeline teks Indonesia</h3>
+            <ul>
+              <li>Normalisasi dan penghapusan tanda baca.</li>
+              <li>Tokenisasi dan stopword removal Bahasa Indonesia.</li>
+              <li>Stemming morfologis dengan PySastrawi.</li>
+              <li>Pembangunan inverted index dan panjang dokumen.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Parameter BM25</h3>
+            <div class="formula">Score(D, Q) = sum IDF(q) *
+  (f(q, D) * (k1 + 1)) /
+  (f(q, D) + k1 * (1 - b + b * |D| / avgdl))
+
+IDF(q) = ln((N - n(q) + 0.5) / (n(q) + 0.5) + 1)
+
+k1 = 1.5    b = 0.75</div>
+          </div>
+        </div>
+        <div class="callout">
+          IDF dengan floor +1 menjaga skor tetap non-negatif, termasuk untuk term yang sangat umum.
+        </div>
+        <aside class="notes">
+          Fadhlur 35 detik. Jelaskan bahwa BM25 dibangun dari nol dengan inverted index, bukan
+          library pencarian siap pakai. Sebutkan k1 dan b.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Core IR | Fadhlur</p>
+        <h2>Sentence-BERT: mencari makna, bukan hanya kata</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Model dan representasi</h3>
+            <ul>
+              <li>Model multilingual: paraphrase-multilingual-MiniLM-L12-v2.</li>
+              <li>Matriks embedding 900 x 384 dimensi.</li>
+              <li>Setiap vektor dinormalisasi L2.</li>
+              <li>Kemiripan kosinus dihitung sebagai dot product NumPy.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Konsekuensi praktis</h3>
+            <ul>
+              <li>Tahan terhadap parafrase dan sinonim.</li>
+              <li>Tidak bergantung pada kecocokan kata secara literal.</li>
+              <li>Latensi lebih tinggi karena encoding kueri dan perkalian matriks.</li>
+              <li>Model dimuat secara fail-loud agar artefak evaluasi tidak rusak diam-diam.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Fadhlur 35 detik. Kontraskan dengan BM25: S-BERT memahami makna kalimat, tetapi
+          biaya komputasinya lebih besar.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Demo 1: kueri teknis eksak | Fadhlur</p>
+        <h2>"ASUS Zenbook Intel OLED" (q02)</h2>
+        <div class="grid-3">
+          <div class="card metric">
+            <span class="value amber">0,9861</span>
+            <span class="label">Average Precision BM25</span>
+          </div>
+          <div class="card metric">
+            <span class="value">~1,3 ms</span>
+            <span class="label">Latensi retrieval</span>
+          </div>
+          <div class="card metric">
+            <span class="value">Top-1</span>
+            <span class="label">Dokumen tepat</span>
+          </div>
+        </div>
+        <ul>
+          <li>Term <strong>ASUS</strong>, <strong>Zenbook</strong>, <strong>Intel</strong>, dan <strong>OLED</strong> cocok secara literal dengan dokumen.</li>
+          <li>IDF memberikan bobot tinggi pada term yang diskriminatif.</li>
+          <li>Modal spesifikasi menampilkan detail teknis dari dokumen teratas.</li>
+        </ul>
+        <aside class="notes">
+          Fadhlur 40 detik. Jalankan pencarian q02, tunjukkan hasil BM25 di kolom kiri, lalu buka
+          modal spesifikasi. Sebutkan AP 0,9861 dan latensi sekitar 1,3 ms.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Demo 2: kueri niat semantik | Fadhlur</p>
+        <h2>"HP baterai tahan lama seharian tanpa sering cas" (q11)</h2>
+        <div class="grid-2">
+          <div class="card metric">
+            <span class="value indigo">0,80</span>
+            <span class="label">P@5 Sentence-BERT</span>
+          </div>
+          <div class="card metric">
+            <span class="value indigo">0,5047</span>
+            <span class="label">Average Precision Sentence-BERT</span>
+          </div>
+        </div>
+        <ul>
+          <li><strong>HP</strong> bersifat polisemi: bisa berarti merek HP atau handphone.</li>
+          <li>Pencocokan literal BM25 berisiko salah menangkap konteks.</li>
+          <li>S-BERT menangkap makna "baterai tahan lama" dan konteks smartphone.</li>
+        </ul>
+        <aside class="notes">
+          Fadhlur 40 detik. Jalankan q11, tunjukkan kolom S-BERT, dan jelaskan jebakan polisemi
+          "HP". Ini contoh paling jelas mengapa pencarian semantik melengkapi BM25.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">3:00 - 4:15 | Irfan</p>
+        <h2>Dashboard evaluasi: 15 kueri uji</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="amber">Okapi BM25</h3>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <span class="bar-label">MAP</span>
+                <span class="bar-track"><span class="bar-fill bm25" style="width: 46.47%"></span></span>
+                <span class="bar-value">0,4647</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">P@5</span>
+                <span class="bar-track"><span class="bar-fill bm25" style="width: 74.67%"></span></span>
+                <span class="bar-value">0,7467</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Latensi</span>
+                <span class="bar-track"><span class="bar-fill bm25" style="width: 7%"></span></span>
+                <span class="bar-value">1,28 ms</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="indigo">Sentence-BERT</h3>
+            <div class="bar-chart">
+              <div class="bar-row">
+                <span class="bar-label">MAP</span>
+                <span class="bar-track"><span class="bar-fill sbert" style="width: 29.93%"></span></span>
+                <span class="bar-value">0,2993</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">P@5</span>
+                <span class="bar-track"><span class="bar-fill sbert" style="width: 54.67%"></span></span>
+                <span class="bar-value">0,5467</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-label">Latensi</span>
+                <span class="bar-track"><span class="bar-fill sbert" style="width: 100%"></span></span>
+                <span class="bar-value">18,00 ms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="legend">
+          <span><span class="dot bm25"></span> BM25</span>
+          <span><span class="dot sbert"></span> Sentence-BERT</span>
+          <span>Skala metrik 0 sampai 1; latensi dinormalisasi terhadap nilai maksimum.</span>
+        </div>
+        <aside class="notes">
+          Irfan 75 detik. Buka tab Evaluasi. Tunjukkan tabel metrik, grafik batang, dan tabel
+          per kueri. Sebutkan MAP 0,4647 vs 0,2993, P@5 0,7467 vs 0,5467, dan latensi
+          1,28 ms vs 18,00 ms.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Insight per kueri | Irfan</p>
+        <h2>Kapan masing-masing pendekatan unggul?</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="amber">Okapi BM25</h3>
+            <ul>
+              <li>Kueri teknis dengan istilah eksak: merek, chipset, tipe panel.</li>
+              <li>Dokumen panjang dengan banyak pengulangan term.</li>
+              <li>Latensi sangat rendah dan mudah dijelaskan.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="indigo">Sentence-BERT</h3>
+            <ul>
+              <li>Parafrase dan sinonim yang tidak muncul literal di dokumen.</li>
+              <li>Kueri niat seperti "baterai tahan lama seharian".</li>
+              <li>Polisemi dan konteks bahasa alami.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout">
+          Split view membuat trade-off ini terlihat langsung: pengguna dapat membandingkan
+          hasil lexical dan semantic pada kueri yang sama.
+        </div>
+        <aside class="notes">
+          Irfan 45 detik. Tunjukkan satu kueri eksak dan satu kueri semantik di dashboard,
+          lalu jelaskan mengapa peringkat keduanya berbeda.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">4:15 - 5:00 | Semua anggota</p>
+        <h2>Kesimpulan</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3 class="emerald">Terintegrasi</h3>
+            <p>Dua mesin pencari berjalan end-to-end melalui FastAPI, React, dan Docker Compose.</p>
+          </div>
+          <div class="card">
+            <h3 class="amber">BM25</h3>
+            <p>MAP 0,4647 dan latensi 1,28 ms; sangat kuat untuk kueri teknis eksak.</p>
+          </div>
+          <div class="card">
+            <h3 class="indigo">Sentence-BERT</h3>
+            <p>Melengkapi kueri semantik dan polisemi, dengan biaya latensi 18,00 ms.</p>
+          </div>
+        </div>
+        <ul>
+          <li>Rencana lanjutan: pembobotan hybrid, cross-encoder reranking, dan korpus yang lebih besar.</li>
+        </ul>
+        <aside class="notes">
+          Semua anggota 45 detik. Masing-masing menyampaikan satu poin, lalu buka sesi tanya
+          jawab. Pastikan video menampilkan ketiga anggota berbicara.
+        </aside>
+      </section>
+
+      <section class="slide" aria-hidden="true">
+        <p class="kicker">Penutup</p>
+        <h2>Terima kasih</h2>
+        <div class="team">
+          <div class="card">
+            <h3>Irfan</h3>
+            <p>Frontend dan UI: React, Split View, dashboard evaluasi, dan slide demo.</p>
+          </div>
+          <div class="card">
+            <h3>Fadhlur</h3>
+            <p>Core IR dan backend: preprocessing, BM25, Sentence-BERT, evaluator, dan Docker.</p>
+          </div>
+          <div class="card">
+            <h3>Khalish</h3>
+            <p>Data dan laporan: crawler 5 portal, ground truth, laporan USK FMIPA, dan video.</p>
+          </div>
+        </div>
+        <ul>
+          <li>Aplikasi: http://localhost:3000</li>
+          <li>Dokumentasi API: http://localhost:8000/docs</li>
+          <li>Repositori: mesin-pencari-gadget</li>
+        </ul>
+        <p class="lead">Sesi tanya jawab.</p>
+        <aside class="notes">
+          Akhiri tepat waktu. Ucapkan terima kasih, tampilkan peran tim, dan buka Q&A.
+        </aside>
+      </section>
+    </main>
+
+    <footer class="hud">
+      <span class="brand">Kelompok 4 - Penelusuran Informasi</span>
+      <span id="counter">1 / 11</span>
+      <span class="hint">Panah atau spasi untuk navigasi - N untuk catatan</span>
+    </footer>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const counter = document.getElementById("counter");
+      const progressBar = document.getElementById("progressBar");
+      let current = 0;
+
+      function show(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, position) => {
+          const active = position === current;
+          slide.classList.toggle("active", active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+        counter.textContent = `${current + 1} / ${slides.length}`;
+        progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+        history.replaceState(null, "", `#${current + 1}`);
+      }
+
+      document.addEventListener("keydown", (event) => {
+        const key = event.key;
+        if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(key)) {
+          event.preventDefault();
+          show(current + 1);
+        } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(key)) {
+          event.preventDefault();
+          show(current - 1);
+        } else if (key === "Home") {
+          show(0);
+        } else if (key === "End") {
+          show(slides.length - 1);
+        } else if (key.toLowerCase() === "n") {
+          document.body.classList.toggle("show-notes");
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (event.target.closest("a, button, .notes")) return;
+        show(event.clientX < window.innerWidth * 0.25 ? current - 1 : current + 1);
+      });
+
+      const requested = Number.parseInt(window.location.hash.replace("#", ""), 10);
+      show(Number.isFinite(requested) && requested > 0 ? requested - 1 : 0);
+    </script>
+  </body>
+</html>

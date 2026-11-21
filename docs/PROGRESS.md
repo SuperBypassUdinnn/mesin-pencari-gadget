@@ -3,7 +3,7 @@
 - **Proyek**: Mesin Pencari Ulasan & Spesifikasi Gadget (`mesin-pencari-gadget`)
 - **Mata Kuliah**: Penelusuran Informasi (Information Retrieval) 2025/2026
 - **Institusi**: FMIPA Universitas Syiah Kuala (USK)
-- **Status Terakhir**: Minggu 1 (Fondasi & Algoritma Core Selesai Dibangun)
+- **Status Terakhir**: Minggu 3 (Finalisasi Frontend & Kesiapan Demo)
 
 > **ATURAN WAJIB WORKFLOW**:
 > 1. Setiap anggota tim atau AI agent yang menyelesaikan suatu tugas **WAJIB** mencentang checkbox (`- [x]`) pada dokumen ini sebelum membuat Pull Request (PR).
@@ -69,8 +69,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **Arsitektur & Scaffolding** | Tim / Fadhlur | **SELESAI (100%)** | Struktur repo, Dockerfile, requirements, dan Makefile siap |
 | **[#3] Core IR: Preprocessing Sastrawi & BM25** | Member 2 (Fadhlur) | **CLOSED (100%)** | Lulus 155 unit tests, formula Okapi BM25 murni ([Issue #3](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/3)) |
 | **[#4] Core IR: S-BERT & FastAPI REST API** | Member 2 (Fadhlur) | **CLOSED (100%)** | S-BERT cosine similarity, Evaluator, FastAPI, Docker ([Issue #4](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/4)) |
-| **[#1] Frontend: Komponen UI & Search** | Member 1 | **OPEN (90%)** | React 18, SearchBar, ResultCard, SplitView, Vitest ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
-| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **OPEN (75%)** | Dashboard Recharts siap, slide demo in progress ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
+| **[#1] Frontend: Komponen UI & Search** | Member 1 | **READY FOR PR (100%)** | React 18, SearchBar, ResultCard, SplitView responsif; 11 test Vitest hijau ([Issue #1](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/1)) |
+| **[#2] Frontend: Dashboard Evaluasi & Slides** | Member 1 | **READY FOR PR (100%)** | Dashboard Recharts siap; deck slide 5 menit (`frontend/slides/`) dengan catatan pembicara ([Issue #2](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/2)) |
 | **[#5] Scraper Multi-Sumber (700+ Dokumen)** | Member 3 (Khalish) | **CLOSED (100%)** | 900 artikel dari 5 portal (Jagat Review, Yangcanggih, Droidlime, Gadgetren, Hybrid), 15 kueri ground truth, indeks & evaluasi riil selesai ([Issue #5](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/5)) |
 | **[#6] Naskah Laporan USK FMIPA (Bab I-V)** | Member 3 (Khalish) Lead | **READY FOR PR (95%)** | Bab I-V lengkap dengan angka riil, grafik/bukti, dan PDF `Kelompok_4.pdf`; sisa pengisian nama/NPM Member 1 & Dosen ([Issue #6](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/6)) |
 | **[#7] Demo 5 Menit, Video, & Delivery** | Bersama (M1, M2, M3) | **OPEN (10%)** | Menunggu korpus penuh & perekaman video YouTube ([Issue #7](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/7)) |
@@ -95,8 +95,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Desain halaman `EvaluationDashboard.jsx` (tabel metrik dan grafik Recharts)
 *Tugas Integrasi:*
 - [x] Sambungkan `frontend/src/services/api.js` ke backend FastAPI (`http://localhost:8000/api`)
-- [ ] Uji responsivitas UI pada tampilan mobile dan desktop
-- [ ] Buat bahan tayang presentasi live demo (Canva / PPTX) mengikuti naskah `docs/presentation/5_MINUTE_DEMO_SCRIPT.md`
+- [x] Uji responsivitas UI pada tampilan mobile dan desktop (Navbar, SearchBar, ResultCard, SplitView, SpecsModal, MetricsTable; 11 test Vitest hijau)
+- [x] Buat bahan tayang presentasi live demo mengikuti naskah `docs/presentation/5_MINUTE_DEMO_SCRIPT.md` (deck HTML mandiri dan catatan pembicara di `frontend/slides/`)
 
 ---
 
