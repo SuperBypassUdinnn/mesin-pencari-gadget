@@ -7,6 +7,7 @@ import { Search } from "lucide-react";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
+  const [searchedQuery, setSearchedQuery] = useState("");
   const [results, setResults] = useState({ bm25: [], sbert: [] });
   const [latency, setLatency] = useState({ bm25: 0, sbert: 0 });
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ export default function SearchPage() {
     if (!q) {
       setResults({ bm25: [], sbert: [] });
       setLatency({ bm25: 0, sbert: 0 });
+      setSearchedQuery("");
       setError(null);
       return;
     }
@@ -32,6 +34,7 @@ export default function SearchPage() {
         bm25: data.bm25?.latency_ms || 0,
         sbert: data.sbert?.latency_ms || 0,
       });
+      setSearchedQuery(q);
     } catch (err) {
       setError("Gagal memuat hasil pencarian. Pastikan backend berjalan di http://localhost:8000");
       console.error(err);
@@ -81,6 +84,7 @@ export default function SearchPage() {
         sbertResults={results.sbert}
         bm25Latency={latency.bm25}
         sbertLatency={latency.sbert}
+        query={searchedQuery}
         onResultClick={handleResultClick}
       />
 
