@@ -51,6 +51,25 @@ describe("Responsive layout contracts", () => {
     expect(article.className).toContain("sm:p-5");
     expect(container.querySelectorAll(".flex-wrap").length).toBeGreaterThan(0);
     expect(container.querySelector(".sm\\:flex-row")).not.toBeNull();
+    expect(screen.queryByText(/ms/)).toBeNull();
+    expect(screen.getByText("BM25 Score")).toBeDefined();
+  });
+
+  it("ResultCard labels semantic scores as cosine similarity with a bounded bar", () => {
+    const { container } = render(
+      <ResultCard
+        item={SAMPLE_ITEM}
+        engine="sbert"
+        maxScore={1}
+        onResultClick={() => {}}
+      />
+    );
+
+    expect(screen.getByText("Cosine Sim")).toBeDefined();
+    expect(screen.getByText("0.98")).toBeDefined();
+    const bar = container.querySelector('[aria-hidden="true"] > div');
+    expect(bar.style.width).toBe("98%");
+    expect(bar.className).toContain("bg-indigo-500");
   });
 
   it("SplitView collapses to one column until the large breakpoint", () => {
@@ -64,7 +83,7 @@ describe("Responsive layout contracts", () => {
       />
     );
 
-    const columns = container.querySelector("section > div");
+    const columns = container.querySelector("section").children[1];
     expect(columns.className).toContain("flex-col");
     expect(columns.className).toContain("lg:flex-row");
     expect(screen.getByText("Okapi BM25")).toBeDefined();
@@ -72,8 +91,68 @@ describe("Responsive layout contracts", () => {
     expect(screen.getAllByText("1 hasil").length).toBe(2);
   });
 
-  it("SpecsModal is scrollable and keeps the specs table horizontally safe", () => {
-    render(
+  it("SplitView switches the visible mobile column with the segment control", () => {
+    const { container } = render(
+      <SplitView
+        bm25Results={[SAMPLE_ITEM]}
+        sbertResults={[SAMPLE_ITEM]}
+        bm25Latency={1.3}
+        sbertLatency={18}
+        query="ASUS Zenbook Intel OLED"
+        onResultClick={() => {}}
+      />
+    );
+
+    const segment = container.querySelector('[role="group"]');
+    expect(segment.className).toContain("lg:hidden");
+
+    const panels = container.querySelector("section").children[1].children;
+    expect(panels.length).toBe(2);
+    expect(panels[0].className).not.toContain("hidden");
+    expect(panels[1].className).toContain("hidden");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: /Sentence-BERT \(1\)/ })
+    );
+
+    expect(panels[0].className).toContain("hidden");
+    expect(panels[1].className).not.toContain("hidden");
+  });
+
+  it("SplitView removes the dead weight button and gates JSON export", () => {
+    const { rerender } = render(
+      <SplitView
+        bm25Results={[SAMPLE_ITEM]}
+        sbertResults={[SAMPLE_ITEM]}
+        bm25Latency={1.3}
+        sbertLatency={18}
+        onResultClick={() => {}}
+      />
+    );
+
+    expect(screen.queryByText("Atur bobot gabungan")).toBeNull();
+    expect(
+      screen.getByRole("button", { name: /Ekspor hasil JSON/ }).disabled
+    ).toBe(true);
+
+    rerender(
+      <SplitView
+        bm25Results={[SAMPLE_ITEM]}
+        sbertResults={[SAMPLE_ITEM]}
+        bm25Latency={1.3}
+        sbertLatency={18}
+        query="ASUS Zenbook Intel OLED"
+        onResultClick={() => {}}
+      />
+    );
+
+    expect(
+      screen.getByRole("button", { name: /Ekspor hasil JSON/ }).disabled
+    ).toBe(false);
+  });
+
+  it("SpecsModal prioritizes specs and keeps the long review collapsed", () => {
+    const { container } = render(
       <SpecsModal
         document={{
           ...SAMPLE_ITEM,
@@ -88,8 +167,41 @@ describe("Responsive layout contracts", () => {
     expect(dialog.className).toContain("sm:p-4");
     expect(dialog.querySelector('[class*="max-h-"]')).not.toBeNull();
     expect(dialog.querySelector(".overflow-y-auto")).not.toBeNull();
-    expect(dialog.querySelector(".overflow-x-auto")).not.toBeNull();
-    expect(dialog.querySelector("table").className).toContain("min-w-[320px]");
+    expect(dialog.querySelector("dl")).not.toBeNull();
+    expect(dialog.querySelector("table")).toBeNull();
+
+    const review = dialog.querySelector("details");
+    expect(review).not.toBeNull();
+    expect(review.open).toBe(false);
+    expect(screen.getByText("Ulasan Lengkap")).toBeDefined();
+
+    const specsSection = dialog.querySelector("dl").closest("section");
+    const reviewSection = dialog.querySelector("details").closest("section");
+    expect(
+      specsSection.compareDocumentPosition(reviewSection) &
+        Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+  });
+
+  it("SpecsModal renders badges for all five source portals", () => {
+    const sources = [
+      ["Gadgetren", "badge-gadgetren"],
+      ["Jagat Review", "badge-jagat"],
+      ["Droidlime", "badge-droidlime"],
+      ["Yangcanggih", "badge-yangcanggih"],
+      ["Hybrid", "badge-hybrid"],
+    ];
+
+    sources.forEach(([source, badgeClass]) => {
+      const { container, unmount } = render(
+        <SpecsModal
+          document={{ ...SAMPLE_ITEM, source }}
+          onClose={() => {}}
+        />
+      );
+      expect(container.querySelector(`.${badgeClass}`)).not.toBeNull();
+      unmount();
+    });
   });
 
   it("MetricsTable exposes horizontal scroll on narrow screens", () => {
@@ -123,6 +235,17 @@ describe("Responsive interactions", () => {
 
     expect(onChangeView).toHaveBeenCalledWith("evaluasi");
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
+  });
+
+  it("Navbar Split View shortcut returns to the comparison view", () => {
+    const onChangeView = vi.fn();
+    render(<Navbar view="evaluasi" onChangeView={onChangeView} />);
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Buka tampilan Split View" })
+    );
+
+    expect(onChangeView).toHaveBeenCalledWith("pencarian");
   });
 
   it("SearchBar fills the input and triggers search from a suggestion pill", () => {

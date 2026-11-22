@@ -37,8 +37,18 @@ export default function MetricsBarChart({ data }) {
             <YAxis domain={[0, 1]} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Okapi BM25" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="Sentence-BERT" fill="#6366f1" radius={[4, 4, 0, 0]} />
+            <Bar
+              dataKey="Okapi BM25"
+              fill="#3b82f6"
+              radius={[4, 4, 0, 0]}
+              isAnimationActive={false}
+            />
+            <Bar
+              dataKey="Sentence-BERT"
+              fill="#6366f1"
+              radius={[4, 4, 0, 0]}
+              isAnimationActive={false}
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

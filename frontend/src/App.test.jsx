@@ -17,13 +17,19 @@ vi.mock("./services/api.js", () => ({
         map: 0.4647,
         mean_p5: 0.7467,
         avg_latency_ms: 1.28,
-        per_query_results: [],
+        per_query_results: [
+          { query_id: "q01", "p@5": 1.0, latency_ms: 1.25 },
+          { query_id: "q11", "p@5": 0.2, latency_ms: 0.91 },
+        ],
       },
       sbert: {
         map: 0.2993,
         mean_p5: 0.5467,
         avg_latency_ms: 18,
-        per_query_results: [],
+        per_query_results: [
+          { query_id: "q01", "p@5": 1.0, latency_ms: 20.5 },
+          { query_id: "q11", "p@5": 0.8, latency_ms: 17.4 },
+        ],
       },
       test_queries_count: 15,
     }),
@@ -45,5 +51,12 @@ describe("App Component", () => {
 
     expect(await screen.findByText("Evaluasi IR")).toBeDefined();
     expect(screen.getByText("Perbandingan Metrik Evaluasi")).toBeDefined();
+    expect(screen.getByText("MAP BM25")).toBeDefined();
+    expect(screen.getByText("Xiaomi kamera Leica")).toBeDefined();
+    expect(
+      screen.getByText("HP baterai tahan lama seharian tanpa sering cas")
+    ).toBeDefined();
+    expect(screen.getAllByText("Eksak").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Semantik").length).toBeGreaterThan(0);
   });
 });

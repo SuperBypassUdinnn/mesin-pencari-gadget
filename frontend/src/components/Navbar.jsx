@@ -42,11 +42,17 @@ export default function Navbar({ view, onChangeView }) {
 
           <div className="flex shrink-0 items-center gap-2">
             <button
-              className="btn-ghost hidden items-center gap-2 sm:flex"
-              title="Mode tampilan"
+              type="button"
+              onClick={() => onChangeView("pencarian")}
+              className={`btn-ghost hidden items-center gap-2 sm:flex ${
+                view === "pencarian" ? "text-primary-700" : ""
+              }`}
+              title="Buka tampilan komparasi Split View"
+              aria-label="Buka tampilan Split View"
+              aria-pressed={view === "pencarian"}
             >
               <BarChart3 size={16} strokeWidth={1.5} />
-              <span className="text-xs font-medium text-slate-600">Split View</span>
+              <span className="text-xs font-medium">Split View</span>
             </button>
             <button
               className="btn-ghost md:hidden"

@@ -252,10 +252,17 @@ class TestContentSignatures:
 
     def test_resultcard_has_source_badges_and_fields(self):
         content = _read("src/components/ResultCard.jsx")
+        assert "getSourceBadgeClass" in content, (
+            "ResultCard must use the shared source badge mapping"
+        )
+        badge_content = _read("src/utils/sourceBadge.js")
         for badge in ("Gadgetren", "Jagat Review", "Droidlime", "Yangcanggih", "Hybrid"):
-            assert badge in content, f"ResultCard missing source badge: {badge}"
-        for field in ("score", "latency_ms", "snippet", "specs"):
+            assert badge in badge_content, f"Source badge mapping missing: {badge}"
+        for field in ("score", "snippet", "specs"):
             assert field in content, f"ResultCard missing field: {field}"
+        assert "latency_ms" not in content, (
+            "ResultCard must not render undefined per-document latency"
+        )
 
     def test_splitview_has_bm25_and_sbert_columns(self):
         content = _read("src/components/SplitView.jsx")
@@ -264,11 +271,15 @@ class TestContentSignatures:
             "SplitView missing Sentence-BERT column"
         )
 
-    def test_specsmodal_shows_table_and_review(self):
+    def test_specsmodal_prioritizes_specs_grid_and_collapsible_review(self):
         content = _read("src/components/SpecsModal.jsx")
-        assert "<table" in content.lower(), "SpecsModal missing specs table"
-        assert ("review" in content.lower() or "content" in content.lower()), (
-            "SpecsModal missing review content"
+        assert "<dl" in content.lower(), "SpecsModal missing specs grid"
+        assert "<details" in content.lower(), (
+            "SpecsModal missing collapsible review section"
+        )
+        assert "content" in content.lower(), "SpecsModal missing review content"
+        assert "<table" not in content.lower(), (
+            "SpecsModal should not place a long specs table above the review"
         )
 
     def test_searchpage_wires_api_and_view_mode(self):

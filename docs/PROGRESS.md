@@ -78,8 +78,8 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 | **[#11] Bugfix: Integritas Daftar Pustaka** | Member 3 (Khalish), via review | **CLOSED (100%)** | Referensi terverifikasi, sitasi APA 1:1, PDF regenerasi ([Issue #11](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/11)) |
 | **[#12] Bugfix: PDF exporter lintas-platform** | Member 3 (Khalish), via review | **CLOSED (100%)** | Terverifikasi di Linux; \`make report\` aktif ([Issue #12](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/12)) |
 | **[#13] Docs & UI: README 5 portal + pola UI** | Tim, via review | **CLOSED (100%)** | README, badge, pills, dead code dibersihkan ([Issue #13](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/13)) |
-| **[#20] Refactor UI/UX: Glitch teks latensi, SpecsModal, & Mobile Segment** | Member 1 (Irfan Qadafi) | **OPEN** | Tugas penyempurnaan UI/UX dari audit Playwright ([Issue #20](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/20)) |
-| **[#21] Security: Fix npm vulnerabilities & enforce CI/verify audit gate** | Member 2 (Fadhlurrahman Alaudin) | **READY FOR PR (100%)** | Vulnerabilities resolved (0 vuln), Gate 8 added to CI & verifier ([Issue #21](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/21)) |
+| **[#20] Refactor UI/UX: Glitch teks latensi, SpecsModal, & Mobile Segment** | Member 1 (Irfan Qadafi) | **READY FOR PR (100%)** | 5 perbaikan selesai: skor kontekstual, SpecsModal, ekspor JSON, dashboard informatif, segment mobile; 19 test Vitest hijau ([Issue #20](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/20)) |
+| **[#21] Security: Fix npm vulnerabilities & enforce CI/verify audit gate** | Member 2 (Fadhlurrahman Alaudin) | **CLOSED (100%)** | Vulnerabilities resolved (0 vuln); Gate 8 aktif di CI & verifier; merged via PR #22 ([Issue #21](https://github.com/SuperBypassUdinnn/mesin-pencari-gadget/issues/21)) |
 
 ---
 
@@ -97,8 +97,14 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Desain halaman `EvaluationDashboard.jsx` (tabel metrik dan grafik Recharts)
 *Tugas Integrasi:*
 - [x] Sambungkan `frontend/src/services/api.js` ke backend FastAPI (`http://localhost:8000/api`)
-- [x] Uji responsivitas UI pada tampilan mobile dan desktop (Navbar, SearchBar, ResultCard, SplitView, SpecsModal, MetricsTable; 11 test Vitest hijau)
+- [x] Uji responsivitas UI pada tampilan mobile dan desktop (Navbar, SearchBar, ResultCard, SplitView, SpecsModal, MetricsTable; 19 test Vitest hijau)
 - [x] Buat bahan tayang presentasi live demo mengikuti naskah `docs/presentation/5_MINUTE_DEMO_SCRIPT.md` (deck HTML mandiri dan catatan pembicara di `frontend/slides/`)
+*Tugas Tindak Lanjut Issue #20:*
+- [x] Hilangkan glitch teks latensi per-dokumen dan beri label skor `BM25 Score` vs `Cosine Sim` dengan bar skala relatif
+- [x] Susun ulang `SpecsModal.jsx`: grid spesifikasi di atas, ulasan lengkap dalam accordion, dan badge benar untuk 5 portal
+- [x] Fungsikan ekspor hasil kedua engine ke JSON, hapus tombol bobot mati, dan aktifkan shortcut Split View di Navbar
+- [x] Tambahkan konteks skor, teks/tipe kueri pada dashboard evaluasi, dan matikan animasi chart Recharts
+- [x] Tambahkan segment switcher mobile `[Okapi BM25]` vs `[Sentence-BERT]` pada `SplitView.jsx`
 
 ---
 

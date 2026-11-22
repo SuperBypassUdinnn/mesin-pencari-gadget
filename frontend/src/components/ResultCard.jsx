@@ -1,32 +1,58 @@
 import { ExternalLink, Cpu } from "lucide-react";
+import { getSourceBadgeClass } from "../utils/sourceBadge.js";
 
-const SOURCE_BADGE_STYLE = {
-  Gadgetren: "badge-gadgetren",
-  "Jagat Review": "badge-jagat",
-  Droidlime: "badge-droidlime",
-  Yangcanggih: "badge-yangcanggih",
-  Hybrid: "badge-hybrid",
-};
-
-export default function ResultCard({ item, onResultClick }) {
+export default function ResultCard({
+  item,
+  onResultClick,
+  engine = "bm25",
+  maxScore,
+}) {
   const specs = item.specs || {};
   const specEntries = Object.entries(specs);
+  const isSemantic = engine === "sbert";
+  const score = Number(item.score);
+  const hasScore = Number.isFinite(score);
+  const referenceMax = isSemantic
+    ? 1
+    : Math.max(Number(maxScore) || 0, score || 0);
+  const scorePercent =
+    hasScore && referenceMax > 0
+      ? Math.min(100, Math.max(0, (score / referenceMax) * 100))
+      : 0;
+  const scoreLabel = isSemantic ? "Cosine Sim" : "BM25 Score";
+  const scoreHint = isSemantic
+    ? "Kemiripan kosinus 0-1; makin dekat 1, makin mirip."
+    : "Skor BM25 relatif terhadap hasil teratas pada kolom ini.";
+  const scoreBarClass = isSemantic ? "bg-indigo-500" : "bg-amber-500";
 
   return (
     <article className="panel p-4 sm:p-5">
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <span
-          className={`badge ${SOURCE_BADGE_STYLE[item.source] || "bg-slate-100 text-slate-700 border-slate-200"}`}
-        >
-          [{item.source}]
+        <span className={getSourceBadgeClass(item.source)}>
+          [{item.source || "Sumber"}]
         </span>
-        <div className="ml-auto flex items-center gap-2">
-          <span className="font-mono text-xs text-slate-400">
-            {item.latency_ms?.toFixed(1)} ms
-          </span>
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-700">
-            Score {item.score?.toFixed(2) ?? "-"}
-          </span>
+        <div
+          className="ml-auto flex items-center gap-2"
+          title={scoreHint}
+          aria-label={`${scoreLabel}: ${hasScore ? score.toFixed(2) : "tidak tersedia"}`}
+        >
+          <div className="text-right">
+            <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+              {scoreLabel}
+            </div>
+            <div className="font-mono text-sm font-bold text-slate-800">
+              {hasScore ? score.toFixed(2) : "-"}
+            </div>
+          </div>
+          <div
+            className="h-1.5 w-14 overflow-hidden rounded-full bg-slate-100"
+            aria-hidden="true"
+          >
+            <div
+              className={`h-full rounded-full ${scoreBarClass}`}
+              style={{ width: `${scorePercent}%` }}
+            />
+          </div>
         </div>
       </div>
 
