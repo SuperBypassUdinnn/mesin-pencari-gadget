@@ -156,6 +156,11 @@ def create_app(
     def health() -> Dict[str, Any]:
         return {"status": "ok", "docs_count": len(app.state.docs)}
 
+    # Root-level alias for health-check tooling that probes /health by default.
+    @app.get("/health", include_in_schema=False)
+    def health_alias() -> Dict[str, Any]:
+        return health()
+
     @app.get("/api/search")
     def search(
         q: str = Query(default=""),

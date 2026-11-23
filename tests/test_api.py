@@ -72,6 +72,13 @@ class TestHealth:
         assert body["status"] == "ok"
         assert body["docs_count"] == 2
 
+    def test_root_health_alias_matches_canonical_payload(self):
+        client = TestClient(build_app())
+        canonical = client.get("/api/health")
+        alias = client.get("/health")
+        assert alias.status_code == 200
+        assert alias.json() == canonical.json()
+
 
 class TestSearch:
     def test_search_algo_both_returns_bm25_and_sbert(self):

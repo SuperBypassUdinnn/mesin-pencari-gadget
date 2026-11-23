@@ -51,6 +51,7 @@ docker compose up --build
 - **Web Application**: Open [http://localhost:3000](http://localhost:3000)
 - **FastAPI Documentation**: Open [http://localhost:8000/docs](http://localhost:8000/docs)
 - **API Health Check**: Open [http://localhost:8000/api/health](http://localhost:8000/api/health)
+- **Health Check Alias**: `/health` serves the same JSON payload for tooling that probes a root-level path
 
 ---
 
