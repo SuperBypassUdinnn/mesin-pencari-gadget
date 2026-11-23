@@ -117,6 +117,7 @@ Diagram alur berikut menjelaskan mana tugas yang **BISA DIKERJAKAN LANGSUNG (PAR
 - [x] Implementasi dense semantic retrieval Sentence-BERT dengan Cosine Similarity NumPy (`backend/app/engine/sbert.py`)
 - [x] Implementasi kalkulator metrik evaluasi IR: P@K, R@K, F1@K, MAP, dan latensi (`backend/app/engine/evaluator.py`)
 - [x] Implementasi REST API FastAPI dengan CORS dan endpoint lengkap (`backend/app/main.py`)
+- [x] Tambah alias root `/health` untuk health check tooling, payload identik dengan `/api/health` (diverifikasi 23 Nov 2026)
 - [x] Implementasi script offline indexer (`backend/app/engine/indexer.py`)
 *Tugas Integrasi:*
 - [x] Jalankan baseline benchmark evaluasi dan ekspor `evaluation_results/metrics_summary.json`
